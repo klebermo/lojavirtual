@@ -1,0 +1,9 @@
+=== Project WEBCMS ===
+
+A content management system to future blogs.
+
+packages already added to the application:
+
+config -> configuration classes to spring, spring-security, hibernate
+acesso-> classes to access login data from database
+
