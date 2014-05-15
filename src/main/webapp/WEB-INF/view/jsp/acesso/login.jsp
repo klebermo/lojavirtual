@@ -12,10 +12,10 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<c:out value="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<c:out value="${pageContext.request.contextPath}/extras/css/signin.css"/>" rel="stylesheet">
+    <link href="<c:out value="${pageContext.request.contextPath}/resources/extras/css/signin.css"/>" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -41,6 +41,18 @@
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       </form>
+      
+      <c:if test="${erro == 'login'}">
+      <div class="alert alert-danger">
+        <strong>Erro!</strong> Credenciais inv&aacute;lidas.
+      </div>
+      </c:if>
+      
+      <c:if test="${erro == 'no_permit'}">
+      <div class="alert alert-danger">
+        <strong>Erro!</strong> Acesso n&atilde;o autorizado.
+      </div>
+      </c:if>
 
     </div> <!-- /container -->
 

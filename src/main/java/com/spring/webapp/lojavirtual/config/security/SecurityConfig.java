@@ -25,12 +25,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     		.csrf()
     			.disable()
     		.authorizeRequests()
-    			.antMatchers("/erro/login").permitAll()
-    			.antMatchers("/bootstrap/**", "/jquery/**", "/extra/**", "/publico/**", "/erro/publico/**").permitAll()
+    			.antMatchers("/erro/**").permitAll()
+    			.antMatchers("/resources/**").permitAll()
     			.anyRequest().authenticated()
     			.and()
 			.formLogin()
-				.loginPage("/acesso/login").permitAll()
+				.loginPage("/acesso/login.htm").permitAll()
 				.loginProcessingUrl("/login").permitAll()
 				.usernameParameter("login")
 				.passwordParameter("senha")
@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.logout()
 				.logoutUrl("/logout")
-				.logoutSuccessUrl("/acesso/login").permitAll();
+				.logoutSuccessUrl("/acesso/login.htm").permitAll();
     }
     
 }

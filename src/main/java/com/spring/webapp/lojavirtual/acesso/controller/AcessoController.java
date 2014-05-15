@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="acesso")
 public class AcessoController {
 	
-	@RequestMapping(value="login")
+	@RequestMapping(value="login.htm")
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("acesso/login");
