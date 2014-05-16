@@ -40,7 +40,6 @@ public class Usuario {
 	@Column(name="email")
 	private String email;
 	
-	
 	@ManyToMany
 	@JoinTable(name="role_members", joinColumns={@JoinColumn(name="fk_usuario")}, inverseJoinColumns={@JoinColumn(name="fk_role")})
 	@LazyCollection(LazyCollectionOption.FALSE)
