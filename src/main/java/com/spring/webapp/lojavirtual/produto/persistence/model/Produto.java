@@ -1,6 +1,6 @@
 package com.spring.webapp.lojavirtual.produto.persistence.model;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKey;
+import javax.persistence.MapKeyClass;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -27,10 +29,12 @@ public class Produto {
 	@Column(name = "nome")
 	private String Nome;
 	
+	@MapKey
+	@MapKeyClass(MateriaPrima.class)
 	@ManyToMany
 	@JoinTable(name="materia_prima_produto", joinColumns={@JoinColumn(name="fk_produto")}, inverseJoinColumns={@JoinColumn(name="fk_materia_prima")})
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<MateriaPrima> MateriaPrima;
+	private Map<MateriaPrima, Integer> MateriaPrima;
 
 	public int getId() {
 		return Id;
@@ -48,11 +52,11 @@ public class Produto {
 		Nome = nome;
 	}
 
-	public List<MateriaPrima> getMateriaPrima() {
+	public Map<com.spring.webapp.lojavirtual.produto.persistence.model.MateriaPrima, Integer> getMateriaPrima() {
 		return MateriaPrima;
 	}
 
-	public void setMateriaPrima(List<MateriaPrima> materiaPrima) {
+	public void setMateriaPrima(Map<MateriaPrima, Integer> materiaPrima) {
 		MateriaPrima = materiaPrima;
 	}
 	
