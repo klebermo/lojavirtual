@@ -24,10 +24,10 @@ public class Produto {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int Id;
+	private int id;
 	
 	@Column(name = "nome")
-	private String Nome;
+	private String nome;
 	
 	@MapKey
 	@MapKeyClass(MateriaPrima.class)
@@ -37,19 +37,19 @@ public class Produto {
 	private Map<MateriaPrima, Integer> MateriaPrima;
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public Map<MateriaPrima, Integer> getMateriaPrima() {

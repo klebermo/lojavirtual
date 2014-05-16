@@ -65,17 +65,11 @@
             <li class="active"><a href="#">Overview</a></li>
             <li><a href="#">Produtos</a></li>
             <li><a href="#">Categorias</a></li>
-            <li><a href="#">P&aacute;ginas</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
             <li><a href="#">Promo&ccedil;&otilde;es</a></li>
             <li><a href="#">Destaques</a></li>
-            <li><a href="#">Combos</a></li>
-            <li><a href="#">Parceiros</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="#">Usu&aacute;rios</a></li>
-            <li><a href="#">Temas</a></li>
             <li><a href="#">Configura&ccedil;&otilde;es</a></li>
           </ul>
         </div>

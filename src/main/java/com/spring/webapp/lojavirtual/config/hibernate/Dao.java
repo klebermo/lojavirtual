@@ -53,14 +53,13 @@ public class Dao<E> {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Transactional
-	public E merge(E detachedInstance) {
+	public boolean merge(E detachedInstance) {
 		try {
-			E result = (E) sessionFactory.getCurrentSession().merge(detachedInstance);
-			return result;
+			sessionFactory.getCurrentSession().merge(detachedInstance);
+			return true;
 		} catch (RuntimeException re) {
-			return null;
+			return false;
 		}
 	}
 	
