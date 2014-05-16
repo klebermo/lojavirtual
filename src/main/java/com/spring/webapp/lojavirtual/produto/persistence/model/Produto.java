@@ -52,7 +52,7 @@ public class Produto {
 		Nome = nome;
 	}
 
-	public Map<com.spring.webapp.lojavirtual.produto.persistence.model.MateriaPrima, Integer> getMateriaPrima() {
+	public Map<MateriaPrima, Integer> getMateriaPrima() {
 		return MateriaPrima;
 	}
 
