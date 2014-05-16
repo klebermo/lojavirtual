@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/view/include.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,13 +42,13 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       </form>
       
-      <c:if test="${erro == 'login'}">
+      <c:if test="${erro eq 'login'}">
       <div class="alert alert-danger">
         <strong>Erro!</strong> Credenciais inv&aacute;lidas.
       </div>
       </c:if>
       
-      <c:if test="${erro == 'no_permit'}">
+      <c:if test="${erro eq 'no_permit'}">
       <div class="alert alert-danger">
         <strong>Erro!</strong> Acesso n&atilde;o autorizado.
       </div>

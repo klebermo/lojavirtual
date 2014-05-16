@@ -19,15 +19,6 @@ import com.spring.webapp.lojavirtual.acesso.persistence.UsuarioHome;
 import com.spring.webapp.lojavirtual.acesso.persistence.model.Permission;
 import com.spring.webapp.lojavirtual.acesso.persistence.model.Usuario;
 
-/**
-Usernames/Passwords are
-    rod/koala
-    dianne/emu
-    scott/wombat
-    peter/opal
-    kleber/kmo1982
-**/
-
 @Service
 public class AuthenticationService implements UserDetailsService {
 

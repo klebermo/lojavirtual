@@ -13,8 +13,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException auth) throws IOException, ServletException {
-		request.getSession().setAttribute("erro", "login");
-		response.sendRedirect(request.getContextPath() + "/erro/login.htm");
+		response.sendRedirect(request.getContextPath() + "/acesso/login.htm?erro=login");
 	}
 
 }
