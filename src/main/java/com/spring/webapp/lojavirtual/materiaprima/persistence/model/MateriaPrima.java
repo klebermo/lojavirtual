@@ -1,6 +1,6 @@
-package com.spring.webapp.lojavirtual.produto.persistence.model;
+package com.spring.webapp.lojavirtual.materiaprima.persistence.model;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,17 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.MapKey;
-import javax.persistence.MapKeyClass;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import com.spring.webapp.lojavirtual.materiaprima.persistence.model.MateriaPrima;
+import com.spring.webapp.lojavirtual.fornecedor.persistence.model.Fornecedor;
 
 @Entity
-@Table(name="produto")
-public class Produto {
+@Table(name="materia_prima")
+public class MateriaPrima {
 	
 	@Id
 	@Column(name = "id")
@@ -30,12 +29,13 @@ public class Produto {
 	@Column(name = "nome")
 	private String nome;
 	
-	@MapKey
-	@MapKeyClass(MateriaPrima.class)
 	@ManyToMany
-	@JoinTable(name="materia_prima_produto", joinColumns={@JoinColumn(name="fk_produto")}, inverseJoinColumns={@JoinColumn(name="fk_materia_prima")})
+	@JoinTable(name="fornecedor_materia_prima", joinColumns={@JoinColumn(name="fk_materia_prima")}, inverseJoinColumns={@JoinColumn(name="fk_fornecedor")})
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Map<MateriaPrima, Integer> MateriaPrima;
+	private List<Fornecedor> fornecedor;
+	
+	@Column(name = "preco")
+	private float preco;
 
 	public int getId() {
 		return id;
@@ -53,12 +53,19 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public Map<MateriaPrima, Integer> getMateriaPrima() {
-		return MateriaPrima;
+	public List<Fornecedor> getFornecedor() {
+		return fornecedor;
 	}
 
-	public void setMateriaPrima(Map<MateriaPrima, Integer> materiaPrima) {
-		MateriaPrima = materiaPrima;
+	public void setFornecedor(List<Fornecedor> fornecedor) {
+		this.fornecedor = fornecedor;
 	}
-	
+
+	public float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
 }
