@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.webapp.lojavirtual.acesso.persistence.UsuarioHome;
-import com.spring.webapp.lojavirtual.acesso.persistence.model.Permission;
+import com.spring.webapp.lojavirtual.acesso.persistence.model.Permissao;
 import com.spring.webapp.lojavirtual.acesso.persistence.model.Usuario;
 
 @Service
@@ -38,7 +38,7 @@ public class AuthenticationService implements UserDetailsService {
 	        throw new UsernameNotFoundException("User " + username + " has no authorities");
 	    }
 	    
-	    List<Permission> lista = new ArrayList<Permission>();
+	    List<Permissao> lista = new ArrayList<Permissao>();
 	    int max = account.getAutorizacao().size();
 	    for(int i=0; i<max; i++) {
 	    	for(int j=0; j<max; j++) {
@@ -54,9 +54,9 @@ public class AuthenticationService implements UserDetailsService {
 	    return new User(account.getLogin(), account.getSenha(), accountIsEnabled, accountNonExpired, credentialsNonExpired, accountNonLocked, getAuthorities(lista));
 	}
 	
-	public List<String> getRolesAsList(List<Permission> list) {
+	public List<String> getRolesAsList(List<Permissao> list) {
 	    List <String> rolesAsList = new ArrayList<String>();
-	    for(Permission role : list){
+	    for(Permissao role : list){
 	        rolesAsList.add(role.getNome());
 	    }
 	    return rolesAsList;
@@ -70,7 +70,7 @@ public class AuthenticationService implements UserDetailsService {
 	    return authorities;
 	}
 	
-	public Collection<? extends GrantedAuthority> getAuthorities(List<Permission> list) {
+	public Collection<? extends GrantedAuthority> getAuthorities(List<Permissao> list) {
 	    List<GrantedAuthority> authList = getGrantedAuthorities(getRolesAsList(list));
 	    return authList;
 	}

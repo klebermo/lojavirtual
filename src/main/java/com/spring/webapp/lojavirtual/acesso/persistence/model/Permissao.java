@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="permission")
-public class Permission {
+@Table(name="permissao")
+public class Permissao {
 	
 	@Id
 	@Column(name = "id")

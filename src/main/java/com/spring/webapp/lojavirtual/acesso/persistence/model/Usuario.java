@@ -17,7 +17,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-@Table(name="user")
+@Table(name="usuario")
 public class Usuario {
 	
 	@Id
@@ -43,7 +43,7 @@ public class Usuario {
 	@ManyToMany
 	@JoinTable(name="role_members", joinColumns={@JoinColumn(name="fk_usuario")}, inverseJoinColumns={@JoinColumn(name="fk_role")})
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Role> Autorizacao = new ArrayList<Role>();
+	private List<GrupoPermissao> Autorizacao = new ArrayList<GrupoPermissao>();
 
 	public Usuario() {
 	}
@@ -101,11 +101,11 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public List<Role> getAutorizacao() {
+	public List<GrupoPermissao> getAutorizacao() {
 		return this.Autorizacao;
 	}
 
-	public void setAutorizacao(List<Role> autorizacao) {
+	public void setAutorizacao(List<GrupoPermissao> autorizacao) {
 		this.Autorizacao = autorizacao;
 	}
 
