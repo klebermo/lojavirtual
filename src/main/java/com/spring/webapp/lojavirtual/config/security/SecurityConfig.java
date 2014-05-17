@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     			.disable()
     		.authorizeRequests()
     			.antMatchers("/erro/**").permitAll()
+    			.antMatchers("/publico/**").permitAll()
     			.antMatchers("/resources/**").permitAll()
     			.anyRequest().authenticated()
     			.and()
