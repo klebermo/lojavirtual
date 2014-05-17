@@ -12,24 +12,27 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import com.spring.webapp.lojavirtual.fornecedor.persistence.model.Fornecedor;
+
 @Entity
-@Table(name="materia_prima")
-public class MateriaPrima {
+@Table(name="descricao_materia_prima")
+public class DescricaoMateriaPrima {
 	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-	@JoinColumn(name="descricao")
-	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-	private DescricaoMateriaPrima descricao;
+	@Column(name = "nome")
+	private String nome;
+	
+	@Column(name = "descricao")
+	private String descricao;
 	
 	@OneToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-	@JoinColumn(name="quantidade")
+	@JoinColumn(name="fornecedor")
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-	private QuantidadeMateriaPrima quantidade;
+	private Fornecedor fornecedor;
 
 	public int getId() {
 		return id;
@@ -39,20 +42,28 @@ public class MateriaPrima {
 		this.id = id;
 	}
 
-	public DescricaoMateriaPrima getDescricao() {
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
 		return descricao;
 	}
 
-	public void setDescricao(DescricaoMateriaPrima descricao) {
+	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-	public QuantidadeMateriaPrima getQuantidade() {
-		return quantidade;
+	public Fornecedor getFornecedor() {
+		return fornecedor;
 	}
 
-	public void setQuantidade(QuantidadeMateriaPrima quantidade) {
-		this.quantidade = quantidade;
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
 	}
 	
 }
