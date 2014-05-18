@@ -23,7 +23,7 @@ $( document ).ready(function() {
 	</div>
 	    
     <div class="panel-body">
-	    <c:url value="/usuario/cadastra" var="cadastraUsuario"/>
+	    <c:url value="/usuario/cadastra.htm" var="cadastraUsuario"/>
 	    <form class="form" role="form" action="${cadastraUsuario}" method="post">
 	      <p> <input type="text" class="form-control" placeholder="Login" autofocus> </p>
 	      <p> <input type="password" class="form-control" placeholder="Senha"> </p>
@@ -33,7 +33,7 @@ $( document ).ready(function() {
     </div>
     
       <div id="yes" class="alert alert-success">
-        <strong>Pronto!</strong> Usu&acute;rio cadastrado com sucesso.
+        <strong>Pronto!</strong> Usu&aacute;rio cadastrado com sucesso.
       </div>
       
       <div id="not" class="alert alert-danger">
@@ -42,6 +42,29 @@ $( document ).ready(function() {
       
   </div>
 </div>
+
+<script>
+$( ".form" ).submit(function( event ) {
+	  // Stop form from submitting normally
+	  event.preventDefault();
+	 
+	  // Get some values from elements on the page:
+	  var $form = $( this ),
+	  	url = $form.attr( "action" );
+	 
+	  // Send the data using post
+	  var posting = $.post( url, $(this).serialize() );
+	 
+	  // Put the results in a div
+	  posting.done(function( data ) {
+		  $("#"+data).show();
+		  
+		  $(".form").each (function(){
+			  this.reset();
+		  });
+	  });
+	});
+</script>
 
 </body>
 </html>

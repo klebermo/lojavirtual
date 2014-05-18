@@ -25,7 +25,7 @@ public class UsuarioController {
 	@RequestMapping(value="cadastra.htm")
 	public ModelAndView cadastra() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("usuario/cadastra");
+		mav.setViewName("privado/usuario/cadastra");
 		return mav;
 	}
 	

@@ -30,6 +30,9 @@
   </head>
 
   <body>
+  <script>
+  $("#content").hide();
+  </script>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -69,7 +72,7 @@
             <li><a href="#">Destaques</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="#">Usu&aacute;rios</a></li>
+            <li> <c:url value="/usuario/cadastra.htm" var="usuario"/><a href="[${usuario}]">Usu&aacute;rios</a></li>
             <li><a href="#">Configura&ccedil;&otilde;es</a></li>
           </ul>
         </div>
@@ -77,6 +80,16 @@
        </div>
       </div>
       
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div id="content" class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title"></h3>
+            </div>
+            <div class="panel-body">
+            </div>
+          </div>
+      </div>
+            
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -84,5 +97,38 @@
     <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-ui-1.10.4.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/extra/js/docs.min.js"/>"></script>
+    
+    <script>    
+    $('a').click(function(e){
+        var link = $(this).attr('href');
+        
+        if(link == '#') {
+        	e.preventDefault();
+        	
+        	$(".panel-title").empty();
+  			$(".panel-body").empty();
+  			$("#content").hide();
+        }
+        else {
+            var tam = link.length;
+            var primeiraLetra = link.charAt(0);
+            var ultimaLetra = link.charAt(tam-1);
+            var result = link.substr(1, tam-2);
+            
+            if(primeiraLetra == '[' && ultimaLetra == ']') {
+              e.preventDefault();
+              
+              $.get(result, function(data){
+        		  var $temp  = $('<div/>', {html:data});
+        		  var titulo = $temp.find('title').text();
+        		  var conteudo = $temp.remove('head').html();
+        		  $(".panel-title").text(titulo);
+        		  $(".panel-body").html(conteudo);
+        		  $("#content").show();
+              });
+            }
+        }
+    });
+    </script>
   </body>
 </html>
