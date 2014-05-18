@@ -17,7 +17,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-@Table(name="grupo_permissao")
+@Table(name="role")
 public class GrupoPermissao {
 	
 	@Id

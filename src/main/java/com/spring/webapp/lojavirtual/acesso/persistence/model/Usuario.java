@@ -48,9 +48,12 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(String login, String senha) {
+	public Usuario(String login, String senha, String email, String pnome, String unome) {
 		this.login = login;
 		this.senha = senha;
+		this.email = email;
+		this.first_name = pnome;
+		this.last_name = unome;
 	}
 
 	public int getId() {

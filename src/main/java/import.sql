@@ -13,6 +13,7 @@ INSERT INTO role(id, nome) VALUES (12, 'fornecedor');
 INSERT INTO role(id, nome) VALUES (13, 'endereco');
 INSERT INTO role(id, nome) VALUES (14, 'contato');
 INSERT INTO role(id, nome) VALUES (15, 'unidade');
+INSERT INTO role(id, nome) VALUES (16, 'geral');
 
 INSERT INTO permission(id, nome) VALUES (1, 'cadastra_produto');
 INSERT INTO permission(id, nome) VALUES (2, 'altera_produto');
@@ -59,6 +60,7 @@ INSERT INTO permission(id, nome) VALUES (42, 'remove_contato');
 INSERT INTO permission(id, nome) VALUES (43, 'cadastra_unidade');
 INSERT INTO permission(id, nome) VALUES (44, 'altera_unidade');
 INSERT INTO permission(id, nome) VALUES (45, 'remove_unidade');
+INSERT INTO permission(id, nome) VALUES (46, 'dashboard');
 
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (1, 1);
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (1, 2);
@@ -105,6 +107,7 @@ INSERT INTO role_permissions(fk_role, fk_permission) VALUES (14, 42);
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (15, 43);
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (15, 44);
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (15, 45);
+INSERT INTO role_permissions(fk_role, fk_permission) VALUES (16, 46);
 
 INSERT INTO usuario(id, email, first_name, last_name, login, senha) VALUES (1, 'klebermo@gmail.com', 'Kleber', 'Mota', 'klebermo', 'a7f5306827af05dd0c3b689323403e81');
 INSERT INTO role_members(fk_usuario, fk_role) VALUES (1, 1);
@@ -122,3 +125,4 @@ INSERT INTO role_members(fk_usuario, fk_role) VALUES (1, 12);
 INSERT INTO role_members(fk_usuario, fk_role) VALUES (1, 13);
 INSERT INTO role_members(fk_usuario, fk_role) VALUES (1, 14);
 INSERT INTO role_members(fk_usuario, fk_role) VALUES (1, 15);
+INSERT INTO role_members(fk_usuario, fk_role) VALUES (1, 16);

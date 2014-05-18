@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="permissao")
+@Table(name="permission")
 public class Permissao {
 	
 	@Id

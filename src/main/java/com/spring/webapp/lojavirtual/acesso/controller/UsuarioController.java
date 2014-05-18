@@ -1,5 +1,7 @@
 package com.spring.webapp.lojavirtual.acesso.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.webapp.lojavirtual.acesso.service.UsuarioService;
 
@@ -18,6 +21,34 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuario;
+	
+	@RequestMapping(value="cadastra.htm")
+	public ModelAndView cadastra() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usuario/cadastra");
+		return mav;
+	}
+	
+	@RequestMapping(value="altera.htm")
+	public ModelAndView altera() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usuario/altera");
+		return mav;
+	}
+	
+	@RequestMapping(value="listagem.htm")
+	public ModelAndView lista() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usuario/listagem");
+		return mav;
+	}
+	
+	@RequestMapping(value="pesquisa.htm")
+	public ModelAndView pesquisa() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usuario/pesquisa");
+		return mav;
+	}
 	
 	@RequestMapping(value="cadastra.htm", method=RequestMethod.POST)
 	@ResponseBody
@@ -47,6 +78,13 @@ public class UsuarioController {
 			return "yes";
 		else
 			return "not";
+	}
+	
+	@RequestMapping(value="listagem.htm", method=RequestMethod.POST)
+	@ResponseBody
+	@PreAuthorize("hasPermission(#user, 'remove_usuario')")
+	public List<?> listagem(HttpServletRequest request, HttpServletResponse response) {
+		return usuario.listagem();
 	}
 	
 }

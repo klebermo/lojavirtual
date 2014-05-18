@@ -41,7 +41,8 @@ public class AuthenticationService implements UserDetailsService {
 	    List<Permissao> lista = new ArrayList<Permissao>();
 	    int max = account.getAutorizacao().size();
 	    for(int i=0; i<max; i++) {
-	    	for(int j=0; j<max; j++) {
+	    	int max2 = account.getAutorizacao().get(i).getPermissao().size();
+	    	for(int j=0; j<max2; j++) {
 	    		lista.add(account.getAutorizacao().get(i).getPermissao().get(j));
 	    	}
 	    }
