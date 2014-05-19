@@ -94,6 +94,9 @@ public class UsuarioService {
 	
 	@Transactional
 	public List<Usuario> listagem_usuarios() {
+		List<Usuario> lista = usuario.findAll();
+		for(int i=0; i<lista.size(); i++)
+			System.out.println(lista.get(i).getLogin());
 		return usuario.findAll();
 	}
 	
