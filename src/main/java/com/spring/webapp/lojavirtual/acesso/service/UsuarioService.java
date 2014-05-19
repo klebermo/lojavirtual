@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.webapp.lojavirtual.acesso.persistence.GrupoPermissaoHome;
 import com.spring.webapp.lojavirtual.acesso.persistence.PermissaoHome;
@@ -29,6 +30,7 @@ public class UsuarioService {
 	private PermissaoHome permissao;
 	
 	@PreAuthorize("hasPermission(#user, 'cadastra_usuario')")
+	@Transactional
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		String email = request.getParameter("email");
 		String login = request.getParameter("login");
@@ -40,6 +42,7 @@ public class UsuarioService {
 	}
 	
 	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
+	@Transactional
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.valueOf(request.getParameter("id")).intValue();
 		Usuario merge = usuario.findById(id);
@@ -65,6 +68,7 @@ public class UsuarioService {
 	}
 	
 	@PreAuthorize("hasPermission(#user, 'remove_usuario')")
+	@Transactional
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.valueOf(request.getParameter("id")).intValue();
 		Usuario remove = usuario.findById(id);
@@ -72,24 +76,34 @@ public class UsuarioService {
 		return usuario.remove(remove);
 	}
 	
+	@Transactional
 	public List<GrupoPermissao> lista_grupo_permissoes() {
+		System.out.println("listagem_grupo_usuario");
 		return grupo_permissao.findAll();
 	}
 	
+	@Transactional
 	public List<Permissao> lista_permissoes(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("listagem_permissoes(req, res)");
 		int id_grupo = Integer.valueOf(request.getParameter("id")).intValue();
 		return grupo_permissao.findById(id_grupo).getPermissao();
 	}
 	
+	@Transactional
 	public List<Permissao> lista_permissoes() {
+		System.out.println("listagem_permissoes");
 		return permissao.findAll();
 	}
 	
+	@Transactional
 	public List<Usuario> listagem_usuarios() {
+		System.out.println("listagem_usuarios");
 		return usuario.findAll();
 	}
 	
+	@Transactional
 	public Usuario listagem_usuario(int id) {
+		System.out.println("listagem_usuario");
 		return usuario.findById(id);
 	}
 }

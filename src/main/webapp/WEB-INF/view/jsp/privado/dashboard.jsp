@@ -96,7 +96,7 @@ $( document ).ready(function() {
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-2.1.0.min.js"/>"></script>
+    <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-1.10.2.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-ui-1.10.4.custom.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/docs.min.js"/>"></script>

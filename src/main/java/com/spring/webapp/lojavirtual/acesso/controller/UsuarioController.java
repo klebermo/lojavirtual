@@ -50,6 +50,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value="listagem.htm")
 	public ModelAndView lista() {
+		System.out.println("listagem_usuarios.htm");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privado/usuario/listagem");
 		return mav;
@@ -58,6 +59,7 @@ public class UsuarioController {
 	@RequestMapping(value="permissoes.htm")
 	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
 	public ModelAndView permissoes() {
+		System.out.println("listagem_usuarios.htm");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("permissoes", usuario.lista_grupo_permissoes());
 		mav.setViewName("privado/usuario/permissoes");
@@ -93,6 +95,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value="usuarios.json")
 	public ModelAndView usuarios() {
+		System.out.println("usuarios.json");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lista", usuario.listagem_usuarios());
 		mav.setViewName("listagem_usuarios");
@@ -101,6 +104,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value="permissoes.json", method=RequestMethod.GET)
 	public ModelAndView permissoes(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("permissoes.json");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lista", usuario.lista_permissoes(request, response));
 		mav.setViewName("listagem_permissoes");

@@ -223,28 +223,24 @@ $(document).ready(function(){
 	});
 });
 
-$(".btn").each(function(){
-	$(this).click(function(){
-		var action = $(this).data('action');
-		var target = $(this).data('target');
-		var url;
-		
-		if(target == "") {
-			url = action;
-		} else {
-			url = action+"?id="+target;
-		}
-		
-        $.get(url, function(data){
-    		  var $temp  = $('<div/>', {html:data});
-    		  var titulo = $temp.find('title').text();
-    		  var conteudo = $temp.remove('head').html();
-    		  $(".panel-title").empty();
-    		  $(".panel-title").text(titulo);
-    		  $(".panel-body").empty();
-    		  $(".panel-body").html(conteudo);
-    		  $("#content").show();
-          });
+$(".btn").on("click", function(){
+	var action = $(this).data('action');
+	var target = $(this).data('target');
+	alert("action="+action+",target="+target);
+	
+	if(target != "") {
+		action = action + "?id=" + target;
+	}
+	
+    $.get(action, function(data){
+		var $temp  = $('<div/>', {html:data});
+		var titulo = $temp.find('title').text();
+		var conteudo = $temp.remove('head').html();
+		$(".panel-title").empty();
+		$(".panel-title").text(titulo);
+		$(".panel-body").empty();
+		$(".panel-body").html(conteudo);
+		$("#content").show();
 	});
 });
 </script>

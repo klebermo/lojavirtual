@@ -98,8 +98,11 @@ public class Dao<E> {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<E> findAll() {
+		System.out.println("Dao.findAll()");
 		try {
 			List<E> instance = sessionFactory.getCurrentSession().createCriteria(entity.getClass()).list();
+			for(int i=0; i<instance.size(); i++)
+				System.out.println(i+"="+instance.get(i).toString());
 			return instance;
 		} catch (RuntimeException re) {
 			return null;
