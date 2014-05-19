@@ -209,9 +209,7 @@ table {
 <script>
 $(document).ready(function(){
 	var url = "<c:out value="${lista}"/>";
-	console.log("url="+url);
 	$.get(url, function(data){
-		console.log("data="+data);
 		var json = jQuery.parseJSON( data );
 		for(var item in json.usuario) {
 			var row = $('<tr>');

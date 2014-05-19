@@ -81,15 +81,15 @@ public class UsuarioService {
 		return grupo_permissao.findById(id_grupo).getPermissao();
 	}
 	
-	public List<Permissao> lista_todas_as_permissoes() {
+	public List<Permissao> lista_permissoes() {
 		return permissao.findAll();
 	}
 	
-	public List<Usuario> listagem() {
+	public List<Usuario> listagem_usuarios() {
 		return usuario.findAll();
 	}
 	
-	public Usuario usuario(int id) {
+	public Usuario listagem_usuario(int id) {
 		return usuario.findById(id);
 	}
 }

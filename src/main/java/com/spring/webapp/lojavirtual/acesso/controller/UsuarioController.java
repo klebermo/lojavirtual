@@ -35,7 +35,7 @@ public class UsuarioController {
 		int id_usuario = Integer.valueOf(id).intValue();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("usuario", usuario.usuario(id_usuario));
+		mav.addObject("usuario", usuario.listagem_usuario(id_usuario));
 		mav.setViewName("privado/usuario/altera");
 		return mav;
 	}
@@ -94,7 +94,7 @@ public class UsuarioController {
 	@RequestMapping(value="usuarios.json")
 	public ModelAndView usuarios() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("lista", usuario.listagem());
+		mav.addObject("lista", usuario.listagem_usuarios());
 		mav.setViewName("listagem_usuarios");
 		return mav;
 	}

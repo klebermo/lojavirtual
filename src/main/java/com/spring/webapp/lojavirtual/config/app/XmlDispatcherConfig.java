@@ -14,7 +14,7 @@ public class XmlDispatcherConfig {
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/view/xml/");
-        viewResolver.setSuffix(".xml");
+        viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
 	

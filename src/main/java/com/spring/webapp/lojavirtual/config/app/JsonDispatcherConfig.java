@@ -14,7 +14,7 @@ public class JsonDispatcherConfig {
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/view/json/");
-        viewResolver.setSuffix(".json");
+        viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
 	
