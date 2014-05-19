@@ -19,25 +19,27 @@ $( document ).ready(function() {
   <div class="panel panel-warning">
   
 	<div class="panel-heading">
-	  <h3 class="panel-title">Cadastro de usu&aacute;rio</h3>
+	  <h3 class="panel-title">Altera&ccedil;&atilde;o de usu&aacute;rio</h3>
 	</div>
 	    
     <div class="panel-body">
 	    <c:url value="/usuario/altera" var="alteraUsuario"/>
 	    <form class="form" role="form" action="${alteraUsuario}" method="post">
-	      <p> <input type="text" class="form-control" placeholder="Login" autofocus> </p>
-	      <p> <input type="password" class="form-control" placeholder="Senha"> </p>
-	      <p> <input type="email" class="form-control" placeholder="E-mail"> </p>
-	      <p> <button type="submit" class="btn btn-primary">Cadastrar</button> </p>
+	      <p> <input type="text" name="login" class="form-control" value="${usuario.login}" autofocus> </p>
+	      <p> <input type="password" name="senha" class="form-control" valuer="${usuario.senha}"> </p>
+	      <p> <input type="email" name="email" class="form-control" value="${usuario.email}"> </p>
+	      <p> <input type="text" name="pnome" class="form-control" value="${usuario.pnome}"> </p>
+	      <p> <input type="text" name="unome" class="form-control" value="${usuario.unome}"> </p>
+	      <p> <button type="submit" class="btn btn-primary">Alterar</button> </p>
 	     </form>
     </div>
     
       <div id="yes" class="alert alert-success">
-        <strong>Pronto!</strong> Usu&acute;rio cadastrado com sucesso.
+        <strong>Pronto!</strong> Usu&acute;rio alterado com sucesso.
       </div>
       
       <div id="not" class="alert alert-danger">
-        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar o usu&aacute;rio.
+        <strong>Erro!</strong> N&atilde;o foi possivel alterar o usu&aacute;rio.
       </div>
       
   </div>

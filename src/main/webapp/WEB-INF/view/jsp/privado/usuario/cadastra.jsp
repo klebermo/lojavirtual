@@ -25,9 +25,11 @@ $( document ).ready(function() {
     <div class="panel-body">
 	    <c:url value="/usuario/cadastra.htm" var="cadastraUsuario"/>
 	    <form class="form" role="form" action="${cadastraUsuario}" method="post">
-	      <p> <input type="text" class="form-control" placeholder="Login" autofocus> </p>
-	      <p> <input type="password" class="form-control" placeholder="Senha"> </p>
-	      <p> <input type="email" class="form-control" placeholder="E-mail"> </p>
+      <p> <input type="text" name="login" class="form-control" placeholder="Login" autofocus> </p>
+      <p> <input type="password" name="senha" class="form-control" placeholder="Senha"> </p>
+	      <p> <input type="email" name="email" class="form-control" placeholder="E-mail"> </p>
+	      <p> <input type="text" name="pnome" class="form-control" placeholder="Nome"> </p>
+	      <p> <input type="text" name="unome" class="form-control" placeholder="Sobrenome"> </p>
 	      <p> <button type="submit" class="btn btn-primary">Cadastrar</button> </p>
 	     </form>
     </div>

@@ -11,9 +11,5 @@ public class UsuarioHome extends Dao<Usuario> {
 	public UsuarioHome() {
 		super(Usuario.class);
 	}
-
-	public UsuarioHome(Usuario entity) {
-		super(entity);
-	}
 	
 }

@@ -14,10 +14,6 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	}
 	
 	public boolean hasPermission(Authentication arg0, Object arg1) {
-		System.out.println("CustomPermissionEvaluator.hasPermission");
-		System.out.println("arg0 = "+arg0);
-		System.out.println("arg1 = "+arg1);
-		
         if (arg0 == null || !arg0.isAuthenticated()) {
         	System.out.println("false");
             return false;
@@ -34,11 +30,6 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	
 	@Override
 	public boolean hasPermission(Authentication arg0, Object arg1, Object arg2) {
-		System.out.println("CustomPermissionEvaluator.hasPermission");
-		System.out.println("arg0 = "+arg0);
-		System.out.println("arg1 = "+arg1);
-		System.out.println("arg2 = "+arg2);
-		
         if (arg0 == null || !arg0.isAuthenticated()) {
         	System.out.println("false");
             return false;

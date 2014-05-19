@@ -1,7 +1,5 @@
 package com.spring.webapp.lojavirtual.acesso.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +22,7 @@ public class UsuarioController {
 	private UsuarioService usuario;
 	
 	@RequestMapping(value="cadastra.htm")
+	@PreAuthorize("hasPermission(#user, 'cadastra_usuario')")
 	public ModelAndView cadastra() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privado/usuario/cadastra");
@@ -30,29 +30,42 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="altera.htm")
-	public ModelAndView altera() {
+	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
+	public ModelAndView altera(@RequestParam("id") String id) {
+		int id_usuario = Integer.valueOf(id).intValue();
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("usuario/altera");
+		mav.addObject("usuario", usuario.usuario(id_usuario));
+		mav.setViewName("privado/usuario/altera");
+		return mav;
+	}
+	
+	@RequestMapping(value="remove.htm")
+	@PreAuthorize("hasPermission(#user, 'remove_usuario')")
+	public ModelAndView remove() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("privado/usuario/altera");
 		return mav;
 	}
 	
 	@RequestMapping(value="listagem.htm")
 	public ModelAndView lista() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("usuario/listagem");
+		mav.setViewName("privado/usuario/listagem");
 		return mav;
 	}
 	
-	@RequestMapping(value="pesquisa.htm")
-	public ModelAndView pesquisa() {
+	@RequestMapping(value="permissoes.htm")
+	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
+	public ModelAndView permissoes() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("usuario/pesquisa");
+		mav.addObject("permissoes", usuario.lista_grupo_permissoes());
+		mav.setViewName("privado/usuario/permissoes");
 		return mav;
 	}
 	
 	@RequestMapping(value="cadastra.htm", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'cadastra_usuario')")
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
 		if(usuario.cadastra(request, response))
 			return "yes";
@@ -62,7 +75,6 @@ public class UsuarioController {
 	
 	@RequestMapping(value="altera.htm", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
 		if(usuario.altera(request, response))
 			return "yes";
@@ -72,7 +84,6 @@ public class UsuarioController {
 	
 	@RequestMapping(value="remove.htm", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'remove_usuario')")
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
 		if(usuario.remove(request, response))
 			return "yes";
@@ -80,11 +91,20 @@ public class UsuarioController {
 			return "not";
 	}
 	
-	@RequestMapping(value="listagem.htm", method=RequestMethod.POST)
-	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'remove_usuario')")
-	public List<?> listagem(HttpServletRequest request, HttpServletResponse response) {
-		return usuario.listagem();
+	@RequestMapping(value="usuarios.json")
+	public ModelAndView usuarios() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("lista", usuario.listagem());
+		mav.setViewName("listagem_usuarios");
+		return mav;
+	}
+	
+	@RequestMapping(value="permissoes.json", method=RequestMethod.GET)
+	public ModelAndView permissoes(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("lista", usuario.lista_permissoes(request, response));
+		mav.setViewName("listagem_permissoes");
+		return mav;
 	}
 	
 }

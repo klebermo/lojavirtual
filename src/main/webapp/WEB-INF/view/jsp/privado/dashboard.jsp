@@ -30,9 +30,12 @@
   </head>
 
   <body>
-  <script>
-  $("#content").hide();
-  </script>
+  
+<script>
+$( document ).ready(function() {
+	$("#content").hide();
+});
+</script>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -72,7 +75,7 @@
             <li><a href="#">Destaques</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li> <c:url value="/usuario/cadastra.htm" var="usuario"/><a href="[${usuario}]">Usu&aacute;rios</a></li>
+            <li> <c:url value="/usuario/listagem.htm" var="usuario"/><a href="[${usuario}]">Usu&aacute;rios</a></li>
             <li><a href="#">Configura&ccedil;&otilde;es</a></li>
           </ul>
         </div>
@@ -94,9 +97,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-2.1.0.min.js"/>"></script>
-    <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-ui-1.10.4.min.js"/>"></script>
+    <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-ui-1.10.4.custom.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/>"></script>
-    <script src="<c:out value="${pageContext.request.contextPath}/resources/extra/js/docs.min.js"/>"></script>
+    <script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/docs.min.js"/>"></script>
     
     <script>    
     $('a').click(function(e){
