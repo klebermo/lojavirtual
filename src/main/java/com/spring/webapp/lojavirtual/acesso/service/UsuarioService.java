@@ -78,32 +78,27 @@ public class UsuarioService {
 	
 	@Transactional
 	public List<GrupoPermissao> lista_grupo_permissoes() {
-		System.out.println("listagem_grupo_usuario");
 		return grupo_permissao.findAll();
 	}
 	
 	@Transactional
 	public List<Permissao> lista_permissoes(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("listagem_permissoes(req, res)");
 		int id_grupo = Integer.valueOf(request.getParameter("id")).intValue();
 		return grupo_permissao.findById(id_grupo).getPermissao();
 	}
 	
 	@Transactional
 	public List<Permissao> lista_permissoes() {
-		System.out.println("listagem_permissoes");
 		return permissao.findAll();
 	}
 	
 	@Transactional
 	public List<Usuario> listagem_usuarios() {
-		System.out.println("listagem_usuarios");
 		return usuario.findAll();
 	}
 	
 	@Transactional
 	public Usuario listagem_usuario(int id) {
-		System.out.println("listagem_usuario");
 		return usuario.findById(id);
 	}
 }
