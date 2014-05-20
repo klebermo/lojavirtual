@@ -161,12 +161,13 @@ table {
 </head>
 <body>
 
-<c:url value="/usuario/cadastra.htm" var="novo"/>
-<c:url value="/usuario/altera.htm" var="editar"/>
-<c:url value="/usuario/remove.htm" var="remover"/>
-<c:url value="/permissao/alterna.htm" var="grupos"/>
+<c:url value="/usuario/cadastrar.htm" var="novo"/>
+<c:url value="/usuario/alterar.htm" var="altera"/>
+<c:url value="/usuario/remover.htm" var="remove"/>
 
 <c:url value="/usuario/listagem.json" var="lista"/>
+
+<c:url value="/permissao/alternar.htm" var="permissao"/>
 
 <p>
 	<button type="button" class="btn btn-sm btn-link" data-action="${novo}" data-target="">
@@ -194,22 +195,30 @@ table {
 
 <script>
 
-$(document).ready(function(){
-	var url = "<c:out value="${lista}"/>";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON(data);
-		$.each(json.usuario, function(index, item){
-			console.log("index="+index);
-			console.log("item="+item.login);
-			var row = $('<tr>');
-			row.append('<td>'+item.login+'</td>');
-			row.append('<td>'+item.pnome+'</td>');
-			row.append('<td>'+item.unome+'</td>');
-			row.append('<td>'+item.email+'</td>');
-			row.append('<td> <button type="button" class="btn btn-sm btn-primary" data-action="'+${editar}+'" data-target="'+item.id+'">Editar</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${remover}+'" data-target="'+item.id+'">Remover</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${grupos}+'" data-target="'+item.id+'">Permiss&otilde;es</button> </td>');
-			$('tbody.content').append(row);
-		});
-	});
+$(function(){
+    $.get("<c:out value="${lista}"/>").done(function (data) {
+        var $rowTemplate = $(
+        '<tr>' +
+            '<td></td>' + 
+            '<td></td>' + 
+            '<td></td>' + 
+            '<td></td>' + 
+            '<td>' +
+                '<button type="button" class="btn btn-sm btn-primary" data-action="'+${editar}+'">Editar</button> ' +
+                '<button type="button" class="btn btn-sm btn-primary" data-action="'+${remover}+'">Remover</button> ' +
+                '<button type="button" class="btn btn-sm btn-primary" data-action="'+${grupos}+'">Permissões</button> ' +
+            '</td>' +
+        '</tr>');
+
+        $.each(data.usuario, function (user) {
+            var $row = $rowTemplate.clone().appendTo('tbody.content');
+            $row.find("td:eq(0)").text(user.login);
+            $row.find("td:eq(1)").text(user.pnome);
+            $row.find("td:eq(2)").text(user.unome);
+            $row.find("td:eq(3)").text(user.email);
+            $row.find("button").data("target", user.id);
+        });
+    });
 });
 
 $(".btn").on("click", function(){
