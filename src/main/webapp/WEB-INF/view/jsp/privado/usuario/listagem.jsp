@@ -161,11 +161,12 @@ table {
 </head>
 <body>
 
-<c:url value="/usuario/listagem.json" var="lista"/>
 <c:url value="/usuario/cadastra.htm" var="novo"/>
 <c:url value="/usuario/altera.htm" var="editar"/>
 <c:url value="/usuario/remove.htm" var="remover"/>
 <c:url value="/permissao/alterna.htm" var="grupos"/>
+
+<c:url value="/usuario/listagem.json" var="lista"/>
 
 <p>
 	<button type="button" class="btn btn-sm btn-link" data-action="${novo}" data-target="">
@@ -187,14 +188,6 @@ table {
     </thead>
     
     <tbody class="content">
-    <tr>
-    	<td></td>
-    	<td></td>
-    	<td></td>
-    	<td></td>
-    	<td></td>
-    	<td></td>
-    </tr>
     </tbody>
 
 </table>
@@ -205,15 +198,17 @@ $(document).ready(function(){
 	var url = "<c:out value="${lista}"/>";
 	$.get(url, function(data){
 		var json = jQuery.parseJSON(data);
-		for(var item in json.usuario) {
+		$.each(json.usuario, function(index, item){
+			console.log("index="+index);
+			console.log("item="+item.login);
 			var row = $('<tr>');
-			row.append('<td>'+json.usuario[item].login+'</td>');
-			row.append('<td>'+json.usuario[item].pnome+'</td>');
-			row.append('<td>'+json.usuario[item].unome+'</td>');
-			row.append('<td>'+json.usuario[item].email+'</td>');
-			row.append('<td> <button type="button" class="btn btn-sm btn-primary" data-action="'+${editar}+'" data-target="'+json.usuario[item].id+'">Editar</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${remover}+'" data-target="'+json.usuario[item].id+'">Remover</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${grupos}+'" data-target="'+json.usuario[item].id+'">Permiss&otilde;es</button> </td>');
+			row.append('<td>'+item.login+'</td>');
+			row.append('<td>'+item.pnome+'</td>');
+			row.append('<td>'+item.unome+'</td>');
+			row.append('<td>'+item.email+'</td>');
+			row.append('<td> <button type="button" class="btn btn-sm btn-primary" data-action="'+${editar}+'" data-target="'+item.id+'">Editar</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${remover}+'" data-target="'+item.id+'">Remover</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${grupos}+'" data-target="'+item.id+'">Permiss&otilde;es</button> </td>');
 			$('tbody.content').append(row);
-		}
+		});
 	});
 });
 
