@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.webapp.lojavirtual.acesso.persistence.GrupoPermissaoHome;
-import com.spring.webapp.lojavirtual.acesso.persistence.PermissaoHome;
 import com.spring.webapp.lojavirtual.acesso.persistence.UsuarioHome;
-import com.spring.webapp.lojavirtual.acesso.persistence.model.GrupoPermissao;
-import com.spring.webapp.lojavirtual.acesso.persistence.model.Permissao;
 import com.spring.webapp.lojavirtual.acesso.persistence.model.Usuario;
 
 @Service
@@ -25,9 +22,6 @@ public class UsuarioService {
 	
 	@Autowired
 	private GrupoPermissaoHome grupo_permissao;
-	
-	@Autowired
-	private PermissaoHome permissao;
 	
 	@PreAuthorize("hasPermission(#user, 'cadastra_usuario')")
 	@Transactional
@@ -73,30 +67,19 @@ public class UsuarioService {
 		int id = Integer.valueOf(request.getParameter("id")).intValue();
 		Usuario remove = usuario.findById(id);
 		
-		return usuario.remove(remove);
-	}
-	
-	@Transactional
-	public List<GrupoPermissao> lista_grupo_permissoes() {
-		return grupo_permissao.findAll();
-	}
-	
-	@Transactional
-	public List<Permissao> lista_permissoes(HttpServletRequest request, HttpServletResponse response) {
-		int id_grupo = Integer.valueOf(request.getParameter("id")).intValue();
-		return grupo_permissao.findById(id_grupo).getPermissao();
-	}
-	
-	@Transactional
-	public List<Permissao> lista_permissoes() {
-		return permissao.findAll();
+		for(int i=0; i<remove.getAutorizacao().size(); i++) {
+			remove.getAutorizacao().remove(i);
+		}
+		
+		if(usuario.merge(remove)) {
+			return usuario.remove(remove);
+		} else {
+			return false;
+		}
 	}
 	
 	@Transactional
 	public List<Usuario> listagem_usuarios() {
-		List<Usuario> lista = usuario.findAll();
-		for(int i=0; i<lista.size(); i++)
-			System.out.println(lista.get(i).getLogin());
 		return usuario.findAll();
 	}
 	

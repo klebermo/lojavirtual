@@ -165,8 +165,7 @@ table {
 <c:url value="/usuario/cadastra.htm" var="novo"/>
 <c:url value="/usuario/altera.htm" var="editar"/>
 <c:url value="/usuario/remove.htm" var="remover"/>
-<c:url value="/usuario/permissoes.json" var="permissoes"/>
-<c:url value="/usuario/permissoes.htm" var="grupos"/>
+<c:url value="/permissao/alterna.htm" var="grupos"/>
 
 <table class="bordered">
 	<caption> <button type="button" class="btn btn-sm btn-primary" data-action="${novo}" data-target="">Novo</button> </caption>
@@ -199,22 +198,19 @@ table {
 </table>
 
 <script>
+
 $(document).ready(function(){
 	var url = "<c:out value="${lista}"/>";
 	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
-		if(json.lenght == 0) {
-			alert("json vazio");
-		} else {
-			for(var item in json.usuario) {
-				var row = $('<tr>');
-				row.append('<td>'+json.usuario[item].login+'</td>');
-				row.append('<td>'+json.usuario[item].pnome+'</td>');
-				row.append('<td>'+json.usuario[item].unome+'</td>');
-				row.append('<td>'+json.usuario[item].email+'</td>');
-				row.append('<td> <button type="button" class="btn btn-sm btn-primary" data-action="'+${editar}+'" data-target="'+json.usuario[item].id+'">Editar</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${remover}+'" data-target="'+json.usuario[item].id+'">Remover</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${grupos}+'" data-target="'+json.usuario[item].id+'">Permiss&otilde;es</button> </td>');
-				$('tbody.content').append(row);
-			}
+		var json = jQuery.parseJSON(data);		
+		for(var item in json.usuario) {
+			var row = $('<tr>');
+			row.append('<td>'+json.usuario[item].login+'</td>');
+			row.append('<td>'+json.usuario[item].pnome+'</td>');
+			row.append('<td>'+json.usuario[item].unome+'</td>');
+			row.append('<td>'+json.usuario[item].email+'</td>');
+			row.append('<td> <button type="button" class="btn btn-sm btn-primary" data-action="'+${editar}+'" data-target="'+json.usuario[item].id+'">Editar</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${remover}+'" data-target="'+json.usuario[item].id+'">Remover</button> <button type="button" class="btn btn-sm btn-primary" data-action="'+${grupos}+'" data-target="'+json.usuario[item].id+'">Permiss&otilde;es</button> </td>');
+			$('tbody.content').append(row);
 		}
 	});
 });
@@ -222,7 +218,6 @@ $(document).ready(function(){
 $(".btn").on("click", function(){
 	var action = $(this).data('action');
 	var target = $(this).data('target');
-	alert("action="+action+",target="+target);
 	
 	if(target != "") {
 		action = action + "?id=" + target;

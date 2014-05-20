@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Dashboard</title>
 
     <!-- Jquery core CSS -->
     <link href="<c:out value="${pageContext.request.contextPath}/resources/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.min.css"/>" rel="stylesheet">
@@ -30,12 +30,6 @@
   </head>
 
   <body>
-  
-<script>
-$( document ).ready(function() {
-	$("#content").hide();
-});
-</script>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -96,12 +90,16 @@ $( document ).ready(function() {
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-1.10.2.js"/>"></script>
+    <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-2.1.0.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-ui-1.10.4.custom.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/docs.min.js"/>"></script>
     
-    <script>    
+    <script>
+    $(document).ready(function(){
+    	$("#content").hide();
+    });
+    
     $('a').click(function(e){
         var link = $(this).attr('href');
         

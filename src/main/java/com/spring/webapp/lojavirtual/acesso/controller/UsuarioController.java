@@ -21,46 +21,10 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuario;
 	
-	@RequestMapping(value="cadastra.htm")
-	@PreAuthorize("hasPermission(#user, 'cadastra_usuario')")
-	public ModelAndView cadastra() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("privado/usuario/cadastra");
-		return mav;
-	}
-	
-	@RequestMapping(value="altera.htm")
-	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
-	public ModelAndView altera(@RequestParam("id") String id) {
-		int id_usuario = Integer.valueOf(id).intValue();
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("usuario", usuario.listagem_usuario(id_usuario));
-		mav.setViewName("privado/usuario/altera");
-		return mav;
-	}
-	
-	@RequestMapping(value="remove.htm")
-	@PreAuthorize("hasPermission(#user, 'remove_usuario')")
-	public ModelAndView remove() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("privado/usuario/altera");
-		return mav;
-	}
-	
 	@RequestMapping(value="listagem.htm")
 	public ModelAndView lista() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privado/usuario/listagem");
-		return mav;
-	}
-	
-	@RequestMapping(value="permissoes.htm")
-	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
-	public ModelAndView permissoes() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("permissoes", usuario.lista_grupo_permissoes());
-		mav.setViewName("privado/usuario/permissoes");
 		return mav;
 	}
 	
@@ -73,6 +37,14 @@ public class UsuarioController {
 			return "not";
 	}
 	
+	@RequestMapping(value="cadastra.htm")
+	@PreAuthorize("hasPermission(#user, 'cadastra_usuario')")
+	public ModelAndView cadastra() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("privado/usuario/cadastra");
+		return mav;
+	}
+	
 	@RequestMapping(value="altera.htm", method=RequestMethod.POST)
 	@ResponseBody
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
@@ -80,6 +52,17 @@ public class UsuarioController {
 			return "yes";
 		else
 			return "not";
+	}
+	
+	@RequestMapping(value="altera.htm")
+	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
+	public ModelAndView altera(@RequestParam("id") String id) {
+		int id_usuario = Integer.valueOf(id).intValue();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("usuario", usuario.listagem_usuario(id_usuario));
+		mav.setViewName("privado/usuario/altera");
+		return mav;
 	}
 	
 	@RequestMapping(value="remove.htm", method=RequestMethod.POST)
@@ -96,14 +79,6 @@ public class UsuarioController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lista", usuario.listagem_usuarios());
 		mav.setViewName("listagem_usuarios");
-		return mav;
-	}
-	
-	@RequestMapping(value="permissoes.json", method=RequestMethod.GET)
-	public ModelAndView permissoes(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("lista", usuario.lista_permissoes(request, response));
-		mav.setViewName("listagem_permissoes");
 		return mav;
 	}
 	
