@@ -38,49 +38,44 @@ public class PermissaoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="alterna.htm", method=RequestMethod.POST)
+	@RequestMapping(value="altera.htm", method=RequestMethod.POST)
 	@ResponseBody
 	public String alterna(HttpServletRequest request, HttpServletResponse response) {
-		if(permissao.alterna(request, response))
+		if(permissao.altera(request, response))
 			return "yes";
 		else
 			return "not";
 	}
 	
-	@RequestMapping(value="alterna.htm")
+	@RequestMapping(value="altera.htm")
 	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
-	public ModelAndView alterna(@RequestParam("id") String id) {
-		int id_usuario = Integer.valueOf(id).intValue();
-		
+	public ModelAndView alterna(@RequestParam("id") String id_usuario) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("permissao", permissao.lista_permissoes(id_usuario));
-		mav.setViewName("privado/pemissao/alterna");
+		mav.addObject("usuario", permissao.findUserById(Integer.valueOf(id_usuario).intValue()));
+		mav.setViewName("privado/permissao/altera");
 		return mav;
 	}
 	
-	@RequestMapping(value="listagem.htm")
-	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
-	public ModelAndView listagem() {
+	@RequestMapping(value="grupos.json")
+	public ModelAndView grupos() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("lista", permissao.lista_grupo_permissoes());
-		mav.setViewName("privado/permissao/listagem");
-		return mav;
-	}
-	
-	@RequestMapping(value="grupos.json", method=RequestMethod.GET)
-	public ModelAndView grupos(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("lista", permissao.lista_grupo_permissoes());
+		mav.addObject("lista", permissao.lista_grupos());
 		mav.setViewName("listagem_grupos");
 		return mav;
 	}
 	
-	@RequestMapping(value="permissoes.json", method=RequestMethod.GET)
-	public ModelAndView permissoes(HttpServletRequest request, HttpServletResponse response) {
-		int id_permissao = Integer.valueOf(request.getParameter("id")).intValue();
-		
+	@RequestMapping(value="permissoes.json")
+	public ModelAndView permissoes() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("lista", permissao.lista_permissoes(id_permissao));
+		mav.addObject("lista", permissao.lista_permissoes());
+		mav.setViewName("listagem_permissoes");
+		return mav;
+	}
+	
+	@RequestMapping(value="permissoes_grupo.json")
+	public ModelAndView permissoes_grupo(@RequestParam("id") String id_grupo) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("lista", permissao.lista_permissoes_grupo(Integer.valueOf(id_grupo).intValue()));
 		mav.setViewName("listagem_permissoes");
 		return mav;
 	}

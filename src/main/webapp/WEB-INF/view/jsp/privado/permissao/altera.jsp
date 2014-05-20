@@ -3,9 +3,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Permiss&otilde;es do usu&aacute;rio: ${usuario.login}</title>
 </head>
 <body>
+
+<table class="bordered">
+
+    <thead>
+    <tr>
+        <th>#</th>        
+        <th>Grupo</th>
+        <th>Permiss&otilde;es</th>
+        <th>#</th>
+    </tr>
+    </thead>
+    
+    <tbody class="content">
+    </tbody>
+
+</table>
 
 </body>
 </html>

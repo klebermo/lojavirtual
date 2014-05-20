@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="<c:out value="${pageContext.request.contextPath}/resources/extras/css/dashboard.css"/>" rel="stylesheet">
+    <link href="<c:out value="${pageContext.request.contextPath}/resources/extras/css/table.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="<c:out value="${pageContext.request.contextPath}/resources/extras/css/zebra_dialog.css"/>" type="text/css">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->

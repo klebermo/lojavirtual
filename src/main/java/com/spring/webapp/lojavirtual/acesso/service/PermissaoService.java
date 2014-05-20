@@ -53,7 +53,7 @@ public class PermissaoService {
 	
 	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
 	@Transactional
-	public boolean alterna(HttpServletRequest request, HttpServletResponse response) {
+	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		String id_usuario = request.getParameter("usuario");
 		String id_permissao = request.getParameter("grupo");
 		
@@ -71,18 +71,23 @@ public class PermissaoService {
 	}
 	
 	@Transactional
-	public List<GrupoPermissao> lista_grupo_permissoes() {
+	public List<GrupoPermissao> lista_grupos() {
 		return grupo_permissao.findAll();
 	}
-	
-	@Transactional
-	public List<Permissao> lista_permissoes(int id) {
-		return grupo_permissao.findById(id).getPermissao();
-	}
-	
+		
 	@Transactional
 	public List<Permissao> lista_permissoes() {
 		return permissao.findAll();
+	}
+	
+	@Transactional
+	public List<Permissao> lista_permissoes_grupo(int id_grupo) {
+		return grupo_permissao.findById(id_grupo).getPermissao();
+	}
+	
+	@Transactional
+	public Usuario findUserById(int id) {
+		return usuario.findById(id);
 	}
 	
 }
