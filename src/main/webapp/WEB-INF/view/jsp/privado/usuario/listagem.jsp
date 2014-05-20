@@ -161,14 +161,19 @@ table {
 </head>
 <body>
 
-<c:url value="/usuario/usuarios.json" var="lista"/>
+<c:url value="/usuario/listagem.json" var="lista"/>
 <c:url value="/usuario/cadastra.htm" var="novo"/>
 <c:url value="/usuario/altera.htm" var="editar"/>
 <c:url value="/usuario/remove.htm" var="remover"/>
 <c:url value="/permissao/alterna.htm" var="grupos"/>
 
+<p>
+	<button type="button" class="btn btn-sm btn-link" data-action="${novo}" data-target="">
+		cadastrar novo usu&aacute;rio
+	</button>
+</p>
+
 <table class="bordered">
-	<caption> <button type="button" class="btn btn-sm btn-primary" data-action="${novo}" data-target="">Novo</button> </caption>
 
     <thead>
     <tr>
@@ -181,7 +186,7 @@ table {
     </tr>
     </thead>
     
-    <tfoot>
+    <tbody class="content">
     <tr>
     	<td></td>
     	<td></td>
@@ -190,9 +195,6 @@ table {
     	<td></td>
     	<td></td>
     </tr>
-    </tfoot>
-    
-    <tbody class="content">
     </tbody>
 
 </table>
@@ -202,7 +204,7 @@ table {
 $(document).ready(function(){
 	var url = "<c:out value="${lista}"/>";
 	$.get(url, function(data){
-		var json = jQuery.parseJSON(data);		
+		var json = jQuery.parseJSON(data);
 		for(var item in json.usuario) {
 			var row = $('<tr>');
 			row.append('<td>'+json.usuario[item].login+'</td>');

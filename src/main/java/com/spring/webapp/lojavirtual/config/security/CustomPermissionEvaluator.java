@@ -15,11 +15,9 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	
 	public boolean hasPermission(Authentication arg0, Object arg1) {
         if (arg0 == null || !arg0.isAuthenticated()) {
-        	System.out.println("false");
             return false;
         }
         else {
-        	System.out.println("true");
         	for(GrantedAuthority authority: arg0.getAuthorities()) {
         		if(authority.getAuthority().equals(arg1))
         			return true;
@@ -31,11 +29,9 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	@Override
 	public boolean hasPermission(Authentication arg0, Object arg1, Object arg2) {
         if (arg0 == null || !arg0.isAuthenticated()) {
-        	System.out.println("false");
             return false;
         }
         else {
-        	System.out.println("true");
         	for(GrantedAuthority authority: arg0.getAuthorities()) {
         		if(authority.getAuthority().equals(arg2))
         			return true;

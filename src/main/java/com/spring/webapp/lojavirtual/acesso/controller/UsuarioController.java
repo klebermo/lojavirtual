@@ -21,13 +21,6 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuario;
 	
-	@RequestMapping(value="listagem.htm")
-	public ModelAndView lista() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("privado/usuario/listagem");
-		return mav;
-	}
-	
 	@RequestMapping(value="cadastra.htm", method=RequestMethod.POST)
 	@ResponseBody
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
@@ -54,7 +47,7 @@ public class UsuarioController {
 			return "not";
 	}
 	
-	@RequestMapping(value="altera.htm")
+	@RequestMapping(value="altera.htm", method=RequestMethod.GET)
 	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
 	public ModelAndView altera(@RequestParam("id") String id) {
 		int id_usuario = Integer.valueOf(id).intValue();
@@ -74,7 +67,14 @@ public class UsuarioController {
 			return "not";
 	}
 	
-	@RequestMapping(value="usuarios.json")
+	@RequestMapping(value="listagem.htm")
+	public ModelAndView lista() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("privado/usuario/listagem");
+		return mav;
+	}
+	
+	@RequestMapping(value="listagem.json")
 	public ModelAndView usuarios() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lista", usuario.listagem_usuarios());

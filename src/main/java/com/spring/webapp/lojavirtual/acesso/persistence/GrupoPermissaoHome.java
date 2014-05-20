@@ -11,5 +11,5 @@ public class GrupoPermissaoHome extends Dao<GrupoPermissao> {
 	public GrupoPermissaoHome() {
 		super(GrupoPermissao.class);
 	}
-
+	
 }

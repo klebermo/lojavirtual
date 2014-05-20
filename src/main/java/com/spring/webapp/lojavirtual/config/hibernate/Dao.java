@@ -3,6 +3,7 @@ package com.spring.webapp.lojavirtual.config.hibernate;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,99 +12,70 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class Dao<E> {
 	
-	private final E entity;
+	private final Class<E> entity;
 	
 	@Autowired
-	SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory;
 	
 	protected Session getCurrentSession(){
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public Dao(E entity) {  
+	/*public Dao(E entity) {  
 	    this.entity = entity;
-	}
+	}*/
 	 
-	@SuppressWarnings("unchecked")
-	public Dao(Class<?> classe) {
-		this.entity = (E) classe;
+	public Dao(Class<E> classe) {
+		this.entity = classe;
 	}
 
-	public E getEntity() {
+	/*public E getEntity() {
 	    return this.entity;
-	}
+	}*/
 	
 	@Transactional
 	public boolean persist(E transientInstance) {
-		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
-			return true;
-		} catch (RuntimeException re) {
-			return false;
-		}
+		sessionFactory.getCurrentSession().persist(transientInstance);
+		return true;
 	}
 	
 	@Transactional
 	public boolean remove(E transientInstance) {
-		try {
-			sessionFactory.getCurrentSession().delete(transientInstance);
-			return true;
-		} catch (RuntimeException re) {
-			return false;
-		}
+		sessionFactory.getCurrentSession().delete(transientInstance);
+		return true;
 	}
 	
 	@Transactional
 	public boolean merge(E detachedInstance) {
-		try {
-			sessionFactory.getCurrentSession().merge(detachedInstance);
-			return true;
-		} catch (RuntimeException re) {
-			return false;
-		}
+		sessionFactory.getCurrentSession().merge(detachedInstance);
+		return true;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public E findById(int id) {
-		try {
-			E instance = (E) sessionFactory.getCurrentSession().get(entity.getClass(), id);
-			return instance;
-		} catch (RuntimeException re) {
-			return null;
-		}
+		E instance = (E) sessionFactory.getCurrentSession().get(entity.getClass(), id);
+		return instance;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public E findByField(String field, String value) {
-		try {
-			String expressao = entity.toString();
-			String nome_classe = new String();
-			StringTokenizer st = new StringTokenizer(expressao);
-			while (st.hasMoreTokens()) {
-				nome_classe = st.nextToken();
-			}
-			String query = "from "+nome_classe+" where "+field+" = :data";
-			
-			Query q = sessionFactory.getCurrentSession().createQuery(query);
-			q.setParameter("data", value);
-			E instance = (E) q.uniqueResult();
-			return instance;
-		} catch (RuntimeException re) {
-			return null;
+		String expressao = entity.toString();
+		String nome_classe = new String();
+		StringTokenizer st = new StringTokenizer(expressao);
+		while (st.hasMoreTokens()) {
+			nome_classe = st.nextToken();
 		}
+		String query = "from "+nome_classe+" where "+field+" = :data";
+		
+		Query q = sessionFactory.getCurrentSession().createQuery(query);
+		q.setParameter("data", value);
+		E instance = (E) q.uniqueResult();
+		return instance;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<E> findAll() {
-		try {
-			List<E> instance = sessionFactory.getCurrentSession().createCriteria(entity.getClass()).list();
-			return instance;
-		} catch (RuntimeException re) {
-			return null;
-		}
+		return (List<E>) sessionFactory.getCurrentSession().createCriteria(entity).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
 	
 }

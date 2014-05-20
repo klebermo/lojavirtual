@@ -12,7 +12,6 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		System.out.println("CustomAuthenticationManager.authenticate");
 		return authenticationProvider.authenticate(authentication);
 	}
     

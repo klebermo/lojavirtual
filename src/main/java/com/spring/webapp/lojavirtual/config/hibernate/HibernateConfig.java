@@ -64,7 +64,6 @@ public class HibernateConfig {
             setProperty("hibernate.hbm2ddl.auto", "update");
             setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
             setProperty("hibernate.globally_quoted_identifiers", "true");
-            setProperty("hibernate.show_sql", "true");
          }
       };
    }
