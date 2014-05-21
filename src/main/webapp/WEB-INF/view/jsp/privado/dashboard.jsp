@@ -95,8 +95,9 @@
     <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-2.1.0.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-ui-1.10.4.custom.min.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/>"></script>
-    <script type="text/javascript" src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/zebra_dialog.js"/>"></script>
     <script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/docs.min.js"/>"></script>
+    <script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/zebra_dialog.js"/>"></script>
+    <script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/jquery.md5.min.js"/>"></script>
     
     <script>
     $(document).ready(function(){

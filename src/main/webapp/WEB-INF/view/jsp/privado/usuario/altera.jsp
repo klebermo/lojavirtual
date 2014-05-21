@@ -23,19 +23,20 @@ $( document ).ready(function() {
 	</div>
 	    
     <div class="panel-body">
-	    <c:url value="/usuario/altera" var="alteraUsuario"/>
+	    <c:url value="/usuario/altera.htm" var="alteraUsuario"/>
 	    <form class="form" role="form" action="${alteraUsuario}" method="post">
+	      <input type="hidden" name="id" value="${usuario.id}">
 	      <p> <input type="text" name="login" class="form-control" value="${usuario.login}" autofocus> </p>
-	      <p> <input type="password" name="senha" class="form-control" valuer="${usuario.senha}"> </p>
+	      <p> <input type="password" name="senha" class="form-control" value=""> </p>
 	      <p> <input type="email" name="email" class="form-control" value="${usuario.email}"> </p>
-	      <p> <input type="text" name="pnome" class="form-control" value="${usuario.pnome}"> </p>
-	      <p> <input type="text" name="unome" class="form-control" value="${usuario.unome}"> </p>
-	      <p> <button type="submit" class="btn btn-primary">Alterar</button> </p>
+	      <p> <input type="text" name="pnome" class="form-control" value="${usuario.first_name}"> </p>
+	      <p> <input type="text" name="unome" class="form-control" value="${usuario.last_name}"> </p>
+	      <p> <button type="submit" class="btn btn-lg btn-default">Alterar</button> </p>
 	     </form>
     </div>
     
       <div id="yes" class="alert alert-success">
-        <strong>Pronto!</strong> Usu&acute;rio alterado com sucesso.
+        <strong>Pronto!</strong> Usu&aacute;rio alterado com sucesso.
       </div>
       
       <div id="not" class="alert alert-danger">
@@ -44,6 +45,33 @@ $( document ).ready(function() {
       
   </div>
 </div>
+
+<script>
+// Attach a submit handler to the form
+$( ".form" ).submit(function( event ) {
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+ 
+  // Get some values from elements on the page:
+  var $form = $( this ),
+    id = $form.find( "input[name='id']" ).val(),
+    login = $form.find( "input[name='login']" ).val(),
+    senha = $form.find( "input[name='senha']" ).val(),
+    email = $form.find( "input[name='email']" ).val(),
+    pnome = $form.find( "input[name='pnome']" ).val(),
+    unome = $form.find( "input[name='unome']" ).val(),
+    url = $form.attr( "action" );
+ 
+  // Send the data using post
+  var posting = $.post( url, { id: id, login: login, senha: $.md5(senha), email: email, pnome: pnome, unome: unome } );
+ 
+  // Put the results in a div
+  posting.done(function( data ) {
+	  $("#"+data).show();
+  });
+});
+</script>
 
 </body>
 </html>

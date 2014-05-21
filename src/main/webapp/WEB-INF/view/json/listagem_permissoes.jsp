@@ -1,9 +1,9 @@
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <json:object>
-	<json:object name="permissoes">
-		<c:forEach var="item" items="${lista}">
-			<json:property name="${item.id}" value="${item.nome}"/>
-		</c:forEach>
-	</json:object>
+	<json:array name="permissao" var="item" items="${lista}">
+		<json:object>
+				<json:property name="id" value="${item.id}"/>
+				<json:property name="nome" value="${item.nome}"/>
+		</json:object>
+	</json:array>
 </json:object>

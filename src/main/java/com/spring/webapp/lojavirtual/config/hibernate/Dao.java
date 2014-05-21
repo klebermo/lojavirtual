@@ -20,19 +20,11 @@ public class Dao<E> {
 	protected Session getCurrentSession(){
 		return sessionFactory.getCurrentSession();
 	}
-	
-	/*public Dao(E entity) {  
-	    this.entity = entity;
-	}*/
-	 
+		 
 	public Dao(Class<E> classe) {
 		this.entity = classe;
 	}
 
-	/*public E getEntity() {
-	    return this.entity;
-	}*/
-	
 	@Transactional
 	public boolean persist(E transientInstance) {
 		sessionFactory.getCurrentSession().persist(transientInstance);
@@ -51,12 +43,14 @@ public class Dao<E> {
 		return true;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public E findById(int id) {
-		E instance = (E) sessionFactory.getCurrentSession().get(entity.getClass(), id);
+		E instance = (E) sessionFactory.getCurrentSession().get(entity, id);
 		return instance;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public E findByField(String field, String value) {
 		String expressao = entity.toString();
@@ -73,6 +67,7 @@ public class Dao<E> {
 		return instance;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<E> findAll() {
 		return (List<E>) sessionFactory.getCurrentSession().createCriteria(entity).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();

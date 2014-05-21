@@ -13,7 +13,8 @@ INSERT INTO role(id, nome) VALUES (12, 'fornecedor');
 INSERT INTO role(id, nome) VALUES (13, 'endereco');
 INSERT INTO role(id, nome) VALUES (14, 'contato');
 INSERT INTO role(id, nome) VALUES (15, 'unidade');
-INSERT INTO role(id, nome) VALUES (16, 'geral');
+INSERT INTO role(id, nome) VALUES (16, 'permissao');
+INSERT INTO role(id, nome) VALUES (17, 'geral');
 
 INSERT INTO permission(id, nome) VALUES (1, 'cadastra_produto');
 INSERT INTO permission(id, nome) VALUES (2, 'altera_produto');
@@ -60,7 +61,10 @@ INSERT INTO permission(id, nome) VALUES (42, 'remove_contato');
 INSERT INTO permission(id, nome) VALUES (43, 'cadastra_unidade');
 INSERT INTO permission(id, nome) VALUES (44, 'altera_unidade');
 INSERT INTO permission(id, nome) VALUES (45, 'remove_unidade');
-INSERT INTO permission(id, nome) VALUES (46, 'dashboard');
+INSERT INTO permission(id, nome) VALUES (46, 'cadastra_permissao');
+INSERT INTO permission(id, nome) VALUES (47, 'altera_permissao');
+INSERT INTO permission(id, nome) VALUES (48, 'remove_permissao');
+INSERT INTO permission(id, nome) VALUES (49, 'dashboard');
 
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (1, 1);
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (1, 2);
@@ -108,6 +112,9 @@ INSERT INTO role_permissions(fk_role, fk_permission) VALUES (15, 43);
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (15, 44);
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (15, 45);
 INSERT INTO role_permissions(fk_role, fk_permission) VALUES (16, 46);
+INSERT INTO role_permissions(fk_role, fk_permission) VALUES (16, 47);
+INSERT INTO role_permissions(fk_role, fk_permission) VALUES (16, 48);
+INSERT INTO role_permissions(fk_role, fk_permission) VALUES (17, 49);
 
 INSERT INTO usuario(id, email, first_name, last_name, login, senha) VALUES (0, 'klebermo@gmail.com', 'Kleber', 'Mota', 'klebermo', 'a7f5306827af05dd0c3b689323403e81');
 INSERT INTO role_members(fk_usuario, fk_role) VALUES (0, 1);
@@ -126,3 +133,4 @@ INSERT INTO role_members(fk_usuario, fk_role) VALUES (0, 13);
 INSERT INTO role_members(fk_usuario, fk_role) VALUES (0, 14);
 INSERT INTO role_members(fk_usuario, fk_role) VALUES (0, 15);
 INSERT INTO role_members(fk_usuario, fk_role) VALUES (0, 16);
+INSERT INTO role_members(fk_usuario, fk_role) VALUES (0, 17);

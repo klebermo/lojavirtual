@@ -14,7 +14,7 @@
 <c:url value="/usuario/altera.htm" var="editar"/>
 <c:url value="/usuario/remove.htm" var="remover"/>
 
-<c:url value="/permissao/listagem.htm" var="permissoes"/>
+<c:url value="/permissao/altera.htm" var="permissoes"/>
 
 <p>
 	<button type="button" class="btn btn-sm btn-link" data-action="novo">
@@ -41,7 +41,6 @@
 </table>
 
 <script>
-
 $(document).ready(function(){
 	var url = "<c:out value="${lista}"/>";
 	$.get(url, function(data){
@@ -65,12 +64,9 @@ $(document).ready(function(){
 	});
 });
 
-$('.btn').each(function(index, elem) {
-	$(".btn").click(function(){
+$(document).on('click', '.btn', function () {
 		var action = $(this).data('action');
 		var target = $(this).data('target');
-		
-		alert("action="+action+", target="+target);
 		
 		if(action == "novo") {
 			action = "${novo}";
@@ -102,9 +98,9 @@ $('.btn').each(function(index, elem) {
 		} else if(action == "remover") {
 			action = "${remover}";
 			new $.Zebra_Dialog('<strong>Aten&ccedil;&atilde;o!</strong><br><br>', {
-			    'source':  {'ajax': '${remover}?id='+target},
+			    'source':  {'ajax': action+"?id="+target},
 			    width: 350,
-			    'title': 'Aviso de remo&ccedil;&atilde;o de usu&aacute;rio',
+			    'title': 'Remo&ccedil;&atilde;o de usu&aacute;rio',
 			    'buttons':  [
 			                    {caption: 'Yes', callback: remove_usuario(action, target) },
 			                    {caption: 'No' }
@@ -125,13 +121,7 @@ $('.btn').each(function(index, elem) {
 				$(".panel-body").html(conteudo);
 				$("#content").show();
 			});
-		} else {
-			$.Zebra_Dialog('A&ccedil;&atilde;o inv&aacute;lida', {
-			    'type':     'information',
-			    'title':    'Erro'
-			});
 		}
-	});
 });
 
 function remove_usuario(action, target) {

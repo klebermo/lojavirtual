@@ -30,28 +30,27 @@ public class PermissaoService {
 	@Autowired
 	private PermissaoHome permissao;
 	
-	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
+	@PreAuthorize("hasPermission(#user, 'cadastra_permissao')")
 	@Transactional
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		String nome_grupo = request.getParameter("nome");
 		String[] permissoes = request.getParameterValues("permissoes");
 		
+		if(nome_grupo == null || permissoes == null)
+			return false;
+		
 		GrupoPermissao grupo = new GrupoPermissao();
 		grupo.setNome(nome_grupo);
 		
 		List<Permissao> lista = new ArrayList<Permissao>();
-		for(int i=0; i<permissoes.length; i++) {
-			Permissao p = new Permissao();
-			int id = Integer.valueOf(permissoes[i]).intValue();
-			p.setId(id);
-			lista.add(p);
-		}
+		for(int i=0; i<permissoes.length; i++)
+			lista.add(permissao.findById(Integer.valueOf(permissoes[i]).intValue()));
 		grupo.setPermissao(lista);
 		
 		return grupo_permissao.persist(grupo);
 	}
 	
-	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
+	@PreAuthorize("hasPermission(#user, 'altera_permissao')")
 	@Transactional
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		String id_usuario = request.getParameter("usuario");
@@ -70,9 +69,20 @@ public class PermissaoService {
 		return usuario.merge(user);
 	}
 	
+	@PreAuthorize("hasPermission(#user, 'altera_permissao')")
+	@Transactional
+	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
+		return false;
+	}
+	
 	@Transactional
 	public List<GrupoPermissao> lista_grupos() {
 		return grupo_permissao.findAll();
+	}
+	
+	@Transactional
+	public List<GrupoPermissao> lista_permissoes_usuario(int id_usuario) {
+		return usuario.findById(id_usuario).getAutorizacao();
 	}
 		
 	@Transactional
@@ -86,8 +96,13 @@ public class PermissaoService {
 	}
 	
 	@Transactional
-	public Usuario findUserById(int id) {
-		return usuario.findById(id);
+	public GrupoPermissao findRoleById(int id) {
+		return grupo_permissao.findById(id);
+	}
+	
+	@Transactional
+	public Permissao findPermissionById(int id) {
+		return permissao.findById(id);
 	}
 	
 }

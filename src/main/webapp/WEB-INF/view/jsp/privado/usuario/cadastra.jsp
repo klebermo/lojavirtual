@@ -30,7 +30,7 @@ $( document ).ready(function() {
 	      <p> <input type="email" name="email" class="form-control" placeholder="E-mail"> </p>
 	      <p> <input type="text" name="pnome" class="form-control" placeholder="Nome"> </p>
 	      <p> <input type="text" name="unome" class="form-control" placeholder="Sobrenome"> </p>
-	      <p> <button type="submit" class="btn btn-primary">Cadastrar</button> </p>
+	      <p> <button type="submit" class="btn btn-lg btn-default">Cadastrar</button> </p>
 	     </form>
     </div>
     
@@ -46,26 +46,29 @@ $( document ).ready(function() {
 </div>
 
 <script>
+// Attach a submit handler to the form
 $( ".form" ).submit(function( event ) {
-	  // Stop form from submitting normally
-	  event.preventDefault();
-	 
-	  // Get some values from elements on the page:
-	  var $form = $( this ),
-	  	url = $form.attr( "action" );
-	 
-	  // Send the data using post
-	  var posting = $.post( url, $(this).serialize() );
-	 
-	  // Put the results in a div
-	  posting.done(function( data ) {
-		  $("#"+data).show();
-		  
-		  $(".form").each (function(){
-			  this.reset();
-		  });
-	  });
-	});
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+ 
+  // Get some values from elements on the page:
+  var $form = $( this ),
+    login = $form.find( "input[name='login']" ).val(),
+    senha = $form.find( "input[name='senha']" ).val(),
+    email = $form.find( "input[name='email']" ).val(),
+    pnome = $form.find( "input[name='pnome']" ).val(),
+    unome = $form.find( "input[name='unome']" ).val(),
+    url = $form.attr( "action" );
+ 
+  // Send the data using post
+  var posting = $.post( url, { login: login, senha: $.md5(senha), email: email, pnome: pnome, unome: unome } );
+ 
+  // Put the results in a div
+  posting.done(function( data ) {
+	  $("#"+data).show();
+  });
+});
 </script>
 
 </body>
