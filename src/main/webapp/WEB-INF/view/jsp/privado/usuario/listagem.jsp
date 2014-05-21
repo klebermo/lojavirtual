@@ -65,7 +65,6 @@ $(document).ready(function(){
 });
 
 $(document).on('click', '.btn', function (event) {
-		event.preventDefault();
 		var action = $(this).data('action');
 		var target = $(this).data('target');
 		
@@ -75,9 +74,8 @@ $(document).on('click', '.btn', function (event) {
 				var $temp  = $('<div/>', {html:data});
 				var titulo = $temp.find('title').text();
 				var conteudo = $temp.remove('head').html();
-				$(".panel-title").empty();
+				limpa_conteudo();
 				$(".panel-title").text(titulo);
-				$(".panel-body").empty();
 				$(".panel-body").html(conteudo);
 				$("#content").show();
 			});
@@ -90,9 +88,8 @@ $(document).on('click', '.btn', function (event) {
 				var $temp  = $('<div/>', {html:data});
 				var titulo = $temp.find('title').text();
 				var conteudo = $temp.remove('head').html();
-				$(".panel-title").empty();
+				limpa_conteudo();
 				$(".panel-title").text(titulo);
-				$(".panel-body").empty();
 				$(".panel-body").html(conteudo);
 				$("#content").show();
 			});
@@ -116,9 +113,8 @@ $(document).on('click', '.btn', function (event) {
 				var $temp  = $('<div/>', {html:data});
 				var titulo = $temp.find('title').text();
 				var conteudo = $temp.remove('head').html();
-				$(".panel-title").empty();
+				limpa_conteudo();
 				$(".panel-title").text(titulo);
-				$(".panel-body").empty();
 				$(".panel-body").html(conteudo);
 				$("#content").show();
 			});

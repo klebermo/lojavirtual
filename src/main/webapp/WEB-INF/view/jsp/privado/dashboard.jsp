@@ -104,15 +104,20 @@
     	$("#content").hide();
     });
     
+    function limpa_conteudo() {
+    	$("#content").hide();
+    	$(".panel-heading").remove();
+    	$(".panel-body").remove();
+    	$("#content").append('<div class="panel-heading"><h3 class="panel-title"></h3></div>');
+    	$("#content").append('<div class="panel-body"></div>');
+    }
+    
     $('a').click(function(e){
         var link = $(this).attr('href');
         
         if(link == '#') {
         	e.preventDefault();
-        	
-        	$(".panel-title").empty();
-  			$(".panel-body").empty();
-  			$("#content").hide();
+        	limpa_conteudo();
         }
         else {
             var tam = link.length;
@@ -127,8 +132,7 @@
         		  var $temp  = $('<div/>', {html:data});
         		  var titulo = $temp.find('title').text();
         		  var conteudo = $temp.remove('head').html();
-        		  $(".panel-title").empty();
-        		  $(".panel-body").empty();
+        		  limpa_conteudo();
         		  $(".panel-title").text(titulo);
         		  $(".panel-body").html(conteudo);
         		  $("#content").show();
