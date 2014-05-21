@@ -126,6 +126,8 @@
         		  var $temp  = $('<div/>', {html:data});
         		  var titulo = $temp.find('title').text();
         		  var conteudo = $temp.remove('head').html();
+        		  $(".panel-title").empty();
+        		  $(".panel-body").empty();
         		  $(".panel-title").text(titulo);
         		  $(".panel-body").html(conteudo);
         		  $("#content").show();

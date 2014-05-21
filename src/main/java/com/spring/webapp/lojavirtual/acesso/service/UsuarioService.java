@@ -87,4 +87,5 @@ public class UsuarioService {
 	public Usuario listagem_usuario(int id) {
 		return usuario.findById(id);
 	}
+	
 }

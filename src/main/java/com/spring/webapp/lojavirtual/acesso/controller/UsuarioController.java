@@ -67,6 +67,17 @@ public class UsuarioController {
 			return "not";
 	}
 	
+	@RequestMapping(value="remove.htm", method=RequestMethod.GET)
+	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
+	public ModelAndView remove(@RequestParam("id") String id) {
+		int id_usuario = Integer.valueOf(id).intValue();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("usuario", usuario.listagem_usuario(id_usuario));
+		mav.setViewName("privado/usuario/remove");
+		return mav;
+	}
+	
 	@RequestMapping(value="listagem.htm")
 	public ModelAndView lista() {
 		ModelAndView mav = new ModelAndView();

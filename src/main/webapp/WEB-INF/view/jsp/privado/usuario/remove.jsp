@@ -4,25 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Permiss&otilde;es do usu&aacute;rio: ${usuario.login}</title>
+<title>Remover usu&aacute;rio</title>
 </head>
 <body>
 
-<table class="bordered">
-
-    <thead>
-    <tr>
-        <th>#</th>        
-        <th>Grupo</th>
-        <th>Permiss&otilde;es</th>
-        <th>#</th>
-    </tr>
-    </thead>
-    
-    <tbody class="content">
-    </tbody>
-
-</table>
+      <div class="alert alert-danger">
+        <strong>Aten&ccedil;&atilde;o!</strong> Tem certeza que quer remover o usu&aacute;rio <c:out value="${usuario.login}"/>.
+      </div>
 
 </body>
 </html>

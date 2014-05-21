@@ -47,7 +47,8 @@ $(document).ready(function(){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.usuario, function(index, item){
-		    var row = $('<tr>');
+		    var row = $('<tr id=user'+item.id+'>');
+		    row.append('<td>'+item.id+'</td>');
 		    row.append('<td>'+item.login+'</td>');
 		    row.append('<td>'+item.pnome+'</td>');
 		    row.append('<td>'+item.unome+'</td>');
@@ -59,19 +60,31 @@ $(document).ready(function(){
 		    col.append('<button type="button" class="btn btn-sm btn-primary" data-action="permissoes" data-target="'+item.id+'">Permiss&otilde;es</button>');
 		    row.append(col);
 		    
-		    row.append('<td></td>');
-		    
 		    $('tbody.content').append(row);
 		});
 	});
 });
 
-$(".btn").on("click", function(){
-	var action = $(this).data('action');
-	var target = $(this).data('target');
-	
-	switch(action) {
-		case "editar":
+$('.btn').each(function(index, elem) {
+	$(".btn").click(function(){
+		var action = $(this).data('action');
+		var target = $(this).data('target');
+		
+		alert("action="+action+", target="+target);
+		
+		if(action == "novo") {
+			action = "${novo}";
+		    $.get(action, function(data){
+				var $temp  = $('<div/>', {html:data});
+				var titulo = $temp.find('title').text();
+				var conteudo = $temp.remove('head').html();
+				$(".panel-title").empty();
+				$(".panel-title").text(titulo);
+				$(".panel-body").empty();
+				$(".panel-body").html(conteudo);
+				$("#content").show();
+			});
+		} else if(action == "editar") {
 			$.ajax({
 				type: "GET",
 				url: "${editar}",
@@ -86,15 +99,18 @@ $(".btn").on("click", function(){
 				$(".panel-body").html(conteudo);
 				$("#content").show();
 			});
-			break;
-		case "remover":
-			new $.Zebra_Dialog('<strong>Tem certeza que quer excluir o usu&aacute;rio:</strong><br><br>', {
-			    'source':  {'ajax': '${remover}'},
+		} else if(action == "remover") {
+			action = "${remover}";
+			new $.Zebra_Dialog('<strong>Aten&ccedil;&atilde;o!</strong><br><br>', {
+			    'source':  {'ajax': '${remover}?id='+target},
 			    width: 350,
-			    'title': 'Aviso de remo&ccedil;&atilde;o de usu&aacute;rio'
+			    'title': 'Aviso de remo&ccedil;&atilde;o de usu&aacute;rio',
+			    'buttons':  [
+			                    {caption: 'Yes', callback: remove_usuario(action, target) },
+			                    {caption: 'No' }
+			                ]
 			});
-			break;
-		case "permissoes":
+		} else if(action == "permissoes") {
 			$.ajax({
 				type: "GET",
 				url: "${permissoes}",
@@ -109,29 +125,26 @@ $(".btn").on("click", function(){
 				$(".panel-body").html(conteudo);
 				$("#content").show();
 			});
-			break;
-		case "novo":
-			action = "${novo}";
-		    $.get(action, function(data){
-				var $temp  = $('<div/>', {html:data});
-				var titulo = $temp.find('title').text();
-				var conteudo = $temp.remove('head').html();
-				$(".panel-title").empty();
-				$(".panel-title").text(titulo);
-				$(".panel-body").empty();
-				$(".panel-body").html(conteudo);
-				$("#content").show();
-			});
-			break;
-		default:
+		} else {
 			$.Zebra_Dialog('A&ccedil;&atilde;o inv&aacute;lida', {
-				    'type':     'information',
-				    'title':    'Erro'
+			    'type':     'information',
+			    'title':    'Erro'
 			});
-			break;
-	}
-	
+		}
+	});
 });
+
+function remove_usuario(action, target) {
+    $.ajax({
+    	type: "POST",
+    	url: action,
+    	data: {id: target}
+	}).done(function(data){
+		if(data == "yes") {
+			$('#user'+target).remove();
+		}
+	});
+}
 </script>
 
 </body>
