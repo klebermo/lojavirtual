@@ -47,14 +47,10 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <li> <c:url value="/logout" var="logoutUrl"/> <a href="${logoutUrl}">Logout</a> </li>
             <li><a href="#"><c:out value="${pageContext.request.remoteUser}"/></a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </div>
@@ -64,7 +60,7 @@
       
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview</a></li>
+            <li> <a href="#">Overview</a></li>
             <li><a href="#">Produtos</a></li>
             <li><a href="#">Categorias</a></li>
             <li><a href="#">Promo&ccedil;&otilde;es</a></li>
@@ -110,6 +106,7 @@
     	$(".panel-body").remove();
     	$("#content").append('<div class="panel-heading"><h3 class="panel-title"></h3></div>');
     	$("#content").append('<div class="panel-body"></div>');
+    	$("#content").show();
     }
     
     $('a').click(function(e){
@@ -118,6 +115,7 @@
         if(link == '#') {
         	e.preventDefault();
         	limpa_conteudo();
+        	$("#content").hide();
         }
         else {
             var tam = link.length;

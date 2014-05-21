@@ -80,7 +80,7 @@ $(document).ready(function(){
 			
 			if(item.id > 17) {
 				var col = $('<td>');
-				col.append('<button type="button" class="btn btn-sm btn-link" data-action="remove">remove grupo</button>');
+				col.append('<button type="button" id="link" class="btn btn-sm btn-link" data-action="remove">remove grupo</button>');
 				row.append(col);
 			}
 			else {
@@ -104,7 +104,7 @@ $(document).on('click', '.checkbox', function(event){
 	});
 });
 
-$(document).on('click', '.btn', function(event){
+$(document).on('click', '#link', function(event){
 	var action = "${cadastra}";
     $.get(action, function(data){
 		var $temp  = $('<div/>', {html:data});
@@ -113,7 +113,6 @@ $(document).on('click', '.btn', function(event){
 		limpa_conteudo();
 		$(".panel-title").text(titulo);
 		$(".panel-body").html(conteudo);
-		$("#content").show();
 	});
 });
 </script>

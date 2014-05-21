@@ -77,7 +77,6 @@ $(document).on('click', '.btn', function (event) {
 				limpa_conteudo();
 				$(".panel-title").text(titulo);
 				$(".panel-body").html(conteudo);
-				$("#content").show();
 			});
 		} else if(action == "editar") {
 			$.ajax({
@@ -91,7 +90,6 @@ $(document).on('click', '.btn', function (event) {
 				limpa_conteudo();
 				$(".panel-title").text(titulo);
 				$(".panel-body").html(conteudo);
-				$("#content").show();
 			});
 		} else if(action == "remover") {
 			action = "${remover}";
@@ -116,7 +114,6 @@ $(document).on('click', '.btn', function (event) {
 				limpa_conteudo();
 				$(".panel-title").text(titulo);
 				$(".panel-body").html(conteudo);
-				$("#content").show();
 			});
 		}
 });
