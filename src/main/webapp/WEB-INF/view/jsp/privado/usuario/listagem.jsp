@@ -64,7 +64,8 @@ $(document).ready(function(){
 	});
 });
 
-$(document).on('click', '.btn', function () {
+$(document).on('click', '.btn', function (event) {
+		event.preventDefault();
 		var action = $(this).data('action');
 		var target = $(this).data('target');
 		

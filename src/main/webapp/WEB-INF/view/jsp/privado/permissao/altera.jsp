@@ -60,7 +60,24 @@ $(document).ready(function(){
 			var row = $('<tr>');
 			row.append('<td><input class="checkbox" type="checkbox" name="grupo" value="'+item.id+'"></td>');
 			row.append('<td>'+item.nome+'</td>');
-			row.append('<td>'+mostra_permissoes(item.id)+'</td>');
+			
+			var coluna = $('<td>');
+			var url = "${permissoes_grupo}";
+			var grupo = item.id;
+			$.ajax({
+				type: "GET",
+				url: url,
+				data: { id: grupo }
+			}).done(function(data){
+				var json = jQuery.parseJSON( data );
+				var result = $('<ul>');
+				$.each(json.permissao, function(index, item) {
+					result.append('<li>'+item.nome+'</li>');
+				});
+				coluna.append(result);
+			});
+			row.append(coluna);
+			
 			if(item.id > 17) {
 				var col = $('<td>');
 				col.append('<button type="button" class="btn btn-sm btn-link" data-action="remove">remove grupo</button>');
@@ -100,22 +117,6 @@ $(document).on('click', '.btn', function(event){
 		$("#content").show();
 	});
 });
-
-function mostra_permissoes(grupo) {
-	var url = "${permissoes_grupo}";
-	$.ajax({
-		type: "GET",
-		url: url,
-		data: { id: grupo }
-	}).done(function(data){
-		var json = jQuery.parseJSON( data );
-		var result = $('<ul>');
-		$.each(json.permissao, function(index, item) {
-			result.append('<li>'+item.nome+'</li>');
-		});
-		return result;
-	});
-}
 </script>
 </body>
 </html>
