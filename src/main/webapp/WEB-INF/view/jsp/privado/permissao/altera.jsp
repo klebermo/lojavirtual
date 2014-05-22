@@ -10,82 +10,87 @@
 
 <script>
 $(document).ready(function(){
-	$("#yes").hide();
-	$("#not").hide();
+	$("#output").hide();
 });
 </script>
 
-<table class="bordered">
-
-    <thead>
-    <tr>
-        <th>#</th>        
-        <th>Grupo</th>
-        <th>Permiss&otilde;es</th>
-        <th>#</th>
-    </tr>
-    </thead>
-    
-    <tbody class="content">
-    </tbody>
-    
-    <tfoot>
-    <tr>
-    	<td colspan="2">
-			<span id="yes" class="ui-icon ui-icon-check"></span>
-		</td>
-		<td colspan="2">
-			<span id="not" class="ui-icon ui-icon-closethick"></span>
-    	</td>
-    </tr>
-    </tfoot>
-
-</table>
-
 <c:url value="/permissao/cadastra" var="cadastra"/>
-<button type="button" class="btn btn-lg btn-link link" data-action="${cadastra}">cadastrar novo grupo</button>
+<c:url value="/permissao/remove" var="remove"/>
+<c:url value="/permissao/listagem" var="listagem"/>
+<button type="button" class="btn btn-lg btn-link action" data-action="${cadastra}" data-target="">cadastrar novo grupo</button>
+
+<div class="container">
+	<div id="row">
+		<div class="col-md-4">
+			<form id="myform">
+				<div id="workspace"></div>
+			</form>
+		</div>
+		<div class="col-md-8">
+			<div id="output" class="panel panel-warning">
+			  <div class="panel-heading">
+			    <h3 id="output-header" class="panel-title"></h3>
+			  </div>
+			  <div class="panel-body">
+			  	<p id="output-body"></p>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <c:url value="/permissao/grupos.json" var="grupos"/>
 <c:url value="/permissao/permissoes_grupo.json" var="permissoes"/>
 <script>
 $(document).ready(function(){
 	var url = "${grupos}";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
+	$.get(url, function(data) {
+		var json = jQuery.parseJSON(data);
 		$.each(json.grupo, function(index, item){
-			var row = $('<tr>');
-			row.append('<td><input class="checkbox" type="checkbox" name="grupo" value="'+item.id+'"></td>');
-			row.append('<td>'+item.nome+'</td>');
-			
-			var coluna = $('<td>');
-			var url = "${permissoes}";
-			var grupo = item.id;
-			$.ajax({
-				type: "GET",
-				url: url,
-				data: { id: grupo }
-			}).done(function(data){
-				var json = jQuery.parseJSON( data );
-				var result = $('<ul>');
-				$.each(json.permissao, function(index, item) {
-					result.append('<li>'+item.nome+'</li>');
-				});
-				coluna.append(result);
-			});
-			row.append(coluna);
-			
+			$("#workspace").append('<p><div class="input-group input-group-sm"><span class="input-group-addon"><input type="checkbox" name="grupo" value="'+item.id+'"></span><input type="text" class="form-control" value="'+item.nome+'"><span class="input-group-btn"><button type="button" class="btn btn-default action" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span></div>');
 			if(item.id > 17) {
-				var col = $('<td>');
-				col.append('<button type="button" class="btn btn-sm btn-link" data-action="" data-target="">remover</button>');
-				row.append(col);
+				$("#workspace").append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove"></span></button></p>');
+			} else {
+				$("#workspace").append('</p>');
 			}
-			else {
-				row.append('<td></td>');
-			}
-			$('tbody.content').append(row);
 		});
 	});
 });
+
+$('#myform :checkbox').click(function() {   
+    if ($(this).is(':checked')) {
+        alert( "desmarcou " + $(this).val() );
+    } else {
+        alert( "marcou " + $(this).val() );
+    }
+});
+
+$(document).on('click', '.action', function (event) {
+	if( $("#output").is(":visible") ) {
+		$("#output-header").empty();
+		$("#output-body").empty();
+		$("#output").hide();
+	} else {
+		var action = $(this).data('action');
+		var target = $(this).data('target');
+		var url;
+		
+		if(target != "")
+			url = action+"/"+target;
+		else
+			url = action;
+		
+		$.get(url, function(data){
+			var $temp  = $('<div/>', {html:data});
+			var titulo = $temp.find('title').text();
+			var conteudo = $temp.remove('head').html();
+			$("#output-header").text(titulo);
+			$("#output-body").html(conteudo);
+		});
+		$("#output").show();
+	}
+});
 </script>
+
 </body>
 </html>

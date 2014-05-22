@@ -14,15 +14,7 @@ $( document ).ready(function() {
 	$("#not").hide();
 });
 </script>
-
-<div class="col-sm-4">
-  <div class="panel panel-warning">
-  
-	<div class="panel-heading">
-	  <h3 class="panel-title">Altera&ccedil;&atilde;o de usu&aacute;rio</h3>
-	</div>
 	    
-    <div class="panel-body">
 	  <c:url value="/usuario/altera.htm" var="alteraUsuario"/>
 	  <form class="form" role="form" action="${alteraUsuario}" method="post">
 	      <p>
@@ -49,7 +41,6 @@ $( document ).ready(function() {
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>
 		  </p>
 	  </form>
-    </div>
     
       <div id="yes" class="alert alert-success">
         <strong>Pronto!</strong> Usu&aacute;rio alterado com sucesso.
@@ -60,9 +51,6 @@ $( document ).ready(function() {
         <strong>Erro!</strong> N&atilde;o foi possivel alterar o usu&aacute;rio.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
-      
-  </div>
-</div>
 
 <script>
 // Attach a submit handler to the form

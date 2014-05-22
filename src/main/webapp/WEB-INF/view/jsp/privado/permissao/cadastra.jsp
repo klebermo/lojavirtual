@@ -16,15 +16,7 @@ $(document).ready(function(){
 </script>
 
 <c:url value="/permissao/permissoes.json" var="permissoes"/>
-
-<div class="col-sm-4">
-  <div class="panel panel-warning">
   
-	<div class="panel-heading">
-	  <h3 class="panel-title">Cadastro de grupo de permiss&atilde;o</h3>
-	</div>
-	    
-    <div class="panel-body">
 	    <c:url value="/permissao/cadastra.htm" var="cadastraGrupo"/>
 	    <form class="form" role="form" action="${cadastraGrupo}" method="post">
       		<p> <input type="text" name="nome" class="form-control" placeholder="Nome" autofocus> </p>
@@ -50,7 +42,6 @@ $(document).ready(function(){
       		
 	      	<p> <button type="submit" class="btn btn-primary">Cadastrar</button> </p>
 	     </form>
-    </div>
     
       <div id="yes" class="alert alert-success">
         <strong>Pronto!</strong> Permiss&atilde;o cadastrado com sucesso.
@@ -59,9 +50,6 @@ $(document).ready(function(){
       <div id="not" class="alert alert-danger">
         <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a permiss&atilde;o.
       </div>
-      
-  </div>
-</div>
 
 <script>
 $(document).ready(function(){

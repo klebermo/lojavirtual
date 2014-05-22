@@ -65,14 +65,24 @@ public class PermissaoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="remove")
+	@RequestMapping(value="remove/{theString}")
 	@PreAuthorize("hasPermission(#user, 'remove_permissao')")
 	public ModelAndView remove(@PathVariable String theString) {
 		int id = Integer.valueOf(theString).intValue();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("permissao", permissao.findRoleById(id));
-		mav.setViewName("privado/permissao/altera");
+		mav.setViewName("privado/permissao/remove");
+		return mav;
+	}
+	
+	@RequestMapping(value="listagem/{theString}")
+	public ModelAndView lista(@PathVariable String theString) {
+		int id = Integer.valueOf(theString).intValue();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("permissoes", permissao.lista_permissoes_grupo(id));
+		mav.setViewName("privado/permissao/listagem");
 		return mav;
 	}
 	

@@ -16,5 +16,12 @@ public class PrivadoController {
 		mav.setViewName("privado/dashboard");
 		return mav;
 	}
+	
+	@RequestMapping(value="blank")
+	public ModelAndView blank() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("privado/blank");
+		return mav;
+	}
 		
 }
