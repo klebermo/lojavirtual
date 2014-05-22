@@ -34,7 +34,7 @@ public class PermissaoService {
 	@Transactional
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		String nome_grupo = request.getParameter("nome");
-		String[] permissoes = request.getParameterValues("permissoes");
+		String[] permissoes = request.getParameterValues("permissoes[]");
 		
 		if(nome_grupo == null || permissoes == null)
 			return false;
@@ -42,12 +42,15 @@ public class PermissaoService {
 		GrupoPermissao grupo = new GrupoPermissao();
 		grupo.setNome(nome_grupo);
 		
-		List<Permissao> lista = new ArrayList<Permissao>();
-		for(int i=0; i<permissoes.length; i++)
-			lista.add(permissao.findById(Integer.valueOf(permissoes[i]).intValue()));
-		grupo.setPermissao(lista);
-		
-		return grupo_permissao.persist(grupo);
+		if(grupo_permissao.persist(grupo)) {
+			List<Permissao> lista = new ArrayList<Permissao>();
+			for(int i=0; i<permissoes.length; i++)
+				lista.add(permissao.findById(Integer.valueOf(permissoes[i]).intValue()));
+			grupo.setPermissao(lista);
+			return grupo_permissao.merge(grupo);
+		} else {
+			return false;
+		}
 	}
 	
 	@PreAuthorize("hasPermission(#user, 'altera_permissao')")

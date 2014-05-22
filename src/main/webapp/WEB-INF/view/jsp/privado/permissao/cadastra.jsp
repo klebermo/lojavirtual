@@ -103,7 +103,7 @@ $( ".form" ).submit(function( event ) {
 		    $("#"+msg).show();
 		    $(".form").each (function(){
 				  this.reset();
-			  });
+			});
 		});
 });
 </script>
