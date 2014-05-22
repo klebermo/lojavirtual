@@ -22,9 +22,7 @@ $(document).ready(function(){
 <div class="container">
 	<div id="row">
 		<div class="col-md-4">
-			<form id="myform">
-				<div id="workspace"></div>
-			</form>
+			<div id="workspace"></div>
 		</div>
 		<div class="col-md-8">
 			<div id="output" class="panel panel-warning">
@@ -47,7 +45,7 @@ $(document).ready(function(){
 	$.get(url, function(data) {
 		var json = jQuery.parseJSON(data);
 		$.each(json.grupo, function(index, item){
-			$("#workspace").append('<p><div class="input-group input-group-sm"><span class="input-group-addon"><input type="checkbox" name="grupo" value="'+item.id+'"></span><input type="text" class="form-control" value="'+item.nome+'"><span class="input-group-btn"><button type="button" class="btn btn-default action" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span></div>');
+			$("#workspace").append('<p><div class="input-group input-group-sm"><span class="input-group-addon"><input type="checkbox" class="checkbox" name="grupo" value="'+item.id+'"></span><input type="text" class="form-control" value="'+item.nome+'" readonly="readonly"><span class="input-group-btn"><button type="button" class="btn btn-default action" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span></div>');
 			if(item.id > 17) {
 				$("#workspace").append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove"></span></button></p>');
 			} else {
@@ -57,7 +55,7 @@ $(document).ready(function(){
 	});
 });
 
-$('#myform :checkbox').click(function() {   
+$('.checkbox').click(function() {   
     if ($(this).is(':checked')) {
         alert( "desmarcou " + $(this).val() );
     } else {
