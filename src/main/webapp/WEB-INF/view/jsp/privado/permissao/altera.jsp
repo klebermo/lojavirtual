@@ -40,7 +40,7 @@ $(document).ready(function(){
 <c:url value="/permissao/grupos.json" var="grupos"/>
 <c:url value="/permissao/permissoes_grupo.json" var="permissoes"/>
 <script>
-$(document).ready(function(){
+function load() {
 	var url = "${grupos}";
 	$.get(url, function(data) {
 		var json = jQuery.parseJSON(data);
@@ -53,6 +53,18 @@ $(document).ready(function(){
 			}
 		});
 	});
+};
+
+function clean() {
+	$("#workspace").empty();
+}
+
+var action;
+var target;
+var url;
+
+$(document).ready(function() {
+	load();
 });
 
 $('.checkbox').click(function() {   
@@ -65,13 +77,20 @@ $('.checkbox').click(function() {
 
 $(document).on('click', '.action', function (event) {
 	if( $("#output").is(":visible") ) {
-		$("#output-header").empty();
-		$("#output-body").empty();
-		$("#output").hide();
+		if(action == $(this).data('action')) {
+			$("#output-header").empty();
+			$("#output-body").empty();
+			$("#output").hide();
+			clean();
+			load();
+		} else {
+			$("#output-header").empty();
+			$("#output-body").empty();
+			$("#output").hide();
+		}
 	} else {
-		var action = $(this).data('action');
-		var target = $(this).data('target');
-		var url;
+		action = $(this).data('action');
+		target = $(this).data('target');
 		
 		if(target != "")
 			url = action+"/"+target;
