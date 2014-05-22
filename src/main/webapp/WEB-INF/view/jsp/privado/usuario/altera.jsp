@@ -18,6 +18,9 @@ $( document ).ready(function() {
 	  <c:url value="/usuario/altera.htm" var="alteraUsuario"/>
 	  <form class="form" role="form" action="${alteraUsuario}" method="post">
 	      <p>
+	      	<input type="hidden" name="id" class="form-control" value="${usuario.id}" autofocus>
+	      </p>
+	      <p>
 	        <label for="login">Login</label>
 	      	<input type="text" name="login" class="form-control" value="${usuario.login}" autofocus>
 	      </p>

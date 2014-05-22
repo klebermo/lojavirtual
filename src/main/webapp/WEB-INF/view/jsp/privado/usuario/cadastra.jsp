@@ -74,6 +74,9 @@ $( ".form" ).submit(function( event ) {
   // Put the results in a div
   posting.done(function( data ) {
 	  $("#"+data).show();
+	  $(".form").each(function(){
+		  $(this).reset();
+	  });
   });
 });
 </script>
