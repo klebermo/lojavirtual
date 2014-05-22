@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     			.anyRequest().authenticated()
     			.and()
 			.formLogin()
-				.loginPage("/acesso/login.htm").permitAll()
+				.loginPage("/acesso/login").permitAll()
 				.loginProcessingUrl("/login").permitAll()
 				.usernameParameter("login")
 				.passwordParameter("senha")
@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.logout()
 				.logoutUrl("/logout")
-				.logoutSuccessUrl("/acesso/login.htm").permitAll();
+				.logoutSuccessUrl("/acesso/login").permitAll();
     }
     
 }

@@ -15,13 +15,6 @@ $(document).ready(function(){
 });
 </script>
 
-<c:url value="/permissao/grupos.json" var="grupos"/>
-<c:url value="/permissao/permissoes_grupo.json" var="permissoes_grupo"/>
-<c:url value="/permissao/permissoes_usuario.json" var="permissoes_usuario"/>
-
-<c:url value="/permissao/cadastra.htm" var="cadastra"/>
-<c:url value="/permissao/altera.htm" var="altera"/>
-
 <table class="bordered">
 
     <thead>
@@ -49,8 +42,11 @@ $(document).ready(function(){
 
 </table>
 
-<button type="button" class="btn btn-lg btn-link">cadastrar novo grupo</button>
+<c:url value="/permissao/cadastra" var="cadastra"/>
+<button type="button" class="btn btn-lg btn-link link" data-action="${cadastra}">cadastrar novo grupo</button>
 
+<c:url value="/permissao/grupos.json" var="grupos"/>
+<c:url value="/permissao/permissoes_grupo.json" var="permissoes"/>
 <script>
 $(document).ready(function(){
 	var url = "${grupos}";
@@ -62,7 +58,7 @@ $(document).ready(function(){
 			row.append('<td>'+item.nome+'</td>');
 			
 			var coluna = $('<td>');
-			var url = "${permissoes_grupo}";
+			var url = "${permissoes}";
 			var grupo = item.id;
 			$.ajax({
 				type: "GET",
@@ -80,7 +76,7 @@ $(document).ready(function(){
 			
 			if(item.id > 17) {
 				var col = $('<td>');
-				col.append('<button type="button" id="link" class="btn btn-sm btn-link" data-action="remove">remove grupo</button>');
+				col.append('<button type="button" class="btn btn-sm btn-link" data-action="" data-target="">remover</button>');
 				row.append(col);
 			}
 			else {
@@ -88,31 +84,6 @@ $(document).ready(function(){
 			}
 			$('tbody.content').append(row);
 		});
-	});
-});
-
-$(document).on('click', '.checkbox', function(event){
-	var grupo = $('input[name=grupo]').val();
-	var url = "${altera}";
-	$.ajax({
-		type: "POST",
-		url: url,
-		data: {id: grupo }
-	}).done(function(result){
-		$("#"+result).show();
-		$("#"+result).fadeOut(3);
-	});
-});
-
-$(document).on('click', '#link', function(event){
-	var action = "${cadastra}";
-    $.get(action, function(data){
-		var $temp  = $('<div/>', {html:data});
-		var titulo = $temp.find('title').text();
-		var conteudo = $temp.remove('head').html();
-		limpa_conteudo();
-		$(".panel-title").text(titulo);
-		$(".panel-body").html(conteudo);
 	});
 });
 </script>

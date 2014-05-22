@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,7 @@ public class PermissaoController {
 	@Autowired
 	private PermissaoService permissao;
 	
-	@RequestMapping(value="cadastra.htm", method=RequestMethod.POST)
+	@RequestMapping(value="cadastra", method=RequestMethod.POST)
 	@ResponseBody
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
 		if(permissao.cadastra(request, response))
@@ -30,7 +31,7 @@ public class PermissaoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="cadastra.htm")
+	@RequestMapping(value="cadastra")
 	@PreAuthorize("hasPermission(#user, 'cadastra_permissao')")
 	public ModelAndView cadastra() {
 		ModelAndView mav = new ModelAndView();
@@ -38,7 +39,7 @@ public class PermissaoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="altera.htm", method=RequestMethod.POST)
+	@RequestMapping(value="altera", method=RequestMethod.POST)
 	@ResponseBody
 	public String alterna(HttpServletRequest request, HttpServletResponse response) {
 		if(permissao.altera(request, response))
@@ -47,15 +48,15 @@ public class PermissaoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="altera.htm")
+	@RequestMapping(value="altera/{theString}")
 	@PreAuthorize("hasPermission(#user, 'altera_permissao')")
-	public ModelAndView alterna(@RequestParam("id") String id_usuario) {
+	public ModelAndView alterna(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privado/permissao/altera");
 		return mav;
 	}
 	
-	@RequestMapping(value="remove.htm", method=RequestMethod.POST)
+	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
 		if(permissao.remove(request, response))
@@ -64,11 +65,13 @@ public class PermissaoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="remove.htm")
+	@RequestMapping(value="remove")
 	@PreAuthorize("hasPermission(#user, 'remove_permissao')")
-	public ModelAndView remove(@RequestParam("id") String id_permissao) {
+	public ModelAndView remove(@PathVariable String theString) {
+		int id = Integer.valueOf(theString).intValue();
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("permissao", permissao.findRoleById(Integer.valueOf(id_permissao).intValue()));
+		mav.addObject("permissao", permissao.findRoleById(id));
 		mav.setViewName("privado/permissao/altera");
 		return mav;
 	}

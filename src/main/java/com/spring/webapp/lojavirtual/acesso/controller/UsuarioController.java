@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +21,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuario;
 	
-	@RequestMapping(value="cadastra.htm", method=RequestMethod.POST)
+	@RequestMapping(value="cadastra", method=RequestMethod.POST)
 	@ResponseBody
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
 		if(usuario.cadastra(request, response))
@@ -30,7 +30,7 @@ public class UsuarioController {
 			return "not";
 	}
 	
-	@RequestMapping(value="cadastra.htm")
+	@RequestMapping(value="cadastra")
 	@PreAuthorize("hasPermission(#user, 'cadastra_usuario')")
 	public ModelAndView cadastra() {
 		ModelAndView mav = new ModelAndView();
@@ -38,7 +38,7 @@ public class UsuarioController {
 		return mav;
 	}
 	
-	@RequestMapping(value="altera.htm", method=RequestMethod.POST)
+	@RequestMapping(value="altera", method=RequestMethod.POST)
 	@ResponseBody
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
 		if(usuario.altera(request, response))
@@ -47,10 +47,10 @@ public class UsuarioController {
 			return "not";
 	}
 	
-	@RequestMapping(value="altera.htm", method=RequestMethod.GET)
+	@RequestMapping(value = "altera/{theString}")
 	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
-	public ModelAndView altera(@RequestParam("id") String id) {
-		int id_usuario = Integer.valueOf(id).intValue();
+	public ModelAndView altera(@PathVariable String theString) {
+		int id_usuario = Integer.valueOf(theString).intValue();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("usuario", usuario.listagem_usuario(id_usuario));
@@ -58,7 +58,7 @@ public class UsuarioController {
 		return mav;
 	}
 	
-	@RequestMapping(value="remove.htm", method=RequestMethod.POST)
+	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
 		if(usuario.remove(request, response))
@@ -67,10 +67,10 @@ public class UsuarioController {
 			return "not";
 	}
 	
-	@RequestMapping(value="remove.htm", method=RequestMethod.GET)
+	@RequestMapping(value="remove/{theString}")
 	@PreAuthorize("hasPermission(#user, 'altera_usuario')")
-	public ModelAndView remove(@RequestParam("id") String id) {
-		int id_usuario = Integer.valueOf(id).intValue();
+	public ModelAndView remove(@PathVariable String theString) {
+		int id_usuario = Integer.valueOf(theString).intValue();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("usuario", usuario.listagem_usuario(id_usuario));
@@ -78,7 +78,7 @@ public class UsuarioController {
 		return mav;
 	}
 	
-	@RequestMapping(value="listagem.htm")
+	@RequestMapping(value="listagem")
 	public ModelAndView lista() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privado/usuario/listagem");

@@ -19,10 +19,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		SavedRequest savedReq = (SavedRequest) session.getAttribute(WebAttributes.ACCESS_DENIED_403);
 		
 		if (savedReq == null) {
-			response.sendRedirect(request.getContextPath() + "/privado/dashboard.htm");
+			response.sendRedirect(request.getContextPath() + "/privado/dashboard");
 		}
 		else {
-		    response.sendRedirect(request.getContextPath() + "/acesso/login.htm?erro=no_permit");
+		    response.sendRedirect(request.getContextPath() + "/acesso/login?erro=no_permit");
 		}
 	}
 

@@ -46,8 +46,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a class="link" href="#">Dashboard</a></li>
+            <li><a class="link" href="#">Profile</a></li>
             <li> <c:url value="/logout" var="logoutUrl"/> <a href="${logoutUrl}">Logout</a> </li>
             <li><a href="#"><c:out value="${pageContext.request.remoteUser}"/></a></li>
           </ul>
@@ -60,14 +60,14 @@
       
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li> <a href="#">Overview</a></li>
-            <li><a href="#">Produtos</a></li>
-            <li><a href="#">Categorias</a></li>
-            <li><a href="#">Promo&ccedil;&otilde;es</a></li>
-            <li><a href="#">Destaques</a></li>
+            <li> <a class="link" href="#">Overview</a></li>
+            <li><a class="link" href="#">Produtos</a></li>
+            <li><a class="link" href="#">Categorias</a></li>
+            <li><a class="link" href="#">Promo&ccedil;&otilde;es</a></li>
+            <li><a class="link" href="#">Destaques</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li> <c:url value="/usuario/listagem.htm" var="usuario"/><a href="[${usuario}]">Usu&aacute;rios</a></li>
+            <li> <c:url value="/usuario/listagem" var="usuario"/><a class="pagina" href="${usuario}">Usu&aacute;rios</a></li>
             <li><a href="#">Configura&ccedil;&otilde;es</a></li>
           </ul>
         </div>
@@ -109,33 +109,41 @@
     	$("#content").show();
     }
     
-    $('a').click(function(e){
+    $(document).on('click', '.link', function (event) {
+    	event.preventDefault();
+    	var action = $(this).data('action');
+		
+		$.ajax({
+			type: "GET",
+			url: action
+		}).done(function( data ) {
+			var $temp  = $('<div/>', {html:data});
+			var titulo = $temp.find('title').text();
+			var conteudo = $temp.remove('head').html();
+			limpa_conteudo();
+			$(".panel-title").text(titulo);
+			$(".panel-body").html(conteudo);
+		});
+    });
+    
+    $('a.pagina').click(function(e){
+    	e.preventDefault();
         var link = $(this).attr('href');
         
         if(link == '#') {
-        	e.preventDefault();
         	limpa_conteudo();
         	$("#content").hide();
         }
         else {
-            var tam = link.length;
-            var primeiraLetra = link.charAt(0);
-            var ultimaLetra = link.charAt(tam-1);
-            var result = link.substr(1, tam-2);
-            
-            if(primeiraLetra == '[' && ultimaLetra == ']') {
-              e.preventDefault();
-              
-              $.get(result, function(data){
-        		  var $temp  = $('<div/>', {html:data});
-        		  var titulo = $temp.find('title').text();
-        		  var conteudo = $temp.remove('head').html();
-        		  limpa_conteudo();
-        		  $(".panel-title").text(titulo);
-        		  $(".panel-body").html(conteudo);
-        		  $("#content").show();
-              });
-            }
+        	$.get(link, function(data){
+        		var $temp  = $('<div/>', {html:data});
+        		var titulo = $temp.find('title').text();
+        		var conteudo = $temp.remove('head').html();
+        		limpa_conteudo();
+        		$(".panel-title").text(titulo);
+        		$(".panel-body").html(conteudo);
+        		$("#content").show();
+       		});
         }
     });
     </script>

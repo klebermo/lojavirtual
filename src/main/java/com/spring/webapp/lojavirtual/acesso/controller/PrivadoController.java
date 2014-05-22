@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="privado")
 public class PrivadoController {
 	
-	@RequestMapping(value="dashboard.htm")
+	@RequestMapping(value="dashboard")
 	@PreAuthorize("hasPermission(#user, 'dashboard')")
 	public ModelAndView dashboard() {
 		ModelAndView mav = new ModelAndView();

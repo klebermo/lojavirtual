@@ -8,16 +8,13 @@
 </head>
 <body>
 
-<c:url value="/usuario/listagem.json" var="lista"/>
-
-<c:url value="/usuario/cadastra.htm" var="novo"/>
-<c:url value="/usuario/altera.htm" var="editar"/>
-<c:url value="/usuario/remove.htm" var="remover"/>
-
-<c:url value="/permissao/altera.htm" var="permissoes"/>
+<c:url value="/usuario/cadastra" var="cadastro"/>
+<c:url value="/usuario/altera" var="alteracao"/>
+<c:url value="/usuario/remove" var="remocao"/>
+<c:url value="/permissao/altera" var="permissao"/>
 
 <p>
-	<button type="button" class="btn btn-sm btn-link" data-action="novo">
+	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar novo usu&aacute;rio
 	</button>
 </p>
@@ -40,6 +37,8 @@
 
 </table>
 
+<c:url value="/usuario/listagem.json" var="lista"/>
+
 <script>
 $(document).ready(function(){
 	var url = "<c:out value="${lista}"/>";
@@ -54,81 +53,15 @@ $(document).ready(function(){
 		    row.append('<td>'+item.email+'</td>');
 		    
 		    var col = $('<td>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary" data-action="editar" data-target="'+item.id+'">Editar</button>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary" data-action="remover" data-target="'+item.id+'">Remover</button>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary" data-action="permissoes" data-target="'+item.id+'">Permiss&otilde;es</button>');
+		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
+		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
+		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${permissao}/'+item.id+'">Permiss&otilde;es</button>');
 		    row.append(col);
 		    
 		    $('tbody.content').append(row);
 		});
 	});
 });
-
-$(document).on('click', '.btn', function (event) {
-		var action = $(this).data('action');
-		var target = $(this).data('target');
-		
-		if(action == "novo") {
-			action = "${novo}";
-		    $.get(action, function(data){
-				var $temp  = $('<div/>', {html:data});
-				var titulo = $temp.find('title').text();
-				var conteudo = $temp.remove('head').html();
-				limpa_conteudo();
-				$(".panel-title").text(titulo);
-				$(".panel-body").html(conteudo);
-			});
-		} else if(action == "editar") {
-			$.ajax({
-				type: "GET",
-				url: "${editar}",
-				data: { id: target }
-			}).done(function( data ) {
-				var $temp  = $('<div/>', {html:data});
-				var titulo = $temp.find('title').text();
-				var conteudo = $temp.remove('head').html();
-				limpa_conteudo();
-				$(".panel-title").text(titulo);
-				$(".panel-body").html(conteudo);
-			});
-		} else if(action == "remover") {
-			action = "${remover}";
-			new $.Zebra_Dialog('<strong>Aten&ccedil;&atilde;o!</strong><br><br>', {
-			    'source':  {'ajax': action+"?id="+target},
-			    width: 350,
-			    'title': 'Remo&ccedil;&atilde;o de usu&aacute;rio',
-			    'buttons':  [
-			                    {caption: 'Yes', callback: remove_usuario(action, target) },
-			                    {caption: 'No' }
-			                ]
-			});
-		} else if(action == "permissoes") {
-			$.ajax({
-				type: "GET",
-				url: "${permissoes}",
-				data: { id: target }
-			}).done(function( data ) {
-				var $temp  = $('<div/>', {html:data});
-				var titulo = $temp.find('title').text();
-				var conteudo = $temp.remove('head').html();
-				limpa_conteudo();
-				$(".panel-title").text(titulo);
-				$(".panel-body").html(conteudo);
-			});
-		}
-});
-
-function remove_usuario(action, target) {
-    $.ajax({
-    	type: "POST",
-    	url: action,
-    	data: {id: target}
-	}).done(function(data){
-		if(data == "yes") {
-			$('#user'+target).remove();
-		}
-	});
-}
 </script>
 
 </body>

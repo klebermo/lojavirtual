@@ -25,7 +25,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
       // Register and map the dispatcher servlet
       ServletRegistration.Dynamic jsp_dispatcher = container.addServlet("jsp_dispatcher", new DispatcherServlet(jspContext));
       jsp_dispatcher.setLoadOnStartup(1);
-      jsp_dispatcher.addMapping("*.htm");
+      jsp_dispatcher.addMapping("/");
       
       // Create the dispatcher servlet's Spring application context
       AnnotationConfigWebApplicationContext jsonContext = new AnnotationConfigWebApplicationContext();
