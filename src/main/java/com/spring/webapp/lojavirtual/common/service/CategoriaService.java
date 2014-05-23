@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaDao categoria;
 	
+	@Transactional
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		String nome = request.getParameter("nome");
 		
@@ -26,6 +28,7 @@ public class CategoriaService {
 		return categoria.persist(novo);
 	}
 	
+	@Transactional
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		String nome = request.getParameter("nome");
 		
@@ -35,16 +38,19 @@ public class CategoriaService {
 		return categoria.merge(novo);
 	}
 	
+	@Transactional
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int id_categoria = Integer.valueOf(id).intValue();
 		return categoria.remove(categoria.findById(id_categoria));
 	}
 	
+	@Transactional
 	public List<Categoria> listagem() {
 		return categoria.findAll();
 	}
 	
+	@Transactional
 	public Categoria listagem(int id) {
 		return categoria.findById(id);
 	}

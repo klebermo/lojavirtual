@@ -23,11 +23,11 @@ $( document ).ready(function() {
 	      </p>
 		  <p>
 		    <label for="unome">Categoria</label>
-		  	<select name="unome" class="form-control" id="categoria">
+		  	<select name="categoria" class="form-control" id="categoria">
 		  	</select>
 		  </p>
 	      <p>
-	        <label for="senha">Descri&ccedil;&atilde;o</label>
+	        <label for="descricao">Descri&ccedil;&atilde;o</label>
 	      	<textarea rows="25" cols="80" name="descricao"> </textarea>
 	      </p>
 		  <p>

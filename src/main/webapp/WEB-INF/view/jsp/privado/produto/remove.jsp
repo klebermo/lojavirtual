@@ -37,27 +37,5 @@ $( document ).ready(function() {
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 
-<script>
-// Attach a submit handler to the form
-$( ".form" ).submit(function( event ) {
- 
-  // Stop form from submitting normally
-  event.preventDefault();
- 
-  // Get some values from elements on the page:
-  var $form = $( this ),
-    id_produto = $('input[name=id]').val(),
-    url = $form.attr( "action" );
- 
-  // Send the data using post
-  var posting = $.post( url, { id: id_produto } );
- 
-  // Put the results in a div
-  posting.done(function( data ) {
-	  $("#"+data).show();
-  });
-});
-</script>
-
 </body>
 </html>

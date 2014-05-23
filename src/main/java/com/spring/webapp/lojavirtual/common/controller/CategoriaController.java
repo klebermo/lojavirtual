@@ -42,7 +42,7 @@ public class CategoriaController {
 	public ModelAndView altera(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categoria", categoria.listagem(Integer.valueOf(theString).intValue()));
-		mav.setViewName("privado/produto/categoria");
+		mav.setViewName("privado/categoria/altera");
 		return mav;
 	}
 	
@@ -60,11 +60,11 @@ public class CategoriaController {
 	public ModelAndView remove(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categoria", categoria.listagem(Integer.valueOf(theString).intValue()));
-		mav.setViewName("privado/produto/remove");
+		mav.setViewName("privado/categoria/remove");
 		return mav;
 	}
 	
-	@RequestMapping(value="remove.htm", method=RequestMethod.POST)
+	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasPermission(#user, 'remove_categoria')")
 	public String remove(HttpServletRequest request, HttpServletResponse response) {

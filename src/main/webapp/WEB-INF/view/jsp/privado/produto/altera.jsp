@@ -31,7 +31,7 @@ $( document ).ready(function() {
 		  </p>
 	      <p>
 	        <label for="senha">Descri&ccedil;&atilde;o</label>
-	      	<input type="text" name="descricao" class="form-control" value="${produto.descricao}">
+	        <textarea rows="25" cols="80" name="descricao"> ${produto.descricao} </textarea>
 	      </p>
 		  <p>
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>

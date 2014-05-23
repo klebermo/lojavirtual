@@ -18,7 +18,7 @@ $( document ).ready(function() {
 	  <c:url value="/categoria/altera" var="alteraCategoria"/>
 	  <form class="form" role="form" action="${alteraCategoria}" method="post">
 	      <p>
-	      	<input type="hidden" name="id" class="form-control" value="${categoria.id}" autofocus>
+	      	<input type="hidden" name="id" class="form-control" value="${categoria.id}">
 	      </p>
 	      <p>
 	        <label for="nome">Nome</label>

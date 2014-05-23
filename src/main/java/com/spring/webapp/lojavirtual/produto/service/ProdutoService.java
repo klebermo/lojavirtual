@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class ProdutoService {
 	@Autowired
 	private MateriaPrimaDao materiaPrima;
 	
+	@Transactional
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
@@ -35,41 +37,61 @@ public class ProdutoService {
 		
 		Produto novo = new Produto();
 		novo.setNome(nome);
-		novo.setDescricao(descricao);
-		novo.setCategoria(categoria.findById(Integer.valueOf(category).intValue()));
 		
-		List<MateriaPrima> lista = new ArrayList<MateriaPrima>();
-		for(int i=0; i<materia_prima.length; i++) {
-			lista.add(materiaPrima.findById(Integer.valueOf(materia_prima[i]).intValue()));
+		if(descricao != null)
+			novo.setDescricao(descricao);
+		
+		if(category != null)
+			novo.setCategoria(categoria.findById(Integer.valueOf(category).intValue()));
+		
+		if(materia_prima != null) {
+			List<MateriaPrima> lista = new ArrayList<MateriaPrima>();
+			for(int i=0; i<materia_prima.length; i++) {
+				lista.add(materiaPrima.findById(Integer.valueOf(materia_prima[i]).intValue()));
+			}
+			novo.setMateriaPrima(lista);
 		}
-		novo.setMateriaPrima(lista);
 		
 		return produto.persist(novo);
 	}
 	
+	@Transactional
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
 		String category = request.getParameter("categoria");
 		
-		Produto novo = new Produto();
+		Produto novo = produto.findById(Integer.valueOf(id).intValue());
 		novo.setNome(nome);
-		novo.setDescricao(descricao);
-		novo.setCategoria(categoria.findById(Integer.valueOf(category).intValue()));
+		
+		if(descricao != null)
+			novo.setDescricao(descricao);
+		
+		if(category != null)
+			novo.setCategoria(categoria.findById(Integer.valueOf(category).intValue()));
 				
 		return produto.persist(novo);
 	}
 	
+	@Transactional
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id_produto");
+		String id = request.getParameter("id");
 		int id_produto = Integer.valueOf(id).intValue();
-		return produto.remove(produto.findById(id_produto));
+		
+		Produto remover = produto.findById(id_produto);
+		remover.setCategoria(null);
+		remover.setMateriaPrima(null);
+		
+		return produto.remove(remover);
 	}
 	
+	@Transactional
 	public List<Produto> listagem() {
 		return produto.findAll();
 	}
 	
+	@Transactional
 	public Produto listagem(int id) {
 		return produto.findById(id);
 	}
