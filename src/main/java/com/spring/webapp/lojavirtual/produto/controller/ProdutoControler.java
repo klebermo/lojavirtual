@@ -22,6 +22,7 @@ public class ProdutoControler {
 	private ProdutoService produto;
 	
 	@RequestMapping(value="cadastra")
+	@PreAuthorize("hasPermission(#user, 'cadastra_produto')")
 	public ModelAndView cadastra() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privado/produto/cadastra");
@@ -30,7 +31,6 @@ public class ProdutoControler {
 	
 	@RequestMapping(value="cadastra", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'cadastra_produto')")
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
 		if(produto.cadastra(request, response))
 			return "yes";
@@ -39,6 +39,7 @@ public class ProdutoControler {
 	}
 	
 	@RequestMapping(value="altera/{theString}")
+	@PreAuthorize("hasPermission(#user, 'altera_produto')")
 	public ModelAndView altera(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("produto", produto.listagem(Integer.valueOf(theString).intValue()));
@@ -48,7 +49,6 @@ public class ProdutoControler {
 	
 	@RequestMapping(value="altera", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'altera_produto')")
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
 		if(produto.altera(request, response))
 			return "yes";
@@ -57,6 +57,7 @@ public class ProdutoControler {
 	}
 	
 	@RequestMapping(value="remove/{theString}")
+	@PreAuthorize("hasPermission(#user, 'remove_produto')")
 	public ModelAndView remove(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("produto", produto.listagem(Integer.valueOf(theString).intValue()));
@@ -66,7 +67,6 @@ public class ProdutoControler {
 	
 	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'remove_produto')")
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
 		if(produto.remove(request, response))
 			return "yes";

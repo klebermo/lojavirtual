@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.spring.webapp.lojavirtual.common.persistence.CategoriaDao;
@@ -29,6 +30,7 @@ public class ProdutoService {
 	private MateriaPrimaDao materiaPrima;
 	
 	@Transactional
+	@PreAuthorize("hasPermission(#user, 'cadastra_produto')")
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
@@ -56,6 +58,7 @@ public class ProdutoService {
 	}
 	
 	@Transactional
+	@PreAuthorize("hasPermission(#user, 'altera_produto')")
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		String nome = request.getParameter("nome");
@@ -75,6 +78,7 @@ public class ProdutoService {
 	}
 	
 	@Transactional
+	@PreAuthorize("hasPermission(#user, 'remove_produto')")
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int id_produto = Integer.valueOf(id).intValue();
