@@ -1,18 +1,11 @@
 package com.spring.webapp.lojavirtual.materiaprima.persistence.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
-
-import com.spring.webapp.lojavirtual.common.persistence.model.Unidade;
 
 @Entity
 @Table(name="quantidade_materia_prima")
@@ -26,13 +19,11 @@ public class QuantidadeMateriaPrima {
 	@Column(name = "quantidade")
 	private float quantidade;
 	
+	@Column(name = "unidade")
+	private String unidade;
+	
 	@Column(name = "custo")
 	private float custo;
-	
-	@OneToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-	@JoinColumn(name="unidade")
-	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-	private Unidade unidade;
 
 	public int getId() {
 		return id;
@@ -58,11 +49,11 @@ public class QuantidadeMateriaPrima {
 		this.custo = custo;
 	}
 
-	public Unidade getUnidade() {
+	public String getUnidade() {
 		return unidade;
 	}
 
-	public void setUnidade(Unidade unidade) {
+	public void setUnidade(String unidade) {
 		this.unidade = unidade;
 	}
 	

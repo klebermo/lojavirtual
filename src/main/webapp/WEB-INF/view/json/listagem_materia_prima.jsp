@@ -3,7 +3,12 @@
 	<json:array name="materia_prima" var="item" items="${lista}">
 		<json:object>
 				<json:property name="id" value="${item.id}"/>
-				<json:property name="nome" value="${item.nome}"/>
+				<json:property name="nome" value="${item.descricao.nome}"/>
+				<json:property name="descricao" value="${item.descricao.descricao}"/>
+				<json:property name="fornecedor" value="${item.descricao.fornecedor.id}"/>
+				<json:property name="quantidade" value="${item.quantidade.quantidade}"/>
+				<json:property name="unidade" value="${item.quantidade.unidade}"/>
+				<json:property name="custo" value="${item.quantidade.custo}"/>
 		</json:object>
 	</json:array>
 </json:object>
