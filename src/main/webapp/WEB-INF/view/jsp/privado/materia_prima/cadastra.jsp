@@ -27,11 +27,12 @@ $( document ).ready(function() {
 	      </p>
 	      <p>
 	        <label for="fornecedor">Fornecedor</label>
-	      	<select name="fornecedor" class="form-control" id="fornecedor"></select>
+	      	<input list="lista_fornecedores" name="fornecedor">
+	      	<datalist id="lista_fornecedores"></datalist>
 	      </p>
 	      <p>
 	        <label for="quantidade">Quantidade</label>
-	      	<input type="number" name="quantidade" class="form-control">
+	      	<input type="number" name="quantidade" class="form-control" pattern="[0-9]{3},[0-9]{2}">
 	      </p>
 	      <p>
 	        <label for="unidade">Unidade</label>
@@ -39,7 +40,7 @@ $( document ).ready(function() {
 	      </p>
 	      <p>
 	        <label for="custo">Pre&ccedil;o por unidade</label>
-	      	<input type="number" name="custo" class="form-control">
+	      	<input type="number" name="custo" class="form-control" pattern="[0-9]{4},[0-9]{2}">
 	      </p>
 		  <p>
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>
@@ -55,6 +56,21 @@ $( document ).ready(function() {
         <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a materia-prima.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
+
+<c:url value="/fornecedor/listagem.json" var="lista"/>
+
+<script>
+$(document).ready(function(){
+	var url = "<c:out value="${lista}"/>";
+	$.get(url, function(data){
+		var json = jQuery.parseJSON( data );
+		$.each(json.fornecedor, function(index, item){
+		    var option = $('<option value="'+item.id+'">'+item.nome+'</option>');
+		    $('#lista_fornecedores').append(option);
+		});
+	});
+});
+</script>
 
 </body>
 </html>

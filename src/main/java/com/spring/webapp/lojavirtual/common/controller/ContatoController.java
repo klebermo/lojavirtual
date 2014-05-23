@@ -19,7 +19,7 @@ public class ContatoController {
 	@Autowired
 	private ContatoService contato;
 	
-	@RequestMapping(value="cadastra.htm", method=RequestMethod.POST)
+	@RequestMapping(value="cadastra", method=RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasPermission(#user, 'cadastra_contato')")
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
@@ -29,7 +29,7 @@ public class ContatoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="altera.htm", method=RequestMethod.POST)
+	@RequestMapping(value="altera", method=RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasPermission(#user, 'altera_contato')")
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
@@ -39,7 +39,7 @@ public class ContatoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="remove.htm", method=RequestMethod.POST)
+	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasPermission(#user, 'remove_contato')")
 	public String remove(HttpServletRequest request, HttpServletResponse response) {

@@ -19,7 +19,7 @@ public class EnderecoController {
 	@Autowired
 	private EnderecoService endereco;
 	
-	@RequestMapping(value="cadastra.htm", method=RequestMethod.POST)
+	@RequestMapping(value="cadastra", method=RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasPermission(#user, 'cadastra_endereco')")
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
@@ -29,7 +29,7 @@ public class EnderecoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="altera.htm", method=RequestMethod.POST)
+	@RequestMapping(value="altera", method=RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasPermission(#user, 'altera_endereco')")
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
@@ -39,7 +39,7 @@ public class EnderecoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="remove.htm", method=RequestMethod.POST)
+	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasPermission(#user, 'remove_endereco')")
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
