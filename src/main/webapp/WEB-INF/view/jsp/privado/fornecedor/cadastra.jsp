@@ -18,7 +18,7 @@ $( document ).ready(function() {
 	  <c:url value="/fornecedor/cadastra" var="cadastraFornecedor"/>
 	  <form class="form" role="form" action="${cadastraFornecedor}" method="post">
 	      <p>
-	        <label for="identificador">Cnpj</label>
+	        <label for="identificador">Cpf ou Cnpj</label>
 	      	<input type="text" name="identificador" class="form-control" autofocus>
 	      </p>
 	      <p>
