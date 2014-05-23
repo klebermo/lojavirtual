@@ -39,20 +39,15 @@ public class PermissaoService {
 		if(nome_grupo == null || permissoes == null)
 			return false;
 		
-		System.out.println("criando grupo");
 		GrupoPermissao grupo = new GrupoPermissao();
 		grupo.setNome(nome_grupo);
 		
-		System.out.println("adicionando permissoes");
 		List<Permissao> lista = new ArrayList<Permissao>();
 		for(int i=0; i<permissoes.length; i++)
 			lista.add(permissao.findById(Integer.valueOf(permissoes[i]).intValue()));
 		grupo.setPermissao(lista);
 		
-		System.out.println("salvando no banco de dados");
-		boolean result = grupo_permissao.persist(grupo);
-		System.out.println("id_grupo = "+grupo.getId());
-		return result;
+		return grupo_permissao.persist(grupo);
 	}
 	
 	@PreAuthorize("hasPermission(#user, 'altera_permissao')")

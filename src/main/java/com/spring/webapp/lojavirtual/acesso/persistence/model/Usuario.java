@@ -23,7 +23,7 @@ public class Usuario {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	
 	@Column(name = "login")
 	private String login;

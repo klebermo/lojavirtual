@@ -14,7 +14,7 @@ public class Permissao {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	
 	@Column(name="nome")
 	private String nome;

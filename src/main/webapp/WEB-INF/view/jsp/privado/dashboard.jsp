@@ -62,6 +62,10 @@
         <li><a class="link" href="${blank}">Overview</a></li>
         <li> <c:url value="/produto/listagem" var="produto"/><a class="pagina" href="${produto}">Produtos</a></li>
         <li> <c:url value="/categoria/listagem" var="categoria"/><a class="pagina" href="${categoria}">Categorias</a></li>
+        <li> <c:url value="/materiaprima/listagem" var="materiaprima"/><a class="pagina" href="${materiaprima}">Mat&eacute;ria Prima</a></li>
+        <li> <c:url value="/fornecedor/listagem" var="fornecedor"/><a class="pagina" href="${fornecedor}">Fornecedores</a></li>
+       </ul>
+       <ul class="nav nav-sidebar">
         <li> <c:url value="/promocao/listagem" var="promocao"/><a class="pagina" href="${promocao}">Promo&ccedil;&otilde;es</a></li>
         <li> <c:url value="/destaque/listagem" var="destaque"/><a class="pagina" href="${destaque}">Destaques</a></li>
       </ul>
@@ -96,34 +100,63 @@
 <script>
 $(document).ready(function(){
 	$("#content").hide();
-});
+	
+	$(document).on('submit', '.form', function (event) {
+		// Stop form from submitting normally
+		console.log("start of submission");
+		event.preventDefault();
 
-function open(url) {
-	$.ajax({
-		type: "GET",
-		url: url
-	}).done(function( data ) {
-		var $temp  = $('<div/>', {html:data});
-		var titulo = $temp.find('title').text();
-		var conteudo = $temp.remove('head').html();
-		$("#titulo").empty();
-		$("#conteudo").empty();
-		$("#titulo").text(titulo);
-		$("#conteudo").html(conteudo);
-		$("#content").show();
+		// Get some values from elements on the page:
+		var $form = $( this ),
+		url = $form.attr( "action" );
+
+		// Send the data using post
+		var posting = $.post( url, $(this).serialize() );
+
+		// Put the results in a div
+		posting.done(function( data ) {
+			console.log(data);
+			$("#"+data).show();
+			
+			$(".form").each (function(){
+				this.reset();
+			});
+		});
 	});
-}
-  
-$(document).on('click', '.link', function (event) {
-	event.preventDefault();
-	var action = $(this).data('action');
-	open(action);
-});
 
-$(document).on('click', '.pagina', function(event){
-	event.preventDefault();
-    var link = $(this).attr('href');
-    open(link);
+	function md5() {
+		var senha = $(this).val();
+		$("input[name=senha").val($.md5(senha));
+	};
+	
+	function open(url) {
+		$.ajax({
+			type: "GET",
+			url: url
+		}).done(function( data ) {
+			var $temp  = $('<div/>', {html:data});
+			var titulo = $temp.find('title').text();
+			var conteudo = $temp.remove('head').html();
+			$("#titulo").empty();
+			$("#conteudo").empty();
+			$("#titulo").text(titulo);
+			$("#conteudo").html(conteudo);
+			$("#content").show();
+		});
+	}
+	  
+	$(document).on('click', '.link', function (event) {
+		event.preventDefault();
+		var action = $(this).data('action');
+		open(action);
+	});
+
+	$(document).on('click', '.pagina', function(event){
+		event.preventDefault();
+	    var link = $(this).attr('href');
+	    open(link);
+	});
+
 });
 </script>
 

@@ -26,7 +26,8 @@ $( document ).ready(function() {
 	      </p>
 	      <p>
 	        <label for="senha">Senha</label>
-	      	<input type="password" name="senha" class="form-control">
+	      	<input type="password" class="form-control" onchange="md5()">
+	      	<input type="hidden" name="senha" class="form-control">
 	      </p>
 		  <p>
 		    <label for="email">E-mail</label>
@@ -54,33 +55,6 @@ $( document ).ready(function() {
         <strong>Erro!</strong> N&atilde;o foi possivel alterar o usu&aacute;rio.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
-
-<script>
-// Attach a submit handler to the form
-$( ".form" ).submit(function( event ) {
- 
-  // Stop form from submitting normally
-  event.preventDefault();
- 
-  // Get some values from elements on the page:
-  var $form = $( this ),
-    id = $form.find( "input[name='id']" ).val(),
-    login = $form.find( "input[name='login']" ).val(),
-    senha = $form.find( "input[name='senha']" ).val(),
-    email = $form.find( "input[name='email']" ).val(),
-    pnome = $form.find( "input[name='pnome']" ).val(),
-    unome = $form.find( "input[name='unome']" ).val(),
-    url = $form.attr( "action" );
- 
-  // Send the data using post
-  var posting = $.post( url, { id: id, login: login, senha: $.md5(senha), email: email, pnome: pnome, unome: unome } );
- 
-  // Put the results in a div
-  posting.done(function( data ) {
-	  $("#"+data).show();
-  });
-});
-</script>
 
 </body>
 </html>
