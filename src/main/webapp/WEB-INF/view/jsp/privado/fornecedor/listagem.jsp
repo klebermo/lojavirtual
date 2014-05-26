@@ -4,18 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Lista de categorias</title>
+<title>Lista de fornecedores</title>
 </head>
 <body>
 
-<c:url value="/categoria/cadastra" var="cadastro"/>
-<c:url value="/categoria/altera" var="alteracao"/>
-<c:url value="/categoria/remove" var="remocao"/>
+<c:url value="/fornecedor/cadastra" var="cadastro"/>
+<c:url value="/fornecedor/altera" var="alteracao"/>
+<c:url value="/fornecedor/remove" var="remocao"/>
 
 
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
-		cadastrar nova categoria
+		cadastrar novo fornecedor
 	</button>
 </p>
 
@@ -25,7 +25,7 @@
     <tr>
         <th>#</th>        
         <th>Nome</th>
-        <th></th>
+        <th>Website</th>
     </tr>
     </thead>
     
@@ -34,23 +34,18 @@
 
 </table>
 
-<c:url value="/categoria/listagem.json" var="lista"/>
+<c:url value="/fornecedor/listagem.json" var="lista"/>
 
 <script>
 $(document).ready(function(){
 	var url = "<c:out value="${lista}"/>";
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
-		$.each(json.categoria, function(index, item){
+		$.each(json.fornecedor, function(index, item){
 		    var row = $('<tr>');
 		    row.append('<td>'+item.id+'</td>');
 		    row.append('<td>'+item.nome+'</td>');
-		    
-		    var col = $('<td>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    row.append(col);
-		    
+		    row.append('<td>'+item.website+'</td>');
 		    $('tbody.content').append(row);
 		});
 	});

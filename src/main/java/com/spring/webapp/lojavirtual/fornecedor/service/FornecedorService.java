@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.spring.webapp.lojavirtual.common.persistence.ContatoDao;
@@ -28,6 +30,8 @@ public class FornecedorService {
 	@Autowired
 	private ContatoDao contato;
 	
+	@Transactional
+	@PreAuthorize("hasPermission(#user, 'cadastra_fornecedor')")
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		String identificador = request.getParameter("identificador");
 		String nome = request.getParameter("nome");
@@ -67,6 +71,8 @@ public class FornecedorService {
 		return fornecedor.persist(f);
 	}
 	
+	@Transactional
+	@PreAuthorize("hasPermission(#user, 'altera_fornecedor')")
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		String identificador = request.getParameter("identificador");
@@ -106,16 +112,20 @@ public class FornecedorService {
 		return fornecedor.merge(f);
 	}
 	
+	@Transactional
+	@PreAuthorize("hasPermission(#user, 'remove_fornecedor')")
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int id_fornecedor = Integer.valueOf(id).intValue();
 		return fornecedor.remove(fornecedor.findById(id_fornecedor));
 	}
 	
+	@Transactional
 	public List<Fornecedor> listagem() {
 		return fornecedor.findAll();
 	}
 	
+	@Transactional
 	public Fornecedor listagem(int id) {
 		return fornecedor.findById(id);
 	}

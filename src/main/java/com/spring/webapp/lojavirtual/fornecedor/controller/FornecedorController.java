@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,17 +47,17 @@ public class FornecedorController {
 			return "not";
 	}
 	
-	@RequestMapping(value="altera")
+	@RequestMapping(value="altera/{theString}")
 	@PreAuthorize("hasPermission(#user, 'altera_fornecedor')")
-	public ModelAndView altera() {
+	public ModelAndView altera(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("fornecedor", fornecedor.listagem(Integer.valueOf(theString).intValue()));
 		mav.setViewName("privado/fornecedor/altera");
 		return mav;
 	}
 	
 	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'remove_fornecedor')")
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
 		if(fornecedor.remove(request, response))
 			return "yes";
@@ -64,18 +65,19 @@ public class FornecedorController {
 			return "not";
 	}
 	
-	@RequestMapping(value="remove")
+	@RequestMapping(value="remove/{theString}")
 	@PreAuthorize("hasPermission(#user, 'remove_fornecedor')")
-	public ModelAndView remove() {
+	public ModelAndView remove(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("fornecedor", fornecedor.listagem(Integer.valueOf(theString).intValue()));
 		mav.setViewName("privado/fornecedor/cadastra");
 		return mav;
 	}
 	
-	@RequestMapping(value="cadastra")
+	@RequestMapping(value="listagem")
 	public ModelAndView listagem() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("privado/fornecedor/cadastra");
+		mav.setViewName("privado/fornecedor/listagem");
 		return mav;
 	}
 	

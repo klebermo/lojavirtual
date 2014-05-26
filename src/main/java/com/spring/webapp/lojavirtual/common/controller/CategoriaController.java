@@ -22,6 +22,7 @@ public class CategoriaController {
 	private CategoriaService categoria;
 	
 	@RequestMapping(value="cadastra")
+	@PreAuthorize("hasPermission(#user, 'cadastra_categoria')")
 	public ModelAndView cadastra() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("privado/categoria/cadastra");
@@ -30,7 +31,6 @@ public class CategoriaController {
 	
 	@RequestMapping(value="cadastra", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'cadastra_categoria')")
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
 		if(categoria.cadastra(request, response))
 			return "yes";
@@ -39,6 +39,7 @@ public class CategoriaController {
 	}
 	
 	@RequestMapping(value="altera/{theString}")
+	@PreAuthorize("hasPermission(#user, 'altera_categoria')")
 	public ModelAndView altera(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categoria", categoria.listagem(Integer.valueOf(theString).intValue()));
@@ -48,7 +49,6 @@ public class CategoriaController {
 	
 	@RequestMapping(value="altera", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'altera_categoria')")
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
 		if(categoria.altera(request, response))
 			return "yes";
@@ -57,6 +57,7 @@ public class CategoriaController {
 	}
 	
 	@RequestMapping(value="remove/{theString}")
+	@PreAuthorize("hasPermission(#user, 'remove_categoria')")
 	public ModelAndView remove(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categoria", categoria.listagem(Integer.valueOf(theString).intValue()));
@@ -66,7 +67,6 @@ public class CategoriaController {
 	
 	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasPermission(#user, 'remove_categoria')")
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
 		if(categoria.remove(request, response))
 			return "yes";

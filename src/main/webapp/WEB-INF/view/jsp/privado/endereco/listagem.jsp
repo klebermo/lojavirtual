@@ -4,28 +4,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Lista de categorias</title>
+<title>Lista de endere&ccedil;os</title>
 </head>
 <body>
 
-<c:url value="/categoria/cadastra" var="cadastro"/>
-<c:url value="/categoria/altera" var="alteracao"/>
-<c:url value="/categoria/remove" var="remocao"/>
-
-
-<p>
-	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
-		cadastrar nova categoria
-	</button>
-</p>
+<c:url value="/endereco/cadastra" var="cadastro"/>
+<c:url value="/endereco/altera" var="alteracao"/>
+<c:url value="/endereco/remove" var="remocao"/>
 
 <table class="bordered">
 
     <thead>
     <tr>
         <th>#</th>        
-        <th>Nome</th>
-        <th></th>
+        <th>Logradouro</th>
+        <th>Numero</th>
+        <th>Complemento</th>
+        <th>Bairro</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th>CEP</th>
     </tr>
     </thead>
     
@@ -34,7 +32,7 @@
 
 </table>
 
-<c:url value="/categoria/listagem.json" var="lista"/>
+<c:url value="/endereco/listagem.json" var="lista"/>
 
 <script>
 $(document).ready(function(){
@@ -44,13 +42,13 @@ $(document).ready(function(){
 		$.each(json.categoria, function(index, item){
 		    var row = $('<tr>');
 		    row.append('<td>'+item.id+'</td>');
-		    row.append('<td>'+item.nome+'</td>');
-		    
-		    var col = $('<td>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    row.append(col);
-		    
+		    row.append('<td>'+item.logradouro+'</td>');
+		    row.append('<td>'+item.numero+'</td>');
+		    row.append('<td>'+item.complemento+'</td>');
+		    row.append('<td>'+item.bairro+'</td>');
+		    row.append('<td>'+item.cidade+'</td>');
+		    row.append('<td>'+item.estado+'</td>');
+		    row.append('<td>'+item.cep+'</td>');		    
 		    $('tbody.content').append(row);
 		});
 	});

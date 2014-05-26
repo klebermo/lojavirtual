@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Altera&ccedil;&atilde; de categoria</title>
+<title>Altera&ccedil;&atilde;o de fornecedor</title>
 </head>
 <body>
 
@@ -15,27 +15,76 @@ $( document ).ready(function() {
 });
 </script>
   
-	  <c:url value="/categoria/altera" var="alteraCategoria"/>
-	  <form class="form" role="form" action="${alteraCategoria}" method="post">
-	      <p>
-	      	<input type="hidden" name="id" class="form-control" value="${categoria.id}">
-	      </p>
-	      <p>
-	        <label for="nome">Nome</label>
-	      	<input type="text" name="nome" class="form-control" value="${categoria.nome}" autofocus>
-	      </p>
+	  <c:url value="/fornecedor/altera" var="alteraFornecedor"/>
+	  <form class="form" role="form" action="${alteraFornecedor}" method="post">
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title">Dados de identifica&ccedil;o</h3>
+            </div>
+            <div class="panel-body">
+		      <p>
+		      	<input type="hidden" name="id" class="form-control" value="${fornecedor.id}">
+		      </p>
+		      <p>
+		        <label for="identificador">Cpf ou Cnpj</label>
+		      	<input type="text" name="identificador" class="form-control" autofocus>
+		      </p>
+		      <p>
+		        <label for="nome">Nome</label>
+		      	<input type="text" name="nome" class="form-control" value="${fornecedor.nome}">
+		      </p>
+		      <p>
+		        <label for="website">Website</label>
+		      	<input type="text" name="website" class="form-control" value="${fornecedor.website}">
+		      </p>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title">Endere&ccedil;o</h3>
+            </div>
+            <div id="endereco" class="panel-body">
+            	<table>
+            		<tr>
+            			<td></td>
+            			<td><button type="button" class="btn btn-default">Novo Endere&ccedil;o</button><button type="button" class="btn btn-default">Excluir Endere&ccedil;o</button></td>
+            		</tr>
+            		<tr>
+            			<td><select name="endereco" id="lista_enderecos" size="10" multiple="multiple"></select></td>
+            			<td></td>
+            		</tr>
+            	</table>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title">Contato</h3>
+            </div>
+            <div id="contato" class="panel-body">
+            	<table>
+            		<tr>
+            			<td></td>
+            			<td><button type="button" class="btn btn-default">Novo Contato</button><button type="button" class="btn btn-default">Excluir Contato</button></td>
+            		</tr>
+            		<tr>
+            			<td><select name="contato" id="lista_contatos" size="10" multiple="multiple"></select></td>
+            			<td></td>
+            		</tr>
+            	</table>
+            </div>
+          </div>
 		  <p>
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>
 		  </p>
 	  </form>
     
       <div id="yes" class="alert alert-success">
-        <strong>Pronto!</strong> Categoria alterada com sucesso.
+        <strong>Pronto!</strong> Categoria cadastrada com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
       <div id="not" class="alert alert-danger">
-        <strong>Erro!</strong> N&atilde;o foi possivel alterar a categoria.
+        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a categoria.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 

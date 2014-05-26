@@ -62,7 +62,7 @@
         <li><a class="link" href="${blank}">Overview</a></li>
         <li> <c:url value="/produto/listagem" var="produto"/><a class="pagina" href="${produto}">Produtos</a></li>
         <li> <c:url value="/categoria/listagem" var="categoria"/><a class="pagina" href="${categoria}">Categorias</a></li>
-        <li> <c:url value="/materiaprima/listagem" var="materiaprima"/><a class="pagina" href="${materiaprima}">Mat&eacute;ria Prima</a></li>
+        <li> <c:url value="/materia_prima/listagem" var="materiaprima"/><a class="pagina" href="${materiaprima}">Mat&eacute;ria Prima</a></li>
         <li> <c:url value="/fornecedor/listagem" var="fornecedor"/><a class="pagina" href="${fornecedor}">Fornecedores</a></li>
        </ul>
        <ul class="nav nav-sidebar">

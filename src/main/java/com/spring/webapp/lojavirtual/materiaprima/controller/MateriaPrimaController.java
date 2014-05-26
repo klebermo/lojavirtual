@@ -25,7 +25,7 @@ public class MateriaPrimaController {
 	@PreAuthorize("hasPermission(#user, 'cadastra_materia_prima')")
 	public ModelAndView cadastra() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("privado/materia_prima/listagem");
+		mav.setViewName("privado/materia_prima/cadastra");
 		return mav;
 	}
 	

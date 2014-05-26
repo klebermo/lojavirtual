@@ -8,16 +8,9 @@
 </head>
 <body>
 
-<c:url value="/categoria/cadastra" var="cadastro"/>
-<c:url value="/categoria/altera" var="alteracao"/>
-<c:url value="/categoria/remove" var="remocao"/>
-
-
-<p>
-	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
-		cadastrar nova categoria
-	</button>
-</p>
+<c:url value="/contato/cadastra" var="cadastro"/>
+<c:url value="/contato/altera" var="alteracao"/>
+<c:url value="/contato/remove" var="remocao"/>
 
 <table class="bordered">
 
@@ -25,7 +18,8 @@
     <tr>
         <th>#</th>        
         <th>Nome</th>
-        <th></th>
+        <th>E-Mail</th>
+        <th>Telefone</th>
     </tr>
     </thead>
     
@@ -34,7 +28,7 @@
 
 </table>
 
-<c:url value="/categoria/listagem.json" var="lista"/>
+<c:url value="/contato/listagem.json" var="lista"/>
 
 <script>
 $(document).ready(function(){
@@ -45,12 +39,8 @@ $(document).ready(function(){
 		    var row = $('<tr>');
 		    row.append('<td>'+item.id+'</td>');
 		    row.append('<td>'+item.nome+'</td>');
-		    
-		    var col = $('<td>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    row.append(col);
-		    
+		    row.append('<td>'+item.email+'</td>');
+		    row.append('<td>'+item.telefone+'</td>');
 		    $('tbody.content').append(row);
 		});
 	});

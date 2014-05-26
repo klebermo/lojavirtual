@@ -18,14 +18,17 @@ public class MateriaPrimaService {
 	@Autowired
 	private MateriaPrimaDao materiaPrima;
 	
+	@Transactional
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		return materiaPrima.persist(null);
 	}
 	
+	@Transactional
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		return materiaPrima.merge(null);
 	}
 	
+	@Transactional
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
 		return materiaPrima.remove(null);
 	}

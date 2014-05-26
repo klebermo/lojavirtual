@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cadastro de categoria</title>
+<title>Cadastro de contato</title>
 </head>
 <body>
 
@@ -15,11 +15,19 @@ $( document ).ready(function() {
 });
 </script>
   
-	  <c:url value="/categoria/cadastra" var="cadastraCategoria"/>
-	  <form class="form" role="form" action="${cadastraCategoria}" method="post">
+	  <c:url value="/contato/cadastra" var="cadastraContato"/>
+	  <form class="form" role="form" action="${cadastraContato}" method="post">
 	      <p>
 	        <label for="nome">Nome</label>
 	      	<input type="text" name="nome" class="form-control" placeholder="Nome" autofocus>
+	      </p>
+	      <p>
+	        <label for="email">E-Mail</label>
+	      	<input type="text" name="email" class="form-control" placeholder="E-Mail">
+	      </p>
+	      <p>
+	        <label for="telefone">Telefone</label>
+	      	<input type="text" name="telefone" class="form-control" placeholder="(XX) XXXX-XXXX" pattern="([0-9]{2}) [0-9]{4}-[0-9]{4}">
 	      </p>
 		  <p>
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>
@@ -27,12 +35,12 @@ $( document ).ready(function() {
 	  </form>
     
       <div id="yes" class="alert alert-success">
-        <strong>Pronto!</strong> Categoria cadastrada com sucesso.
+        <strong>Pronto!</strong> Contato cadastrado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
       <div id="not" class="alert alert-danger">
-        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a categoria.
+        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar o contato.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 
