@@ -1,4 +1,4 @@
-<%@ include file="/WEB-INF/view/include.jsp" %>
+<%@ include file="../include/include.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -94,71 +94,15 @@
 <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-2.1.0.min.js"/>"></script>
 <script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-ui-1.10.4.custom.min.js"/>"></script>
 <script src="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/>"></script>
+
 <script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/docs.min.js"/>"></script>
 <script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/jquery.md5.min.js"/>"></script>
 
-<script>
-$(document).ready(function(){
-	$("#content").hide();
-	
-	$(document).on('submit', '.form', function (event) {
-		// Stop form from submitting normally
-		console.log("start of submission");
-		event.preventDefault();
+<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/form_submit.js"/>"></script>
+<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/form_validation.js"/>"></script>
+<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/page_link.js"/>"></script>
+<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/page_load.js"/>"></script>
 
-		// Get some values from elements on the page:
-		var $form = $( this ),
-		url = $form.attr( "action" );
-
-		// Send the data using post
-		var posting = $.post( url, $(this).serialize() );
-
-		// Put the results in a div
-		posting.done(function( data ) {
-			console.log(data);
-			$("#"+data).show();
-			
-			$(".form").each (function(){
-				this.reset();
-			});
-		});
-	});
-
-	function md5() {
-		var senha = $(this).val();
-		$("input[name=senha").val($.md5(senha));
-	};
-	
-	function open(url) {
-		$.ajax({
-			type: "GET",
-			url: url
-		}).done(function( data ) {
-			var $temp  = $('<div/>', {html:data});
-			var titulo = $temp.find('title').text();
-			var conteudo = $temp.remove('head').html();
-			$("#titulo").empty();
-			$("#conteudo").empty();
-			$("#titulo").text(titulo);
-			$("#conteudo").html(conteudo);
-			$("#content").show();
-		});
-	}
-	  
-	$(document).on('click', '.link', function (event) {
-		event.preventDefault();
-		var action = $(this).data('action');
-		open(action);
-	});
-
-	$(document).on('click', '.pagina', function(event){
-		event.preventDefault();
-	    var link = $(this).attr('href');
-	    open(link);
-	});
-
-});
-</script>
 
 </body>
 </html>

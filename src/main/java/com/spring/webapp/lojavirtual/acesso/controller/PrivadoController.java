@@ -13,14 +13,15 @@ public class PrivadoController {
 	@PreAuthorize("hasPermission(#user, 'dashboard')")
 	public ModelAndView dashboard() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("privado/dashboard");
+		mav.setViewName("acesso/dashboard");
 		return mav;
 	}
 	
 	@RequestMapping(value="blank")
+	@PreAuthorize("hasPermission(#user, 'dashboard')")
 	public ModelAndView blank() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("privado/blank");
+		mav.setViewName("acesso/blank");
 		return mav;
 	}
 		
