@@ -41,16 +41,7 @@ $( document ).ready(function() {
               <h3 class="panel-title">Endere&ccedil;o</h3>
             </div>
             <div id="endereco" class="panel-body">
-            	<table>
-            		<tr>
-            			<td></td>
-            			<td><button type="button" class="btn btn-default">Novo Endere&ccedil;o</button></td>
-            		</tr>
-            		<tr>
-            			<td><select name="endereco" id="lista_enderecos" size="10" multiple="multiple"></select></td>
-            			<td></td>
-            		</tr>
-            	</table>
+            
             </div>
           </div>
           <div class="panel panel-warning">
@@ -58,16 +49,7 @@ $( document ).ready(function() {
               <h3 class="panel-title">Contato</h3>
             </div>
             <div id="contato" class="panel-body">
-            	<table>
-            		<tr>
-            			<td></td>
-            			<td><button type="button" class="btn btn-default">Novo Contato</button></td>
-            		</tr>
-            		<tr>
-            			<td><select name="contato" id="lista_contatos" size="10" multiple="multiple"></select></td>
-            			<td></td>
-            		</tr>
-            	</table>
+            
             </div>
           </div>
 		  <p>

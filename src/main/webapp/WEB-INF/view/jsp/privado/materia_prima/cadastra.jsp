@@ -23,7 +23,7 @@ $( document ).ready(function() {
 	      </p>
 	      <p>
 	        <label for="descricao">Descri&ccedil;&atilde;o</label>
-	      	<textarea rows="25" cols="80" name="descricao"> </textarea>
+	      	<textarea rows="25" cols="80" name="descricao" style="vertical-align: top;"> </textarea>
 	      </p>
 	      <p>
 	        <label for="fornecedor">Fornecedor</label>
