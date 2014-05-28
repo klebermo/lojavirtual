@@ -28,11 +28,11 @@ $( document ).ready(function() {
 		      </p>
 		      <p>
 		        <label for="nome">Nome</label>
-		      	<input type="text" name="nome" class="form-control" placeholder="Nome" autofocus>
+		      	<input type="text" name="nome" class="form-control" placeholder="Nome">
 		      </p>
 		      <p>
 		        <label for="website">Website</label>
-		      	<input type="text" name="website" class="form-control" placeholder="website" autofocus>
+		      	<input type="text" name="website" class="form-control" placeholder="website">
 		      </p>
             </div>
           </div>
