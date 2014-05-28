@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -88,16 +89,18 @@ public class FornecedorController {
 		return mav;
 	}
 	
-	@RequestMapping(value="endereco.json")
-	public ModelAndView listagem_endereco_json() {
+	@RequestMapping(value="endereco.json", method=RequestMethod.POST)
+	public ModelAndView listagem_endereco_json(@RequestParam("id") String id) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("endereco", fornecedor.listagem(Integer.valueOf(id).intValue()).getEndereco());
 		mav.setViewName("listagem_endereco");
 		return mav;
 	}
 	
-	@RequestMapping(value="contato.json")
-	public ModelAndView listagem_contato_json() {
+	@RequestMapping(value="contato.json", method=RequestMethod.POST)
+	public ModelAndView listagem_contato_json(@RequestParam("id") String id) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("contato", fornecedor.listagem(Integer.valueOf(id).intValue()).getContato());
 		mav.setViewName("listagem_contato");
 		return mav;
 	}

@@ -41,7 +41,8 @@ $( document ).ready(function() {
               <h3 class="panel-title">Endere&ccedil;o</h3>
             </div>
             <div id="endereco" class="panel-body">
-            
+            	<div id="cad_endereco"></div>
+            	<div id="lista_endereco"></div>
             </div>
           </div>
           <div class="panel panel-warning">
@@ -49,7 +50,8 @@ $( document ).ready(function() {
               <h3 class="panel-title">Contato</h3>
             </div>
             <div id="contato" class="panel-body">
-            
+            	<div id="cad_contato"></div>
+            	<div id="lista_contato"></div>
             </div>
           </div>
 		  <p>
@@ -66,6 +68,33 @@ $( document ).ready(function() {
         <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a categoria.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
+
+<c:url value="/fornecedor/endereco.json" var="lista_endereco"/>
+<c:url value="/fornecedor/contato.json" var="lista_contato"/>
+
+<script>
+function lista_endereco(){
+	var url = "<c:out value="${lista_endereco}"/>";
+	$.get(url, function(data){
+		var json = jQuery.parseJSON( data );
+		$.each(json.fornecedor, function(index, item){
+		    var option = $('<option value="'+item.id+'">'+item.nome+'</option>');
+		    $('#lista_endereco').append(option);
+		});
+	});
+};
+
+function lista_contato(){
+	var url = "<c:out value="${lista_contato}"/>";
+	$.get(url, function(data){
+		var json = jQuery.parseJSON( data );
+		$.each(json.fornecedor, function(index, item){
+		    var option = $('<option value="'+item.id+'">'+item.nome+'</option>');
+		    $('#lista_contato').append(option);
+		});
+	});
+};
+</script>
 
 </body>
 </html>
