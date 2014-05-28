@@ -46,6 +46,8 @@ public class FornecedorService {
 			f.setCnpj(identificador);
 		else if(identificador.length() == 11)
 			f.setCpf(identificador);
+		else
+			return false;
 		
 		List<Endereco> lista_endereco = new ArrayList<Endereco>();
 		if(endereco2 != null) {
@@ -81,7 +83,7 @@ public class FornecedorService {
 		String[] endereco2 = request.getParameterValues("endereco[]");
 		String[] contato2 = request.getParameterValues("contato[]");
 		
-		Fornecedor f = new Fornecedor();
+		Fornecedor f = fornecedor.findById(Integer.valueOf(id).intValue());
 		f.setId(Integer.valueOf(id).intValue());
 		f.setRazao_social(nome);
 		f.setWebsite(website);
@@ -89,6 +91,8 @@ public class FornecedorService {
 			f.setCnpj(identificador);
 		else if(identificador.length() == 11)
 			f.setCpf(identificador);
+		else
+			return false;
 		
 		List<Endereco> lista_endereco = new ArrayList<Endereco>();
 		if(endereco2 != null) {
