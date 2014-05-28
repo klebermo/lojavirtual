@@ -72,8 +72,8 @@ $( document ).ready(function() {
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 
-<c:url value="/endereco/listagem.json" var="lista_endereco"/>
-<c:url value="/contato/listagem.json" var="lista_contato"/>
+<c:url value="/fornecedor/endereco.json" var="lista_endereco"/>
+<c:url value="/fornecedor/contato.json" var="lista_contato"/>
 
 <script>
 function lista_endereco(){

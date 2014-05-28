@@ -32,7 +32,7 @@ $( document ).ready(function() {
 	      </p>
 	      <p>
 	        <label for="quantidade">Quantidade</label>
-	      	<input type="number" name="quantidade" class="form-control" pattern="[0-9]{3},[0-9]{2}">
+	      	<input type="number" name="quantidade" class="form-control valida" pattern="[0-9]{3},[0-9]{2}">
 	      </p>
 	      <p>
 	        <label for="unidade">Unidade</label>
@@ -40,7 +40,7 @@ $( document ).ready(function() {
 	      </p>
 	      <p>
 	        <label for="custo">Pre&ccedil;o por unidade</label>
-	      	<input type="number" name="custo" class="form-control" pattern="[0-9]{4},[0-9]{2}">
+	      	<input type="number" name="custo" class="form-control valida" pattern="[0-9]{4},[0-9]{2}">
 	      </p>
 		  <p>
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>
