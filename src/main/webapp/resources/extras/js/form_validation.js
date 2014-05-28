@@ -1,3 +1,4 @@
+
 function md5() {
 	var senha = $(this).val();
 	$("input[name=senha").val($.md5(senha));
@@ -18,26 +19,6 @@ function length(subject) {
 	return group1Caps.length;
 }
 
-function tokens(subject) {
-	var regex = /{(\d+)}/g;
-	var group1Caps = [];
-	var match = regex.exec(subject);
-
-	// put Group 1 captures in an array
-	while (match != null) {
-		if( match[1] != null ) group1Caps.push(match[1]);
-	    match = regex.exec(subject);
-	}
-	
-	// Task 3: What is the length?
-	var counter = 0;
-	if (group1Caps.length > 0) {
-	   for (key in group1Caps) counter += parseInt(group1Caps[key]);
-	   }
-	
-	return counter;
-}
-
 function makeArray(count, content) {
    var result = [];
    if(typeof(content) == "function") {
@@ -52,43 +33,31 @@ function makeArray(count, content) {
    return result;
 }
 
-function template(subject) {
-	var myArray = [];
-	
-	var regex = /{(\d+)}/g;
-	var group1Caps = [];
-	var match = regex.exec(subject);
+function getCharacter(content, pos) {
+	var res = str.match(content);
+	var c = res.substring(pos, pos+1);
+	return c;
+}
 
-	while (match != null) {
-		if( match[1] != null ) group1Caps.push(match[1]);
-	    match = regex.exec(subject);
+function getType(content) {
+	if(typeof content == number) {
+		var retorno = "number";
+		return retorno;
+	} else if (typeof content == string) {
+		if(content >= 'A' && content <= 'Z' || content >= 'a' && content <= 'z') {
+			var retorno = "letter";
+			return retorno;
+		}
+		else {
+			var retorno = "symbol";
+			return retorno;
+		}
+	} else {
+		return null;
 	}
-	
-	if (group1Caps.length > 0) {
-		for (key in group1Caps) {
-			var tam = parseInt(group1Caps[key]);
-			myArray.push(makeArray(tam, "_"));
-		};
-	};
-	
-	return myArray;
 }
 
 $(document).on(".valida", "onfocus", function(e){
 	e.preventDefault();
-	var regex = $(this).attr("pattern");
-	if(regex == null)
-		return true;
-	
-	var tam = length(regex);
-	var conteudo = makeArray(tam, "_");
-	
-	do {
-		var key = which;
-		if(key != "") {
-			conteudo.push(key);
-			$(this).val(conteudo++);
-		}
-	} while(counter < tam);
 });
 
