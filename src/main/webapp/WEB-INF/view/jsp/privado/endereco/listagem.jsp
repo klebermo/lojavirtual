@@ -24,6 +24,7 @@
         <th>Cidade</th>
         <th>Estado</th>
         <th>CEP</th>
+        <th></th>
     </tr>
     </thead>
     
@@ -48,7 +49,13 @@ $(document).ready(function(){
 		    row.append('<td>'+item.bairro+'</td>');
 		    row.append('<td>'+item.cidade+'</td>');
 		    row.append('<td>'+item.estado+'</td>');
-		    row.append('<td>'+item.cep+'</td>');		    
+		    row.append('<td>'+item.cep+'</td>');
+		    
+		    var col = $('<td>');
+		    col.append('<button type="button" class="btn btn-sm btn-primary popup" data-action="${alteracao}/'+item.id+'">Editar</button>');
+		    col.append('<button type="button" class="btn btn-sm btn-primary popup" data-action="${remocao}/'+item.id+'">Remover</button>');
+		    row.append(col);
+		    
 		    $('tbody.content').append(row);
 		});
 	});

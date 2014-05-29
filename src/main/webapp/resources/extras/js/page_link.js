@@ -57,7 +57,7 @@ $(document).on('click', '.link', function (event) {
 
 $(document).on('click', '.popup', function (event) {
 	event.preventDefault();
-	var action = $(this).attr('href');
+	var action = $(this).data('action');
 	var target = $(this).data('target');
 	var func = $(this).data('function');
 	var div = $("#"+target);

@@ -46,6 +46,12 @@ $(document).ready(function(){
 		    row.append('<td>'+item.id+'</td>');
 		    row.append('<td>'+item.nome+'</td>');
 		    row.append('<td>'+item.website+'</td>');
+		    
+		    var col = $('<td>');
+		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
+		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
+		    row.append(col);
+		    
 		    $('tbody.content').append(row);
 		});
 	});

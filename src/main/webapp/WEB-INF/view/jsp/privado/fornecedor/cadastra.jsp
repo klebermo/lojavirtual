@@ -14,6 +14,9 @@ $( document ).ready(function() {
 	$("#not").hide();
 });
 </script>
+
+<c:url value="/endereco/cadastra" var="cadastro_endereco"/>
+<c:url value="/contato/cadastra" var="cadastro_contato"/>
   
 	  <c:url value="/fornecedor/cadastra" var="cadastraFornecedor"/>
 	  <form class="form" role="form" action="${cadastraFornecedor}" method="post">
@@ -38,7 +41,6 @@ $( document ).ready(function() {
 					      <input type="text" name="identificador" class="form-control">
 				    </div><!-- /input-group -->
 			    </p>
-			</div><!-- /.col-lg-6 -->
 		      <p>
 		        <label for="nome">Nome</label>
 		      	<input type="text" name="nome" class="form-control" placeholder="Nome">
@@ -48,30 +50,36 @@ $( document ).ready(function() {
 		      	<input type="text" name="website" class="form-control" placeholder="website">
 		      </p>
             </div>
-          </div>
+           </div>
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title">Endere&ccedil;o</h3><c:url value="/endereco/cadastra" var="cadastra_endereco"/><a class="popup" data-target="cad_endereco" data-function="lista_endereco()" href="${cadastra_endereco}">Novo</a>
+              <h3 class="panel-title">Endere&ccedil;o</h3>
             </div>
             <div id="endereco" class="panel-body">
-            	<div id="lista_endereco">
-            		<select name="endereco" id="select_endereco" size="5"></select>
-            	</div>
-            	<div id="cad_endereco" class="dialog" title="Basic dialog">
-            		<p> <span id="text"></span> </p>
+				<p>
+					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_endereco}" data-target="cad_endereco" data-function="lista_endereco()">
+						cadastrar novo endere&ccedil;o
+					</button>
+				</p>
+            	<div id="lista_endereco"></div>
+            	<div id="cad_endereco">
+            		<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
             	</div>
             </div>
           </div>
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title">Contato</h3><c:url value="/contato/cadastra" var="cadastra_contato"/><a class="popup" data-target="cad_contato" data-function="lista_contato()" href="${cadastra_contato}">Novo</a>
+              <h3 class="panel-title">Contato</h3>
             </div>
             <div id="contato" class="panel-body">
-            	<div id="lista_contato">
-            		<select name="contato" id="select_contato" size="5"></select>
-            	</div>
-            	<div id="cad_contato" class="dialog" title="Basic dialog">
-            		<p> <span id="text"></span> </p>
+				<p>
+					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_contato}" data-target="cad_contato" data-function="lista_contato()">
+						cadastrar novo contato
+					</button>
+				</p>
+            	<div id="lista_contato"></div>
+            	<div id="cad_contato">
+            		<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
             	</div>
             </div>
           </div>
@@ -93,45 +101,20 @@ $( document ).ready(function() {
 <c:url value="/fornecedor/endereco.json" var="lista_endereco"/>
 <c:url value="/fornecedor/contato.json" var="lista_contato"/>
 
-<c:url value="/endereco/altera" var="altera_endereco"/>
-<c:url value="/contato/altera" var="altera_contato"/>
-
 <script>
 function lista_endereco(){
-	var url = "<c:out value="${lista_endereco}"/>";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
-		$.each(json.fornecedor, function(index, item){
-		    var option = $('<option class="item_endereco" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#select_endereco').append(option);
-		});
+	var url = "${lista_endereco}";
+	$.get( url, function( data ) {
+		  $( "#lista_endereco" ).html( data );
 	});
 };
 
 function lista_contato(){
-	var url = "<c:out value="${lista_contato}"/>";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
-		$.each(json.fornecedor, function(index, item){
-		    var option = $('<option class="item_contato" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#select_contato').append(option);
-		});
+	var url = "${lista_contato}";
+	$.get( url, function( data ) {
+		  $( "#lista_contato" ).html( data );
 	});
 };
-
-$(document).on("click", ".item_endereco", function(e){
-	var id = $(this).val();
-	var url = "${altera_endereco}/" + id;
-	var div = $("#cad_endereco");
-	open_dialog(url, div, lista_endreco());
-});
-
-$(document).on("click", ".item_contato", function(e){
-	var id = $(this).val();
-	var url = "${altera_contato}/" + id;
-	var div = $("#cad_contato");
-	open_dialog(url, div, lista_contato());
-});
 
 $(".dropdown-menu li a").click(function(){
     var value = $(this).text();
@@ -140,7 +123,7 @@ $(".dropdown-menu li a").click(function(){
     var placeholder = value == 'Cnpj' ? 'XX.XXX.XXX/XXXX-XX' : 'XXX.XXX.XXX-XX';
     $('.dropdown-toggle').text(value);
     $('[name="identificador"]').attr('pattern', pattern);
-    $('[name="identificador"]').attr('placedholder', placeholder);
+    $('[name="identificador"]').attr('placeholder', placeholder);
 });
 </script>
 
