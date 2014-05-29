@@ -23,8 +23,8 @@ $( document ).ready(function() {
 	      </p>
 	      <p>
 	        <label for="senha">Senha</label>
-	      	<input type="password" class="form-control" placeholder="Senha" onchange="md5()">
-	      	<input type="hidden" name="senha" class="form-control">
+	      	<input type="password" id="senha_aberta" class="form-control" placeholder="Senha" onchange="md5()">
+	      	<input type="hidden" name="senha" class="form-control" value="">
 	      </p>
 		  <p>
 		    <label for="email">E-mail</label>
@@ -52,6 +52,13 @@ $( document ).ready(function() {
         <strong>Erro!</strong> N&atilde;o foi possivel cadastrar o usu&aacute;rio.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
+
+<script>
+function md5() {
+	var senha = $("#senha_aberta").val();
+	$("input[name=senha]").val($.md5(senha));
+};
+</script>
 
 </body>
 </html>

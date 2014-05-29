@@ -20,8 +20,3 @@ $(document).on('submit', '.form', function (event) {
 		});
 	});
 });
-
-function md5() {
-	var senha = $(this).val();
-	$("input[name=senha").val($.md5(senha));
-};
