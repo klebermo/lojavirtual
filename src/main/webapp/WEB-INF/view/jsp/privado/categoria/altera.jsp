@@ -7,13 +7,6 @@
 <title>Altera&ccedil;&atilde; de categoria</title>
 </head>
 <body>
-
-<script>
-$( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
   
 	  <c:url value="/categoria/altera" var="alteraCategoria"/>
 	  <form class="form" role="form" action="${alteraCategoria}" method="post">
@@ -29,12 +22,12 @@ $( document ).ready(function() {
 		  </p>
 	  </form>
     
-      <div id="yes" class="alert alert-success">
+      <div id="yes" class="alert alert-success" style="display: none;">
         <strong>Pronto!</strong> Categoria alterada com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="not" class="alert alert-danger">
+      <div id="not" class="alert alert-danger" style="display: none;">
         <strong>Erro!</strong> N&atilde;o foi possivel alterar a categoria.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>

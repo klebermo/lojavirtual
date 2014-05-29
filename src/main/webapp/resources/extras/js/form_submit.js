@@ -13,7 +13,7 @@ $(document).on('submit', '.form', function (event) {
 	// Put the results in a div
 	posting.done(function( data ) {
 		console.log(data);
-		$("#"+data).show();
+		$("#"+data).css("display", "block");
 		
 		$(".form").each (function(){
 			this.reset();

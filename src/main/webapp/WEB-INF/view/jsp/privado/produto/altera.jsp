@@ -7,13 +7,6 @@
 <title>Altera&ccedil;&atilde;o de produto</title>
 </head>
 <body>
-
-<script>
-$( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
 	    
 	  <c:url value="/produto/altera.htm" var="alteraProduto"/>
 	  <form class="form" role="form" action="${alteraProduto}" method="post">
@@ -38,12 +31,12 @@ $( document ).ready(function() {
 		  </p>
 	  </form>
     
-      <div id="yes" class="alert alert-success">
+      <div id="yes" class="alert alert-success" style="display: none;">
         <strong>Pronto!</strong> Produto alterado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="not" class="alert alert-danger">
+      <div id="not" class="alert alert-danger" style="display: none;">
         <strong>Erro!</strong> N&atilde;o foi possivel alterar o produto.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>

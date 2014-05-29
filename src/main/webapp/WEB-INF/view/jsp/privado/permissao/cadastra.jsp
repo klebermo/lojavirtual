@@ -8,13 +8,6 @@
 </head>
 <body>
 
-<script>
-$(document).ready(function(){
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
-
 <c:url value="/permissao/permissoes.json" var="permissoes"/>
   
 	    <c:url value="/permissao/cadastra.htm" var="cadastraGrupo"/>
@@ -43,11 +36,11 @@ $(document).ready(function(){
 	      	<p> <button type="submit" class="btn btn-primary">Cadastrar</button> </p>
 	     </form>
     
-      <div id="yes" class="alert alert-success">
+      <div id="yes" class="alert alert-success" style="display: none;">
         <strong>Pronto!</strong> Permiss&atilde;o cadastrado com sucesso.
       </div>
       
-      <div id="not" class="alert alert-danger">
+      <div id="not" class="alert alert-danger" style="display: none;">
         <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a permiss&atilde;o.
       </div>
 

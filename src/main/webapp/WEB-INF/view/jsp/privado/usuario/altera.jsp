@@ -7,13 +7,6 @@
 <title>Altera&ccedil;&atilde;o de usu&aacute;rio</title>
 </head>
 <body>
-
-<script>
-$( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
 	    
 	  <c:url value="/usuario/altera.htm" var="alteraUsuario"/>
 	  <form class="form" role="form" action="${alteraUsuario}" method="post">
@@ -46,12 +39,12 @@ $( document ).ready(function() {
 		  </p>
 	  </form>
     
-      <div id="yes" class="alert alert-success">
+      <div id="yes" class="alert alert-success" style="display: none;">
         <strong>Pronto!</strong> Usu&aacute;rio alterado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="not" class="alert alert-danger">
+      <div id="not" class="alert alert-danger" style="display: none;">
         <strong>Erro!</strong> N&atilde;o foi possivel alterar o usu&aacute;rio.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
