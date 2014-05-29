@@ -44,8 +44,8 @@ $( document ).ready(function() {
               <h3 class="panel-title">Endere&ccedil;o</h3>
             </div>
             <div id="endereco" class="panel-body">
-            	<div id="cad_endereco"></div>
             	<div id="lista_endereco"></div>
+            	<div id="cad_endereco"></div>
             </div>
           </div>
           <div class="panel panel-warning">
@@ -53,8 +53,8 @@ $( document ).ready(function() {
               <h3 class="panel-title">Contato</h3>
             </div>
             <div id="contato" class="panel-body">
-            	<div id="cad_contato"></div>
             	<div id="lista_contato"></div>
+            	<div id="cad_contato"></div>
             </div>
           </div>
 		  <p>
