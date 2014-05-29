@@ -19,13 +19,26 @@ $( document ).ready(function() {
 	  <form class="form" role="form" action="${cadastraFornecedor}" method="post">
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title">Dados de identifica&ccedil;o</h3>
+              <h3 class="panel-title">Dados de identifica&ccedil;&atilde;o</h3>
             </div>
             <div class="panel-body">
-		      <p>
-		        <label for="identificador">Cpf ou Cnpj</label>
-		      	<input type="text" name="identificador" class="form-control" autofocus>
-		      </p>
+            	<p>
+				    <div class="input-group">
+					      <div class="input-group-btn">
+
+						        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Identificador <span class="caret"></span></button>
+
+						        <ul class="dropdown-menu">
+						          <li><a href="#">Cpf</a></li>
+						          <li><a href="#">Cnpj</a></li>
+						        </ul>
+						        
+					      </div><!-- /btn-group -->
+					      
+					      <input type="text" name="identificador" class="form-control">
+				    </div><!-- /input-group -->
+			    </p>
+			</div><!-- /.col-lg-6 -->
 		      <p>
 		        <label for="nome">Nome</label>
 		      	<input type="text" name="nome" class="form-control" placeholder="Nome">
@@ -68,12 +81,12 @@ $( document ).ready(function() {
 	  </form>
     
       <div id="yes" class="alert alert-success">
-        <strong>Pronto!</strong> Categoria cadastrada com sucesso.
+        <strong>Pronto!</strong> Fornecedor cadastrado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
       <div id="not" class="alert alert-danger">
-        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a categoria.
+        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar o fornecedor.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 
@@ -118,6 +131,16 @@ $(document).on("click", ".item_contato", function(e){
 	var url = "${altera_contato}/" + id;
 	var div = $("#cad_contato");
 	open_dialog(url, div, lista_contato());
+});
+
+$(".dropdown-menu li a").click(function(){
+    var value = $(this).text();
+
+    var pattern = value == 'Cnpj' ? '[0-9]{2}.[0-9]{3}.[0-9]{3}/[0-9]{4}-[0-9]{2}' : '[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}';
+    var placeholder = value == 'Cnpj' ? 'XX.XXX.XXX/XXXX-XX' : 'XXX.XXX.XXX-XX';
+    $('.dropdown-toggle').text(value);
+    $('[name="identificador"]').attr('pattern', pattern);
+    $('[name="identificador"]').attr('placedholder', placeholder);
 });
 </script>
 

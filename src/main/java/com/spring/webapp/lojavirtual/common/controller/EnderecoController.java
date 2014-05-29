@@ -25,9 +25,9 @@ public class EnderecoController {
 	@ResponseBody
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
 		if(endereco.cadastra(request, response))
-			return "yes";
+			return "done";
 		else
-			return "not";
+			return "fail";
 	}
 	
 	@RequestMapping(value="cadastra")
@@ -42,9 +42,9 @@ public class EnderecoController {
 	@ResponseBody
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
 		if(endereco.altera(request, response))
-			return "yes";
+			return "done";
 		else
-			return "not";
+			return "fail";
 	}
 	
 	@RequestMapping(value="altera/{theString}")
@@ -61,9 +61,9 @@ public class EnderecoController {
 	@PreAuthorize("hasPermission(#user, 'remove_endereco')")
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
 		if(endereco.remove(request, response))
-			return "yes";
+			return "done";
 		else
-			return "not";
+			return "fail";
 	}
 	
 	@RequestMapping(value="remove/{theString}")

@@ -43,6 +43,9 @@ function open_dialog(url, dialog_div, func) {
         $( dialog_div ).dialog({ height: 720 });
         $( dialog_div ).dialog({ width: 720 });
         $( dialog_div ).dialog( "open" );
+        $( dialog_div ).on( "dialogclose", function( event, ui ) {
+        	func();
+        });
 	});
 }
   

@@ -25,9 +25,9 @@ public class ContatoController {
 	@ResponseBody
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
 		if(contato.cadastra(request, response))
-			return "yes";
+			return "done";
 		else
-			return "not";
+			return "fail";
 	}
 	
 	@RequestMapping(value="cadastra")
@@ -42,9 +42,9 @@ public class ContatoController {
 	@ResponseBody
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
 		if(contato.altera(request, response))
-			return "yes";
+			return "done";
 		else
-			return "not";
+			return "fail";
 	}
 	
 	@RequestMapping(value="altera/{theString}")
@@ -60,9 +60,9 @@ public class ContatoController {
 	@ResponseBody
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
 		if(contato.remove(request, response))
-			return "yes";
+			return "done";
 		else
-			return "not";
+			return "fail";
 	}
 	
 	@RequestMapping(value="remove/{theString}")

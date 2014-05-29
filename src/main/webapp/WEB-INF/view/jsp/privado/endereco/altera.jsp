@@ -10,8 +10,8 @@
 
 <script>
 $( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
+	$("#done").hide();
+	$("#fail").hide();
 });
 </script>
   
@@ -53,12 +53,12 @@ $( document ).ready(function() {
 		  </p>
 	  </form>
     
-      <div id="yes" class="alert alert-success">
+      <div id="done" class="alert alert-success">
         <strong>Pronto!</strong> Endere&ccedil;o alterado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="not" class="alert alert-danger">
+      <div id="fail" class="alert alert-danger">
         <strong>Erro!</strong> N&atilde;o foi possivel alterar o endere&ccedil;o.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>

@@ -10,8 +10,8 @@
 
 <script>
 $( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
+	$("#done").hide();
+	$("#fail").hide();
 });
 </script>
 
@@ -27,12 +27,12 @@ $( document ).ready(function() {
 </div>
 </form>
 
-      <div id="yes" class="alert alert-success">
+      <div id="done" class="alert alert-success">
         <strong>Pronto!</strong> Contato excluido com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="not" class="alert alert-danger">
+      <div id="fail" class="alert alert-danger">
         <strong>Erro!</strong> N&atilde;o foi possivel excluir a contato.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>

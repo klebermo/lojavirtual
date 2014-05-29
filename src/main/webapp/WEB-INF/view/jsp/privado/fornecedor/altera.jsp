@@ -41,20 +41,28 @@ $( document ).ready(function() {
           </div>
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title">Endere&ccedil;o</h3>
+              <h3 class="panel-title">Endere&ccedil;o</h3><c:url value="/endereco/cadastra" var="cadastra_endereco"/><a class="popup" data-target="cad_endereco" data-function="lista_endereco()" href="${cadastra_endereco}">Novo</a>
             </div>
             <div id="endereco" class="panel-body">
-            	<div id="lista_endereco"></div>
-            	<div id="cad_endereco"></div>
+            	<div id="lista_endereco">
+            		<select name="endereco" id="select_endereco" size="5"></select>
+            	</div>
+            	<div id="cad_endereco" class="dialog" title="Basic dialog">
+            		<p> <span id="text"></span> </p>
+            	</div>
             </div>
           </div>
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title">Contato</h3>
+              <h3 class="panel-title">Contato</h3><c:url value="/contato/cadastra" var="cadastra_contato"/><a class="popup" data-target="cad_contato" data-function="lista_contato()" href="${cadastra_contato}">Novo</a>
             </div>
             <div id="contato" class="panel-body">
-            	<div id="lista_contato"></div>
-            	<div id="cad_contato"></div>
+            	<div id="lista_contato">
+            		<select name="contato" id="select_contato" size="5"></select>
+            	</div>
+            	<div id="cad_contato" class="dialog" title="Basic dialog">
+            		<p> <span id="text"></span> </p>
+            	</div>
             </div>
           </div>
 		  <p>
@@ -63,17 +71,20 @@ $( document ).ready(function() {
 	  </form>
     
       <div id="yes" class="alert alert-success">
-        <strong>Pronto!</strong> Categoria cadastrada com sucesso.
+        <strong>Pronto!</strong> Fornecedor alterado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
       <div id="not" class="alert alert-danger">
-        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a categoria.
+        <strong>Erro!</strong> N&atilde;o foi possivel alterar o fornecedor.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 
 <c:url value="/fornecedor/endereco.json" var="lista_endereco"/>
 <c:url value="/fornecedor/contato.json" var="lista_contato"/>
+
+<c:url value="/endereco/altera" var="altera_endereco"/>
+<c:url value="/contato/altera" var="altera_contato"/>
 
 <script>
 function lista_endereco(){
@@ -81,8 +92,8 @@ function lista_endereco(){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.fornecedor, function(index, item){
-		    var option = $('<option value="'+item.id+'">'+item.nome+'</option>');
-		    $('#lista_endereco').append(option);
+		    var option = $('<option class="item_endereco" value="'+item.id+'">'+item.nome+'</option>');
+		    $('#select_endereco').append(option);
 		});
 	});
 };
@@ -92,11 +103,25 @@ function lista_contato(){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.fornecedor, function(index, item){
-		    var option = $('<option value="'+item.id+'">'+item.nome+'</option>');
-		    $('#lista_contato').append(option);
+		    var option = $('<option class="item_contato" value="'+item.id+'">'+item.nome+'</option>');
+		    $('#select_contato').append(option);
 		});
 	});
 };
+
+$(document).on("click", ".item_endereco", function(e){
+	var id = $(this).val();
+	var url = "${altera_endereco}/" + id;
+	var div = $("#cad_endereco");
+	open_dialog(url, div, lista_endreco());
+});
+
+$(document).on("click", ".item_contato", function(e){
+	var id = $(this).val();
+	var url = "${altera_contato}/" + id;
+	var div = $("#cad_contato");
+	open_dialog(url, div, lista_contato());
+});
 </script>
 
 </body>
