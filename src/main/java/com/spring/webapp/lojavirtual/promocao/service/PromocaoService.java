@@ -41,11 +41,29 @@ public class PromocaoService {
 	}
 	
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
-		return false;
+		String id = request.getParameter("id");
+		String id_produto = request.getParameter("produto");
+		String desconto = request.getParameter("desconto");
+		
+		Promocao nova = promocao.findById(Integer.valueOf(id).intValue());
+		
+		if(id_produto != null)
+			nova.setProduto(produto.findById(Integer.valueOf(id_produto).intValue()));
+		else
+			return false;
+		
+		if(desconto != null)
+			nova.setDesconto(Float.valueOf(desconto).floatValue());
+		else
+			return false;
+		
+		return promocao.merge(nova);
 	}
 	
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
-		return false;
+		String id = request.getParameter("id");
+		Promocao nova = promocao.findById(Integer.valueOf(id).intValue());
+		return promocao.remove(nova);
 	}
 		
 	public List<Promocao> listagem() {
