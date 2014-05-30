@@ -4,19 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cadastro de categoria</title>
+<title>Cadastro de promo&ccedil;&atilde;o</title>
 </head>
 <body>
-
-<script>
-$( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
   
-	  <c:url value="/categoria/cadastra" var="cadastraCategoria"/>
-	  <form class="form" role="form" action="${cadastraCategoria}" method="post">
+	  <c:url value="/promocao/cadastra" var="cadastraPromocao"/>
+	  <form class="form" role="form" action="${cadastraPromocao}" method="post">
 	      <p>
 	        <label for="nome">Nome</label>
 	      	<input type="text" name="nome" class="form-control" placeholder="Nome" autofocus>
@@ -27,12 +20,12 @@ $( document ).ready(function() {
 	  </form>
     
       <div id="yes" class="alert alert-success" style="display: none;">
-        <strong>Pronto!</strong> Categoria cadastrada com sucesso.
+        <strong>Pronto!</strong> Promo&ccedil;&atilde;o cadastrada com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
       <div id="not" class="alert alert-danger" style="display: none;">
-        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a categoria.
+        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar a promo&ccedil;&atilde;o.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 
