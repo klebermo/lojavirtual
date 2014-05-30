@@ -46,7 +46,12 @@ $(document).ready(function(){
 		    var row = $('<tr>');
 		    row.append('<td>'+item.id+'</td>');
 		    row.append('<td>'+item.categoria+'</td>');
-		    row.append('<td>'+item.num_produtos+'</td>');
+		    
+		    var counter = 0;
+		    $.each(item.produtos, function(index, item2){
+		    	counter++;
+		    });
+		    row.append('<td>'+counter+'</td>');
 		    
 		    var col = $('<td>');
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');

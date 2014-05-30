@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,7 +23,10 @@ public class PromocaoController {
 	@RequestMapping(value="cadastra", method=RequestMethod.POST)
 	@ResponseBody
 	public String cadastra(HttpServletRequest request, HttpServletResponse response) {
-		return "";
+		if(promocao.cadastra(request, response))
+			return "yes";
+		else
+			return "not";
 	}
 	
 	@RequestMapping(value="cadastra")
@@ -37,7 +39,10 @@ public class PromocaoController {
 	@RequestMapping(value="altera", method=RequestMethod.POST)
 	@ResponseBody
 	public String altera(HttpServletRequest request, HttpServletResponse response) {
-		return "";
+		if(promocao.altera(request, response))
+			return "yes";
+		else
+			return "not";
 	}
 	
 	@RequestMapping(value="altera/{theString}")
@@ -51,29 +56,32 @@ public class PromocaoController {
 	@RequestMapping(value="remove", method=RequestMethod.POST)
 	@ResponseBody
 	public String remove(HttpServletRequest request, HttpServletResponse response) {
-		return "";
+		if(promocao.remove(request, response))
+			return "yes";
+		else
+			return "not";
 	}
 	
 	@RequestMapping(value="remove/{theString}")
 	public ModelAndView remove(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("promocao", promocao.listagem(Integer.valueOf(theString).intValue()));
-		mav.setViewName("privado/Promocao/remove");
+		mav.setViewName("privado/promocao/remove");
 		return mav;
 	}
 	
 	@RequestMapping(value="listagem")
 	public ModelAndView listagem() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("privado/promocao/cadastra");
+		mav.setViewName("privado/promocao/listagem");
 		return mav;
 	}
 	
-	@RequestMapping(value="listagem.json", method=RequestMethod.GET)
-	public ModelAndView listagem_Promocao(@RequestParam("id") String id_categoria) {
+	@RequestMapping(value="listagem.json")
+	public ModelAndView listagem_json() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("lista", promocao.listagem(id_categoria));
-		mav.setViewName("listagem_promocao.json");
+		mav.addObject("lista", promocao.listagem());
+		mav.setViewName("listagem_promocao");
 		return mav;
 	}
 	

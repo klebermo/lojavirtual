@@ -2,6 +2,9 @@ package com.spring.webapp.lojavirtual.promocao.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +17,24 @@ public class PromocaoService {
 	@Autowired
 	private PromocaoDao promocao;
 	
-	public boolean cadastra() {
+	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		return false;
 	}
 	
-	public boolean altera() {
+	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		return false;
 	}
 	
-	public boolean remove() {
+	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
 		return false;
 	}
-	
-	public List<Promocao> listagem(String id_categoria) {
-		return null;
+		
+	public List<Promocao> listagem() {
+		return promocao.findAll();
 	}
 	
 	public Promocao listagem(int id) {
-		return null;
+		return promocao.findById(id);
 	}
 	
 }

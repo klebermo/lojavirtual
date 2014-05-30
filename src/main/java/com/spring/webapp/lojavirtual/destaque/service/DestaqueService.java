@@ -54,7 +54,8 @@ public class DestaqueService {
 		Destaque novo = destaque.findById(Integer.valueOf(id).intValue());
 		
 		if(id_categoria != null)
-			novo.setCategoria(categoria.findById(Integer.valueOf(id_categoria).intValue()));
+			if(id_categoria != "")
+				novo.setCategoria(categoria.findById(Integer.valueOf(id_categoria).intValue()));
 		
 		if(produtos != null) {
 			int max = produtos.length;

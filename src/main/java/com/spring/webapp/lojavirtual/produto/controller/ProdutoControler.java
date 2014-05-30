@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -91,9 +90,15 @@ public class ProdutoControler {
 	}
 	
 	@RequestMapping(value="listagem_por_categoria.json", method=RequestMethod.GET)
-	public ModelAndView listagem_por_categoria_json(@RequestParam("id") String id_categoria) {
+	public ModelAndView listagem_por_categoria_json(HttpServletRequest request, HttpServletResponse response) {
+		String id_categoria = request.getParameter("id");
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("lista", produto.listagem_por_categoria(id_categoria));
+		
+		if(id_categoria == null)
+			mav.addObject("lista", produto.listagem());
+		else
+			mav.addObject("lista", produto.listagem_por_categoria(id_categoria));
+		
 		mav.setViewName("listagem_produto");
 		return mav;
 	}

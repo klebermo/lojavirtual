@@ -10,54 +10,6 @@
 
 <c:url value="/destaque/cadastra" var="cadastraDestaque"/>
 
-      <div id="yes" class="alert alert-success" style="display: none;">
-        <strong>Pronto!</strong> Destaques cadastrados com sucesso.
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      </div>
-      
-      <div id="not" class="alert alert-danger" style="display: none;">
-        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar os destaques.
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      </div>
-
-<div class="panel panel-warning">
-	<div class="panel-heading">
-	  <h3 class="panel-title">Destaques da p&aacute;gina frontal</h3>
-	</div>
-	<div class="panel-body">
-	  <form class="form" role="form" action="${cadastraDestaque}" method="post">
-          <div class="panel panel-warning">
-            <div class="panel-heading">
-              <h3 class="panel-title">Produtos em destaque na p&aacute;gina frontal</h3>
-            </div>
-            <div class="panel-body">
-					<table>
-					<tr>
-						<td>
-							<select id="all_produtos_1" size="10" multiple="multiple">
-							</select>
-						</td>
-							
-						<td>
-							<p> <button type="button" class="btn btn-lg btn-default" id="for_left_1"> << </button> </p>
-							<p> <button type="button" class="btn btn-lg btn-default" id="for_right_1"> >> </button> </p>
-						</td>
-						
-						<td>
-							<select name="produtos" id="lista_produtos_1" size="10" multiple="multiple">
-							</select>
-						</td>
-					</tr>
-					</table>
-            </div>
-          </div>
-		  <p>
-		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>
-		  </p>
-	  </form>
-	</div>
-</div>
-
 <div class="panel panel-warning">
 	<div class="panel-heading">
 	  <h3 class="panel-title">Destaques das p&aacute;ginas de categorias</h3>
@@ -66,7 +18,9 @@
 	  <form class="form" role="form" action="${cadastraDestaque}" method="post">
 	      <p>
 	        <label for="categoria">Categoria</label>
-	      	<select name="categoria" id="lista_categoria"></select>
+	      	<select name="categoria" id="lista_categoria">
+	      		<option value="">P&aacute;gina frontal</option>
+	      	</select>
 	      </p>
           <div class="panel panel-warning">
             <div class="panel-heading">
@@ -76,17 +30,17 @@
 					<table>
 					<tr>
 						<td>
-							<select id="all_produtos_2" size="10" multiple="multiple">
+							<select id="all_produtos" size="10" multiple="multiple">
 							</select>
 						</td>
 							
 						<td>
-							<p> <button type="button" class="btn btn-lg btn-default" id="for_left_2"> << </button> </p>
-							<p> <button type="button" class="btn btn-lg btn-default" id="for_right_2"> >> </button> </p>
+							<p> <button type="button" class="btn btn-lg btn-default" id="for_left"> << </button> </p>
+							<p> <button type="button" class="btn btn-lg btn-default" id="for_right"> >> </button> </p>
 						</td>
 						
 						<td>
-							<select name="produtos" id="lista_produtos_2" size="10" multiple="multiple">
+							<select name="produtos" id="lista_produtos" size="10" multiple="multiple">
 							</select>
 						</td>
 					</tr>
@@ -99,6 +53,16 @@
 	  </form>
 	</div>
 </div>
+
+      <div id="yes" class="alert alert-success" style="display: none;">
+        <strong>Pronto!</strong> Destaques cadastrados com sucesso.
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      </div>
+      
+      <div id="not" class="alert alert-danger" style="display: none;">
+        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar os destaques.
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      </div>
 
 <c:url value="/categoria/listagem.json" var="lista"/>
 <c:url value="/produto/listagem_por_categoria.json" var="lista_produtos_1"/>
@@ -115,31 +79,71 @@ $(document).ready(function(){
 		});
 	});
 	
-	var url = "<c:out value="${lista_produtos_1}"/>";
+	var url = "<c:out value="${lista_produtos_2}"/>";
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.produto, function(index, item){
 		    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#all_produtos_1').append(option);
+		    $('#all_produtos').append(option);
 		});
 	});
 });
 
 $(document).on('click', '.categoria', function(){
 	var id = $(this).val();
-	var url = "${lista_produtos_2}";
-	$("#nome").text($(this).text());
-	$.ajax({
-		type: "GET",
-		url: url,
-		data: {id: id}
-	}).done(function(data){
-		var json = jQuery.parseJSON( data );
-		$.each(json.produto, function(index, item){
-		    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#all_produtos_2').append(option);
+	var url;
+	
+	if(id=="") {
+		url = "${lista_produtos_2}";
+		$("#all_produtos").empty();
+		
+		$.get(url, function(data){
+			var json = jQuery.parseJSON( data );
+			$.each(json.produto, function(index, item){
+			    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
+			    $('#all_produtos').append(option);
+			});
 		});
-	});
+	}
+	else {
+		url = "${lista_produtos_1}";
+		$("#all_produtos").empty();
+		$("#nome").text($(this).text());
+		
+		$.ajax({
+			type: "GET",
+			url: url,
+			data: {id: id}
+		}).done(function(data){
+			var json = jQuery.parseJSON( data );
+			$.each(json.produto, function(index, item){
+			    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
+			    $('#all_produtos').append(option);
+			});
+		});
+	}
+});
+
+$('#for_right').click(function(e) {
+    var selectedOpts = $('#all_produtos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#lista_produtos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
+});
+
+$('#for_left').click(function(e) {
+    var selectedOpts = $('#lista_produtos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#all_produtos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
 });
 </script>
 

@@ -55,6 +55,7 @@ public class Dao<E> {
 	public List<E> findByField(String field, String value) {
 		String expressao = entity.toString();
 		String nome_classe = new String();
+		
 		StringTokenizer st = new StringTokenizer(expressao);
 		while (st.hasMoreTokens()) {
 			nome_classe = st.nextToken();
