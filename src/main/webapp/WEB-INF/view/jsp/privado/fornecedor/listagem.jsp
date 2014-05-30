@@ -25,7 +25,9 @@
     <tr>
         <th>#</th>        
         <th>Nome</th>
+        <th>Cpf / Cnpj</th>
         <th>Website</th>
+        <th></th>
     </tr>
     </thead>
     
@@ -44,7 +46,13 @@ $(document).ready(function(){
 		$.each(json.fornecedor, function(index, item){
 		    var row = $('<tr>');
 		    row.append('<td>'+item.id+'</td>');
-		    row.append('<td>'+item.nome+'</td>');
+		    row.append('<td>'+item.razao_social+'</td>');
+		    
+		    if(item.cpf == "")
+		    	row.append('<td>'+item.cnpj+'</td>');
+		    else
+		    	row.append('<td>'+item.cpf+'</td>');
+		    
 		    row.append('<td>'+item.website+'</td>');
 		    
 		    var col = $('<td>');

@@ -7,42 +7,90 @@
 <title>Altera&ccedil;&atilde;o de fornecedor</title>
 </head>
 <body>
+
+<script>
+$( document ).ready(function() {
+	$("#yes").hide();
+	$("#not").hide();
+});
+</script>
+
+<c:url value="/endereco/cadastra" var="cadastro_endereco"/>
+<c:url value="/contato/cadastra" var="cadastro_contato"/>
   
 	  <c:url value="/fornecedor/altera" var="alteraFornecedor"/>
 	  <form class="form" role="form" action="${alteraFornecedor}" method="post">
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title">Dados de identifica&ccedil;o</h3>
+              <h3 class="panel-title">Dados de identifica&ccedil;&atilde;o</h3>
             </div>
             <div class="panel-body">
 		      <p>
-		      	<input type="hidden" name="id" class="form-control" value="${fornecedor.id}">
+		      	<input type="hidden" name="id" class="form-control" value="${fornecedor.id}" >
 		      </p>
-		      <p>
-		        <label for="identificador">Cpf ou Cnpj</label>
-		      	<input type="text" name="identificador" class="form-control" autofocus>
-		      </p>
+            	<p>
+				    <div class="input-group">
+					      <div class="input-group-btn">
+
+						        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Identificador <span class="caret"></span></button>
+
+						        <ul class="dropdown-menu">
+						          <li><a href="#">Cpf</a></li>
+						          <li><a href="#">Cnpj</a></li>
+						        </ul>
+						        
+					      </div><!-- /btn-group -->
+					      
+					      <c:if test="${fornecedor.cpf != null}">
+					      <input type="text" name="identificador" class="form-control" value="${fornecedor.cpf}" >
+					      </c:if>
+					      
+					      <c:if test="${fornecedor.cnpj != null}">
+					      <input type="text" name="identificador" class="form-control" value="${fornecedor.cnpj}" >
+					      </c:if>
+				    </div><!-- /input-group -->
+			    </p>
 		      <p>
 		        <label for="nome">Nome</label>
-		      	<input type="text" name="nome" class="form-control" value="${fornecedor.nome}">
+		      	<input type="text" name="nome" class="form-control" value="${fornecedor.razao_social}" >
 		      </p>
 		      <p>
 		        <label for="website">Website</label>
 		      	<input type="text" name="website" class="form-control" value="${fornecedor.website}">
 		      </p>
             </div>
-          </div>
+           </div>
           <div class="panel panel-warning">
             <div class="panel-heading">
               <h3 class="panel-title">Endere&ccedil;o</h3>
             </div>
             <div id="endereco" class="panel-body">
 				<p>
-					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_contato}" data-target="cad_contato" data-function="lista_contato()">
-						cadastrar novo contato
+					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_endereco}" data-target="cad_endereco" data-function="lista_endereco()">
+						cadastrar novo endere&ccedil;o
 					</button>
 				</p>
-            	<div id="lista_endereco"></div>
+					<table>
+					<tr>
+						<td>
+							<select id="all_enderecos" size="10" multiple="multiple">
+							</select>
+						</td>
+						
+					<td>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_left_1"> << </button> </p>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_right_1"> >> </button> </p>
+					</td>
+					
+						<td>
+							<select name="endereco" id="lista_enderecos" size="10" multiple="multiple">
+								<c:forEach var="item" items="${fornecedor.endereco}">
+									<option value="${item.id}">${item.logradouro}${item.numero}</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					</table>
             	<div id="cad_endereco">
             		<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
             	</div>
@@ -58,7 +106,29 @@
 						cadastrar novo contato
 					</button>
 				</p>
-            	<div id="lista_contato"></div>
+            	<div>
+					<table>
+					<tr>
+						<td>
+							<select id="all_contatos" size="10" multiple="multiple">
+							</select>
+						</td>
+						
+					<td>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_left_2"> << </button> </p>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_right_2"> >> </button> </p>
+					</td>
+					
+						<td>
+							<select name="contato" id="lista_contatos" size="10" multiple="multiple">
+								<c:forEach var="item" items="${fornecedor.contato}">
+									<option value="${item.id}">${item.nome}</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					</table>
+            	</div>
             	<div id="cad_contato">
             		<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
             	</div>
@@ -69,31 +139,47 @@
 		  </p>
 	  </form>
     
-      <div id="yes" class="alert alert-success" style="display: none;">
-        <strong>Pronto!</strong> Fornecedor alterado com sucesso.
+      <div id="yes" class="alert alert-success">
+        <strong>Pronto!</strong> Fornecedor cadastrado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="not" class="alert alert-danger" style="display: none;">
-        <strong>Erro!</strong> N&atilde;o foi possivel alterar o fornecedor.
+      <div id="not" class="alert alert-danger">
+        <strong>Erro!</strong> N&atilde;o foi possivel cadastrar o fornecedor.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 
-<c:url value="/fornecedor/endereco.json" var="lista_endereco"/>
-<c:url value="/fornecedor/contato.json" var="lista_contato"/>
+<c:url value="/endereco/listagem.json" var="lista_endereco"/>
+<c:url value="/contato/listagem.json" var="lista_contato"/>
 
 <script>
+$(document).ready(function(){
+	lista_endereco();
+	lista_contato();
+});
+
 function lista_endereco(){
-	var url = "${lista_endereco}";
-	$.get( url, function( data ) {
-		  $( "#lista_endereco" ).html( data );
+	var url = "<c:out value="${lista_endereco}"/>";
+	$.get(url, function(data){
+		var json = jQuery.parseJSON( data );
+		$.each(json.endereco, function(index, item){
+		    var row = $('<option value="'+item.id+'">');
+		    row.append('<td>'+item.logradouro+'</td>');
+		    row.append('<td>'+item.numero+'</td>');
+		    $('#all_enderecos').append(row);
+		});
 	});
 };
 
 function lista_contato(){
-	var url = "${lista_contato}";
-	$.get( url, function( data ) {
-		  $( "#lista_contato" ).html( data );
+	var url = "<c:out value="${lista_contato}"/>";
+	$.get(url, function(data){
+		var json = jQuery.parseJSON( data );
+		$.each(json.endereco, function(index, item){
+		    var row = $('<option value="'+item.id+'">');
+		    row.append('<td>'+item.nome+'</td>');
+		    $('#all_contatos').append(row);
+		});
 	});
 };
 
@@ -105,6 +191,50 @@ $(".dropdown-menu li a").click(function(){
     $('.dropdown-toggle').text(value);
     $('[name="identificador"]').attr('pattern', pattern);
     $('[name="identificador"]').attr('placeholder', placeholder);
+});
+
+$('#for_right_1').click(function(e) {
+    var selectedOpts = $('#all_enderecos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#lista_enderecos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
+});
+
+$('#for_left_1').click(function(e) {
+    var selectedOpts = $('#lista_enderecos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#all_enderecos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
+});
+
+$('#for_right_2').click(function(e) {
+    var selectedOpts = $('#all_contatos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#lista_contatos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
+});
+
+$('#for_left_2').click(function(e) {
+    var selectedOpts = $('#lista_contatos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#all_contatos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
 });
 </script>
 

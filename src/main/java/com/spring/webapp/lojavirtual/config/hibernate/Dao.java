@@ -52,7 +52,7 @@ public class Dao<E> {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public E findByField(String field, String value) {
+	public List<E> findByField(String field, String value) {
 		String expressao = entity.toString();
 		String nome_classe = new String();
 		StringTokenizer st = new StringTokenizer(expressao);
@@ -63,7 +63,7 @@ public class Dao<E> {
 		
 		Query q = sessionFactory.getCurrentSession().createQuery(query);
 		q.setParameter("data", value);
-		E instance = (E) q.uniqueResult();
+		List<E> instance = q.list();
 		return instance;
 	}
 	

@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<c:url value="/endereco/cadastra" var="cadastro"/>
 <c:url value="/endereco/altera" var="alteracao"/>
 <c:url value="/endereco/remove" var="remocao"/>
 
@@ -33,14 +32,14 @@
 
 </table>
 
-<c:url value="/endereco/listagem.json" var="lista"/>
+<c:url value="/endereco/listagem.json" var="enderecos"/>
 
 <script>
 $(document).ready(function(){
-	var url = "<c:out value="${lista}"/>";
+	var url = "<c:out value="${enderecos}"/>";
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
-		$.each(json.categoria, function(index, item){
+		$.each(json.endereco, function(index, item){
 		    var row = $('<tr>');
 		    row.append('<td>'+item.id+'</td>');
 		    row.append('<td>'+item.logradouro+'</td>');

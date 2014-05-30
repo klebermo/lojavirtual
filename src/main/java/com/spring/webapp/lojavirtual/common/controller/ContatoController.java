@@ -84,7 +84,7 @@ public class ContatoController {
 	@RequestMapping(value="listagem.json")
 	public ModelAndView listagem_json() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("contato", contato.listagem());
+		mav.addObject("lista", contato.listagem());
 		mav.setViewName("listagem_contato");
 		return mav;
 	}

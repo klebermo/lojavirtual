@@ -27,12 +27,12 @@ $( document ).ready(function() {
 </div>
 </form>
 
-      <div id="yes" class="alert alert-success">
+      <div id="yes" class="alert alert-success" style="display: none;">
         <strong>Pronto!</strong> Materia Prima excluida com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="not" class="alert alert-danger">
+      <div id="not" class="alert alert-danger" style="display: none;">
         <strong>Erro!</strong> N&atilde;o foi possivel excluir a materia prima.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>

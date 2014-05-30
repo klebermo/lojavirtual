@@ -4,17 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Lista de produtos</title>
+<title>Lista de categorias</title>
 </head>
 <body>
 
-<c:url value="/produto/cadastra" var="cadastro"/>
-<c:url value="/produto/altera" var="alteracao"/>
-<c:url value="/produto/remove" var="remocao"/>
+<c:url value="/destaque/cadastra" var="cadastro"/>
+<c:url value="/destaque/altera" var="alteracao"/>
+<c:url value="/destaque/remove" var="remocao"/>
+
 
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
-		cadastrar novo produto
+		cadastrar nova destaque
 	</button>
 </p>
 
@@ -23,8 +24,9 @@
     <thead>
     <tr>
         <th>#</th>        
-        <th>Nome</th>
-        <th>#</th>
+        <th>Categoria</th>
+        <th>Quant produtos</th>
+        <th></th>
     </tr>
     </thead>
     
@@ -33,23 +35,25 @@
 
 </table>
 
-<c:url value="/produto/listagem.json" var="lista_produto"/>
+<c:url value="/destaque/listagem.json" var="lista"/>
 
 <script>
 $(document).ready(function(){
-	var url = "<c:out value="${lista_produto}"/>";
+	var url = "<c:out value="${lista}"/>";
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
-		$.each(json.produto, function(index, item){
-		    var row = $('<tr id=user'+item.id+'>');
+		$.each(json.destaque, function(index, item){
+		    var row = $('<tr>');
 		    row.append('<td>'+item.id+'</td>');
-		    row.append('<td>'+item.nome+'</td>');
-		    $('tbody.content').append(row);
+		    row.append('<td>'+item.categoria+'</td>');
+		    row.append('<td>'+item.num_produtos+'</td>');
 		    
 		    var col = $('<td>');
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
 		    row.append(col);
+		    
+		    $('tbody.content').append(row);
 		});
 	});
 });

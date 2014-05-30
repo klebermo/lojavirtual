@@ -37,12 +37,12 @@ $( document ).ready(function() {
 		  </p>
 	  </form>
     
-      <div id="done" class="alert alert-success">
+      <div id="done" class="alert alert-success" style="display: none;">
         <strong>Pronto!</strong> Contato alterado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="fail" class="alert alert-danger">
+      <div id="fail" class="alert alert-danger" style="display: none;">
         <strong>Erro!</strong> N&atilde;o foi possivel alterar o contato.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>

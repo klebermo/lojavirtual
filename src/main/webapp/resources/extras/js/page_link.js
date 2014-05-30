@@ -11,7 +11,7 @@ $( ".dialog" ).dialog({
 	    duration: 1000
 	  },
 	  close: function( event, ui ) {
-		  //
+		  alert("close");
 	  }
 });
     	
@@ -31,7 +31,7 @@ function open(url) {
 	});
 }
 
-function open_dialog(url, dialog_div, func) {
+function open_dialog(url, dialog_div) {
 	$.ajax({
 		type: "GET",
 		url: url
@@ -43,9 +43,6 @@ function open_dialog(url, dialog_div, func) {
         $( dialog_div ).dialog({ height: 720 });
         $( dialog_div ).dialog({ width: 720 });
         $( dialog_div ).dialog( "open" );
-        $( dialog_div ).on( "dialogclose", function( event, ui ) {
-        	func();
-        });
 	});
 }
   
@@ -59,9 +56,8 @@ $(document).on('click', '.popup', function (event) {
 	event.preventDefault();
 	var action = $(this).data('action');
 	var target = $(this).data('target');
-	var func = $(this).data('function');
 	var div = $("#"+target);
-	open_dialog(action, div, func);
+	open_dialog(action, div);
 });
 
 $(document).on('click', '.pagina', function(event){

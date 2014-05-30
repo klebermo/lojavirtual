@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<c:url value="/contato/cadastra" var="cadastro"/>
 <c:url value="/contato/altera" var="alteracao"/>
 <c:url value="/contato/remove" var="remocao"/>
 
@@ -29,14 +28,14 @@
 
 </table>
 
-<c:url value="/contato/listagem.json" var="lista"/>
+<c:url value="/contato/listagem.json" var="contatos"/>
 
 <script>
 $(document).ready(function(){
-	var url = "<c:out value="${lista}"/>";
+	var url = "<c:out value="${contatos}"/>";
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
-		$.each(json.categoria, function(index, item){
+		$.each(json.contato, function(index, item){
 		    var row = $('<tr>');
 		    row.append('<td>'+item.id+'</td>');
 		    row.append('<td>'+item.nome+'</td>');

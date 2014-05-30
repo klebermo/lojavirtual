@@ -99,4 +99,9 @@ public class ProdutoService {
 	public Produto listagem(int id) {
 		return produto.findById(id);
 	}
+	
+	@Transactional
+	public List<Produto> listagem_por_categoria(String id_categoria) {
+		return produto.findByField("categoria", id_categoria);
+	}
 }

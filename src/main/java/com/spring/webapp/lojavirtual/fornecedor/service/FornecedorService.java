@@ -42,12 +42,11 @@ public class FornecedorService {
 		Fornecedor f = new Fornecedor();
 		f.setRazao_social(nome);
 		f.setWebsite(website);
+		
 		if(identificador.length() == 14)
-			f.setCnpj(identificador);
-		else if(identificador.length() == 11)
 			f.setCpf(identificador);
 		else
-			return false;
+			f.setCnpj(identificador);
 		
 		List<Endereco> lista_endereco = new ArrayList<Endereco>();
 		if(endereco2 != null) {
@@ -87,12 +86,11 @@ public class FornecedorService {
 		f.setId(Integer.valueOf(id).intValue());
 		f.setRazao_social(nome);
 		f.setWebsite(website);
+		
 		if(identificador.length() == 14)
-			f.setCnpj(identificador);
-		else if(identificador.length() == 11)
 			f.setCpf(identificador);
 		else
-			return false;
+			f.setCnpj(identificador);
 		
 		List<Endereco> lista_endereco = new ArrayList<Endereco>();
 		if(endereco2 != null) {

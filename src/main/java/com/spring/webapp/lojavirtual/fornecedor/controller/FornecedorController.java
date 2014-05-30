@@ -71,7 +71,7 @@ public class FornecedorController {
 	public ModelAndView remove(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("fornecedor", fornecedor.listagem(Integer.valueOf(theString).intValue()));
-		mav.setViewName("privado/fornecedor/cadastra");
+		mav.setViewName("privado/fornecedor/remove");
 		return mav;
 	}
 	
@@ -85,11 +85,12 @@ public class FornecedorController {
 	@RequestMapping(value="listagem.json")
 	public ModelAndView listagem_json() {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("lista", fornecedor.listagem());
 		mav.setViewName("listagem_fornecedor");
 		return mav;
 	}
 	
-	@RequestMapping(value="endereco.json", method=RequestMethod.POST)
+	@RequestMapping(value="endereco.json", method=RequestMethod.GET)
 	public ModelAndView listagem_endereco_json(@RequestParam("id") String id) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("endereco", fornecedor.listagem(Integer.valueOf(id).intValue()).getEndereco());
@@ -97,7 +98,7 @@ public class FornecedorController {
 		return mav;
 	}
 	
-	@RequestMapping(value="contato.json", method=RequestMethod.POST)
+	@RequestMapping(value="contato.json", method=RequestMethod.GET)
 	public ModelAndView listagem_contato_json(@RequestParam("id") String id) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("contato", fornecedor.listagem(Integer.valueOf(id).intValue()).getContato());

@@ -8,16 +8,13 @@
 </head>
 <body>
 
-<script>
-$(document).ready(function(){
-	$("#output").hide();
-});
-</script>
-
 <c:url value="/permissao/cadastra" var="cadastra"/>
 <c:url value="/permissao/remove" var="remove"/>
 <c:url value="/permissao/listagem" var="listagem"/>
-<button type="button" class="btn btn-lg btn-link action" data-action="${cadastra}" data-target="">cadastrar novo grupo</button>
+
+<button type="button" class="btn btn-lg btn-link action" data-action="${cadastra}" data-target="">
+	cadastrar novo grupo
+</button>
 
 <div class="container">
 	<div id="row">
@@ -25,7 +22,7 @@ $(document).ready(function(){
 			<div id="workspace"></div>
 		</div>
 		<div class="col-md-8">
-			<div id="output" class="panel panel-warning">
+			<div id="output" class="panel panel-warning" style="display: none;">
 			  <div class="panel-heading">
 			    <h3 id="output-header" class="panel-title"></h3>
 			  </div>
@@ -55,56 +52,53 @@ function load() {
 	});
 };
 
-function clean() {
-	$("#workspace").empty();
-}
-
-var action;
-var target;
-var url;
+function load_region(pagina, alvo) {
+	url = alvo == "" ? pagina : pagina+"/"+alvo;
+	$.get(url, function(data){
+		var $temp  = $('<div/>', {html:data});
+		var titulo = $temp.find('title').text();
+		var conteudo = $temp.remove('head').html();
+		$("#output-header").text(titulo);
+		$("#output-body").html(conteudo);
+	});
+};
 
 $(document).ready(function() {
 	load();
 });
 
-$('.checkbox').click(function() {   
+$(document).on('click','.checkbox',function(){
+	var id = $(this).val();
     if ($(this).is(':checked')) {
-        alert( "desmarcou " + $(this).val() );
+        alert( "desmarcou " + id );
     } else {
-        alert( "marcou " + $(this).val() );
+        alert( "marcou " + id );
     }
 });
+
+var action;
+var target;
+var url;
 
 $(document).on('click', '.action', function (event) {
 	if( $("#output").is(":visible") ) {
 		if(action == $(this).data('action')) {
 			$("#output-header").empty();
 			$("#output-body").empty();
-			$("#output").hide();
-			clean();
-			load();
+			$("#output").css("display", "none");
 		} else {
 			$("#output-header").empty();
 			$("#output-body").empty();
-			$("#output").hide();
+			action = $(this).data('action');
+			target = $(this).data('target');
+			load_region(action, target);
+			$("#output").css("display", "block");
 		}
 	} else {
 		action = $(this).data('action');
 		target = $(this).data('target');
-		
-		if(target != "")
-			url = action+"/"+target;
-		else
-			url = action;
-		
-		$.get(url, function(data){
-			var $temp  = $('<div/>', {html:data});
-			var titulo = $temp.find('title').text();
-			var conteudo = $temp.remove('head').html();
-			$("#output-header").text(titulo);
-			$("#output-body").html(conteudo);
-		});
-		$("#output").show();
+		load_region(action, target);
+		$("#output").css("display", "block");
 	}
 });
 </script>

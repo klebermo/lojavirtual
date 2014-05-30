@@ -57,11 +57,28 @@ $( document ).ready(function() {
             </div>
             <div id="endereco" class="panel-body">
 				<p>
-					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_endereco}" data-target="cad_endereco" data-function="lista_endereco()">
+					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_endereco}" data-target="cad_endereco">
 						cadastrar novo endere&ccedil;o
 					</button>
 				</p>
-            	<div id="lista_endereco"></div>
+					<table>
+					<tr>
+						<td>
+							<select id="all_enderecos" size="10" multiple="multiple">
+							</select>
+						</td>
+						
+					<td>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_left_1"> << </button> </p>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_right_1"> >> </button> </p>
+					</td>
+					
+						<td>
+							<select name="endereco" id="lista_enderecos" size="10" multiple="multiple">
+							</select>
+						</td>
+					</tr>
+					</table>
             	<div id="cad_endereco">
             		<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
             	</div>
@@ -73,11 +90,30 @@ $( document ).ready(function() {
             </div>
             <div id="contato" class="panel-body">
 				<p>
-					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_contato}" data-target="cad_contato" data-function="lista_contato()">
+					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_contato}" data-target="cad_contato">
 						cadastrar novo contato
 					</button>
 				</p>
-            	<div id="lista_contato"></div>
+            	<div>
+					<table>
+					<tr>
+						<td>
+							<select id="all_contatos" size="10" multiple="multiple">
+							</select>
+						</td>
+						
+					<td>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_left_2"> << </button> </p>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_right_2"> >> </button> </p>
+					</td>
+					
+						<td>
+							<select name="contato" id="lista_contatos" size="10" multiple="multiple">
+							</select>
+						</td>
+					</tr>
+					</table>
+            	</div>
             	<div id="cad_contato">
             		<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
             	</div>
@@ -98,21 +134,37 @@ $( document ).ready(function() {
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 
-<c:url value="/fornecedor/endereco.json" var="lista_endereco"/>
-<c:url value="/fornecedor/contato.json" var="lista_contato"/>
+<c:url value="/endereco/listagem.json" var="lista_endereco"/>
+<c:url value="/contato/listagem.json" var="lista_contato"/>
 
 <script>
+$(document).ready(function(){
+	lista_endereco();
+	lista_contato();
+});
+
 function lista_endereco(){
-	var url = "${lista_endereco}";
-	$.get( url, function( data ) {
-		  $( "#lista_endereco" ).html( data );
+	var url = "<c:out value="${lista_endereco}"/>";
+	$.get(url, function(data){
+		var json = jQuery.parseJSON( data );
+		$.each(json.endereco, function(index, item){
+		    var row = $('<option value="'+item.id+'">');
+		    row.append('<td>'+item.logradouro+'</td>');
+		    row.append('<td>'+item.numero+'</td>');
+		    $('#all_enderecos').append(row);
+		});
 	});
 };
 
 function lista_contato(){
-	var url = "${lista_contato}";
-	$.get( url, function( data ) {
-		  $( "#lista_contato" ).html( data );
+	var url = "<c:out value="${lista_contato}"/>";
+	$.get(url, function(data){
+		var json = jQuery.parseJSON( data );
+		$.each(json.endereco, function(index, item){
+		    var row = $('<option value="'+item.id+'">');
+		    row.append('<td>'+item.nome+'</td>');
+		    $('#all_contatos').append(row);
+		});
 	});
 };
 
@@ -124,6 +176,50 @@ $(".dropdown-menu li a").click(function(){
     $('.dropdown-toggle').text(value);
     $('[name="identificador"]').attr('pattern', pattern);
     $('[name="identificador"]').attr('placeholder', placeholder);
+});
+
+$('#for_right_1').click(function(e) {
+    var selectedOpts = $('#all_enderecos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#lista_enderecos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
+});
+
+$('#for_left_1').click(function(e) {
+    var selectedOpts = $('#lista_enderecos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#all_enderecos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
+});
+
+$('#for_right_2').click(function(e) {
+    var selectedOpts = $('#all_contatos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#lista_contatos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
+});
+
+$('#for_left_2').click(function(e) {
+    var selectedOpts = $('#lista_contatos option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('#all_contatos').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
 });
 </script>
 

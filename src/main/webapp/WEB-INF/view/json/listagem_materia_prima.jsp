@@ -5,7 +5,7 @@
 				<json:property name="id" value="${item.id}"/>
 				<json:property name="nome" value="${item.descricao.nome}"/>
 				<json:property name="descricao" value="${item.descricao.descricao}"/>
-				<json:property name="fornecedor" value="${item.descricao.fornecedor.id}"/>
+				<json:property name="fornecedor" value="${item.descricao.fornecedor.razao_social}"/>
 				<json:property name="quantidade" value="${item.quantidade.quantidade}"/>
 				<json:property name="unidade" value="${item.quantidade.unidade}"/>
 				<json:property name="custo" value="${item.quantidade.custo}"/>

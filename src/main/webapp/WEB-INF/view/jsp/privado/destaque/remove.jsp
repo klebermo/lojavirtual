@@ -4,36 +4,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Remover contato</title>
+<title>Remover categoria</title>
 </head>
 <body>
 
-<script>
-$( document ).ready(function() {
-	$("#done").hide();
-	$("#fail").hide();
-});
-</script>
+<c:url value="/destaque/listagem" var="listagem"/>
 
-<c:url value="/contato/listagem" var="listagem"/>
-
-<c:url value="/contato/remove" var="removeContato"/>
-<form class="form" role="form" action="${removeContato}" method="post">
+<c:url value="/destaque/remove" var="removeDestaque"/>
+<form class="form" role="form" action="${removeDestaque}" method="post">
 <div class="alert alert-warning" id="pergunta">
-  <strong>Aten&ccedil;&atilde;o!</strong> Tem certeza que quer remover o conatato: <c:out value="${contato.nome}"/>?
-  <input type="hidden" name="id" value="<c:out value="${contato.id}"/>">
+  <strong>Aten&ccedil;&atilde;o!</strong> Tem certeza que quer remover o destaque?
+  <input type="hidden" name="id" value="<c:out value="${destaque.id}"/>">
   <button type="submit" class="btn btn-lg btn-link"><span class="glyphicon glyphicon-ok"></span></button>
   <button type="button" class="btn btn-lg btn-link link" data-action="${listagem}"><span class="glyphicon glyphicon-remove"></span></button>
 </div>
 </form>
 
-      <div id="done" class="alert alert-success" style="display: none;">
-        <strong>Pronto!</strong> Contato excluido com sucesso.
+      <div id="yes" class="alert alert-success" style="display: none;">
+        <strong>Pronto!</strong> Destaque excluido com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="fail" class="alert alert-danger" style="display: none;">
-        <strong>Erro!</strong> N&atilde;o foi possivel excluir a contato.
+      <div id="not" class="alert alert-danger" style="display: none;">
+        <strong>Erro!</strong> N&atilde;o foi possivel excluir o destaque.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
 

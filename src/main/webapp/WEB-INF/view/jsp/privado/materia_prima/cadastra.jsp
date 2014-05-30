@@ -20,8 +20,7 @@
 	      </p>
 	      <p>
 	        <label for="fornecedor">Fornecedor</label>
-	      	<input list="lista_fornecedores" name="fornecedor">
-	      	<datalist id="lista_fornecedores"></datalist>
+	      	<select id="lista_fornecedores" name="fornecedor"></select>
 	      </p>
 	      <p>
 	        <label for="quantidade">Quantidade</label>
@@ -58,7 +57,7 @@ $(document).ready(function(){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.fornecedor, function(index, item){
-		    var option = $('<option value="'+item.id+'">'+item.nome+'</option>');
+		    var option = $('<option value="'+item.id+'">'+item.razao_social+'</option>');
 		    $('#lista_fornecedores').append(option);
 		});
 	});
