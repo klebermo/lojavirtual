@@ -15,6 +15,9 @@ $(document).on('submit', '.form', function (event) {
 		console.log(data);
 		$("#"+data).css("display", "block");
 		
+		if($("#pergunta").is("visible"))
+			$("#pergunta").css("display", "none");
+		
 		$(".form").each (function(){
 			this.reset();
 		});

@@ -7,13 +7,6 @@
 <title>Cadastro de categoria</title>
 </head>
 <body>
-
-<script>
-$( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
   
 	  <c:url value="/categoria/cadastra" var="cadastraCategoria"/>
 	  <form class="form" role="form" action="${cadastraCategoria}" method="post">

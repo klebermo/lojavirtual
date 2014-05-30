@@ -8,13 +8,6 @@
 </head>
 <body>
 
-<script>
-$( document ).ready(function() {
-	$("#done").hide();
-	$("#fail").hide();
-});
-</script>
-
 <c:url value="/contato/listagem" var="listagem"/>
 
 <c:url value="/contato/remove" var="removeContato"/>

@@ -8,13 +8,6 @@
 </head>
 <body>
 
-<script>
-$( document ).ready(function() {
-	$("#done").hide();
-	$("#fail").hide();
-});
-</script>
-
 <c:url value="/endereco/listagem" var="listagem"/>
 
 <c:url value="/endereco/remove" var="removeEndereco"/>

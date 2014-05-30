@@ -8,13 +8,6 @@
 </head>
 <body>
 
-<script>
-$( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
-
 <c:url value="/produto/listagem" var="listagem"/>
 
 <c:url value="/produto/remove" var="removeProduto"/>

@@ -8,13 +8,6 @@
 </head>
 <body>
 
-<script>
-$( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
-
 <c:url value="/usuario/listagem" var="listagem"/>
 
 <c:url value="/permissao/remove" var="removePermissao"/>
@@ -36,29 +29,6 @@ $( document ).ready(function() {
         <strong>Erro!</strong> N&atilde;o foi possivel excluir a permiss&atilde;o.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
-
-<script>
-// Attach a submit handler to the form
-$( ".form" ).submit(function( event ) {
- 
-  // Stop form from submitting normally
-  event.preventDefault();
- 
-  // Get some values from elements on the page:
-  var $form = $( this ),
-    id_permissao = $('input[name=id]').val(),
-    url = $form.attr( "action" );
- 
-  // Send the data using post
-  var posting = $.post( url, { id: id_permissao } );
- 
-  // Put the results in a div
-  posting.done(function( data ) {
-	  $("#pergunta").remove();
-	  $("#"+data).show();
-  });
-});
-</script>
 
 </body>
 </html>

@@ -46,7 +46,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li> <c:url value="/privado/blank" var="blank"/><a class="pagina" href="${blank}">Dashboard</a></li>
-        <li> <c:url value="/privado/perfil" var="perfil"/><a class="pagina" href="#">Profile</a></li>
+        <li> <c:url value="/privado/perfil" var="perfil"/><a class="pagina" href="${perfil}">Profile</a></li>
         <li> <c:url value="/logout" var="logoutUrl"/> <a href="${logoutUrl}">Logout</a> </li>
         <li><a href="#"><c:out value="${pageContext.request.remoteUser}"/></a></li>
       </ul>
@@ -79,7 +79,7 @@
 </div>
     
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <div id="content" class="panel panel-warning">
+    <div id="content" class="panel panel-warning" style="display: none;">
       <div class="panel-heading">
         <h3 id="titulo" class="panel-title"></h3>
       </div>
