@@ -9,12 +9,15 @@
 <body>
 
 <c:url value="/permissao/cadastra" var="cadastra"/>
+<c:url value="/permissao/altera" var="altera"/>
 <c:url value="/permissao/remove" var="remove"/>
 <c:url value="/permissao/listagem" var="listagem"/>
 
+<sec:accesscontrollist hasPermission="cadastra_permissao" domainObject="">
 <button type="button" class="btn btn-lg btn-link action" data-action="${cadastra}" data-target="">
 	cadastrar novo grupo
 </button>
+</sec:accesscontrollist>
 
 <div class="container">
 	<div id="row">
@@ -42,11 +45,16 @@ function load() {
 	$.get(url, function(data) {
 		var json = jQuery.parseJSON(data);
 		$.each(json.grupo, function(index, item){
-			$("#workspace").append('<p><div class="input-group input-group-sm"><span class="input-group-addon"><input type="checkbox" class="checkbox" name="grupo" value="'+item.id+'"></span><input type="text" class="form-control" value="'+item.nome+'" readonly="readonly"><span class="input-group-btn"><button type="button" class="btn btn-default action" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span></div>');
+			$("#workspace").append('<div class="input-group input-group-sm"><span class="input-group-addon">');
+				<sec:accesscontrollist hasPermission="altera_permissao" domainObject="">
+					$("#workspace").append('+<input type="checkbox" class="checkbox" name="grupo" value="'+item.id+'">');
+				</sec:accesscontrollist>
+			$("#workspace").append('</span><input type="text" class="form-control" value="'+item.nome+'" readonly="readonly"><span class="input-group-btn"><button type="button" class="btn btn-default action" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span></div>');
+			
 			if(item.id > 17) {
-				$("#workspace").append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove"></span></button></p>');
-			} else {
-				$("#workspace").append('</p>');
+				<sec:accesscontrollist hasPermission="remove_permissao" domainObject="">
+				$("#workspace").append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove"></span></button>');
+				</sec:accesscontrollist>
 			}
 		});
 	});
@@ -68,12 +76,21 @@ $(document).ready(function() {
 });
 
 $(document).on('click','.checkbox',function(){
-	var id = $(this).val();
-    if ($(this).is(':checked')) {
-        alert( "desmarcou " + id );
-    } else {
-        alert( "marcou " + id );
-    }
+	var id_permissao = $(this).val();
+	var id_usuario = "${id_usuario}";
+	var url = "${altera}";
+    $.ajax({
+    	type: "POST",
+    	url: url,
+    	data: {usuario: id_usuario, grupo: id_permissao}
+    }).done(function(data){
+    	if(data == "yes") {
+    		console.log("permissao cadastrada com sucesso!");
+    	}
+    	else {
+    		console.log("erro ao cadastrar a permissao");
+    	}
+    });
 });
 
 var action;

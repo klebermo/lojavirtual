@@ -14,9 +14,11 @@
 <c:url value="/permissao/altera" var="permissao"/>
 
 <p>
+<sec:accesscontrollist hasPermission="cadastra_usuario" domainObject="">
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar novo usu&aacute;rio
 	</button>
+</sec:accesscontrollist>
 </p>
 
 <table class="bordered">
@@ -53,8 +55,12 @@ $(document).ready(function(){
 		    row.append('<td>'+item.email+'</td>');
 		    
 		    var col = $('<td>');
+		    <sec:accesscontrollist hasPermission="altera_usuario" domainObject="">
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
+		    </sec:accesscontrollist>
+		    <sec:accesscontrollist hasPermission="remove_usuario" domainObject="">
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
+		    </sec:accesscontrollist>
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${permissao}/'+item.id+'">Permiss&otilde;es</button>');
 		    row.append(col);
 		    

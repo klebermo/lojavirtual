@@ -48,7 +48,7 @@
         <li> <c:url value="/privado/blank" var="blank"/><a class="pagina" href="${blank}">Dashboard</a></li>
         <li> <c:url value="/privado/perfil" var="perfil"/><a class="pagina" href="${perfil}">Profile</a></li>
         <li> <c:url value="/logout" var="logoutUrl"/> <a href="${logoutUrl}">Logout</a> </li>
-        <li><a href="#"><c:out value="${pageContext.request.remoteUser}"/></a></li>
+        <li><a href="#"><sec:authentication property="principal.username"/></a></li>
       </ul>
     </div>
   </div>

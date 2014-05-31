@@ -4,10 +4,7 @@ $(document).on('submit', '.form', function (event) {
 	var $form = $( this ),
 	url = $form.attr( "action" );
 	
-	console.log( $( this ).serialize() )
-	
 	var posting = $.post( url, $(this).serialize() );
-
 	posting.done(function( data ) {
 		$("#"+data).css("display", "block");
 		

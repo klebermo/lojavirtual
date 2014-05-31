@@ -52,6 +52,7 @@ public class PermissaoController {
 	@PreAuthorize("hasPermission(#user, 'altera_permissao')")
 	public ModelAndView alterna(@PathVariable String theString) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("id_usuario", theString);
 		mav.setViewName("privado/permissao/altera");
 		return mav;
 	}

@@ -14,24 +14,22 @@
 	    <form class="form" role="form" action="${cadastraGrupo}" method="post">
       		<p> <input type="text" name="nome" class="form-control" placeholder="Nome" autofocus> </p>
       		
-			<table class="bordered">
-			<tr>
-				<td>
-					<select class="form-control" id="lista_permissoes" size="10" multiple="multiple">
-					</select>
-				</td>
-				
-			<td>
-				<p> <button type="button" class="btn btn-lg btn-default" id="for_left"> << </button> </p>
-				<p> <button type="button" class="btn btn-lg btn-default" id="for_right"> >> </button> </p>
-			</td>
-			
-				<td>
-					<select name="permissoes" class="form-control" id="selecao" size="10" multiple="multiple">
-					</select>
-				</td>
-			</tr>
-			</table>
+      		<p>
+				<div class="row">
+			        <div class="col-md-4">
+						<select class="form-control" id="lista_permissoes" size="10" multiple="multiple">
+						</select>
+			        </div>
+			        <div class="col-md-4">
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_left"> << </button> </p>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_right"> >> </button> </p>
+			        </div>
+			        <div class="col-md-4">
+						<select name="permissoes" class="form-control" id="selecao" size="10" multiple="multiple">
+						</select>
+			        </div>
+				</div>
+			</p>
       		
 	      	<p> <button type="submit" class="btn btn-primary">Cadastrar</button> </p>
 	     </form>

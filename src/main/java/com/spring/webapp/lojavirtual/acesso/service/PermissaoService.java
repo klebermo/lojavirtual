@@ -34,7 +34,7 @@ public class PermissaoService {
 	@Transactional
 	public boolean cadastra(HttpServletRequest request, HttpServletResponse response) {
 		String nome_grupo = request.getParameter("nome");
-		String[] permissoes = request.getParameterValues("permissoes[]");
+		String[] permissoes = request.getParameterValues("permissoes");
 		
 		if(nome_grupo == null || permissoes == null) {
 			System.out.println("nome_grupo = "+nome_grupo);
@@ -72,10 +72,13 @@ public class PermissaoService {
 		return usuario.merge(user);
 	}
 	
-	@PreAuthorize("hasPermission(#user, 'altera_permissao')")
+	@PreAuthorize("hasPermission(#user, 'remove_permissao')")
 	@Transactional
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
-		return false;
+		String id = request.getParameter("id");
+		GrupoPermissao novo = grupo_permissao.findById(Integer.valueOf(id).intValue());
+		novo.setPermissao(null);
+		return grupo_permissao.remove(novo);
 	}
 	
 	@Transactional
