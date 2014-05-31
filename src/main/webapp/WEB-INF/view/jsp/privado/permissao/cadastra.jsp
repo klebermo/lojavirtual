@@ -17,7 +17,7 @@
 			<table class="bordered">
 			<tr>
 				<td>
-					<select id="lista_permissoes" size="10" multiple="multiple">
+					<select class="form-control" id="lista_permissoes" size="10" multiple="multiple">
 					</select>
 				</td>
 				
@@ -27,7 +27,7 @@
 			</td>
 			
 				<td>
-					<select name="permissoes" id="selecao" size="10" multiple="multiple">
+					<select name="permissoes" class="form-control" id="selecao" size="10" multiple="multiple">
 					</select>
 				</td>
 			</tr>
