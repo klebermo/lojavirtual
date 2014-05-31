@@ -7,6 +7,7 @@
 <title>Cadastro de endereco</title>
 </head>
 <body>
+
 	  <c:url value="/endereco/cadastra" var="cadastraEndereco"/>
 	  <form class="form" role="form" action="${cadastraEndereco}" method="post">
 	      <p>

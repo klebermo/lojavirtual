@@ -6,15 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Cadastro de contato</title>
 </head>
-<body>
-
-<script>
-$( document ).ready(function() {
-	$("#done").hide();
-	$("#fail").hide();
-});
-</script>
-  
+<body>  
 	  <c:url value="/contato/cadastra" var="cadastraContato"/>
 	  <form class="form" role="form" action="${cadastraContato}" method="post">
 	      <p>

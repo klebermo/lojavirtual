@@ -6,15 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Altera&ccedil;&atilde; de contato</title>
 </head>
-<body>
-
-<script>
-$( document ).ready(function() {
-	$("#done").hide();
-	$("#fail").hide();
-});
-</script>
-  
+<body>  
 	  <c:url value="/contato/altera" var="alteraContato"/>
 	  <form class="form" role="form" action="${alteraCategoria}" method="post">
 	      <p>

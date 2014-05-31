@@ -8,13 +8,6 @@
 </head>
 <body>
 
-<script>
-$( document ).ready(function() {
-	$("#yes").hide();
-	$("#not").hide();
-});
-</script>
-
 <c:url value="/endereco/cadastra" var="cadastro_endereco"/>
 <c:url value="/contato/cadastra" var="cadastro_contato"/>
   
@@ -66,7 +59,7 @@ $( document ).ready(function() {
             </div>
             <div id="endereco" class="panel-body">
 				<p>
-					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_endereco}" data-target="cad_endereco" data-function="lista_endereco()">
+					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_endereco}" data-target="popup_window_endereco" data-function="lista_endereco()">
 						cadastrar novo endere&ccedil;o
 					</button>
 				</p>
@@ -91,9 +84,6 @@ $( document ).ready(function() {
 						</td>
 					</tr>
 					</table>
-            	<div id="cad_endereco">
-            		<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
-            	</div>
             </div>
           </div>
           <div class="panel panel-warning">
@@ -102,7 +92,7 @@ $( document ).ready(function() {
             </div>
             <div id="contato" class="panel-body">
 				<p>
-					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_contato}" data-target="cad_contato" data-function="lista_contato()">
+					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_contato}" data-target="popup_windows_contato" data-function="lista_contato()">
 						cadastrar novo contato
 					</button>
 				</p>
@@ -129,9 +119,6 @@ $( document ).ready(function() {
 					</tr>
 					</table>
             	</div>
-            	<div id="cad_contato">
-            		<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
-            	</div>
             </div>
           </div>
 		  <p>
@@ -139,15 +126,23 @@ $( document ).ready(function() {
 		  </p>
 	  </form>
     
-      <div id="yes" class="alert alert-success">
+      <div id="yes" class="alert alert-success" style="display: none;">
         <strong>Pronto!</strong> Fornecedor cadastrado com sucesso.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
       
-      <div id="not" class="alert alert-danger">
+      <div id="not" class="alert alert-danger" style="display: none;">
         <strong>Erro!</strong> N&atilde;o foi possivel cadastrar o fornecedor.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       </div>
+      
+<div id="popup_window_endereco">
+	<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
+</div>
+
+<div id="popup_window_contato">
+	<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
+</div>
 
 <c:url value="/endereco/listagem.json" var="lista_endereco"/>
 <c:url value="/contato/listagem.json" var="lista_contato"/>
