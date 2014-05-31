@@ -49,11 +49,13 @@
               <h3 class="panel-title">Endere&ccedil;o</h3>
             </div>
             <div id="endereco" class="panel-body">
+            <sec:accesscontrollist hasPermission="cadastra_endereco" domainObject="${someObject}">
 				<p>
 					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_endereco}" data-target="popup_window_endereco">
 						cadastrar novo endere&ccedil;o
 					</button>
 				</p>
+				</sec:accesscontrollist>
 					<table>
 					<tr>
 						<td>
@@ -79,11 +81,13 @@
               <h3 class="panel-title">Contato</h3>
             </div>
             <div id="contato" class="panel-body">
+            <sec:accesscontrollist hasPermission="altera_endereco" domainObject="${someObject}">
 				<p>
 					<button type="button" class="btn btn-sm btn-link popup" data-action="${cadastro_contato}" data-target="popup_window_contato">
 						cadastrar novo contato
 					</button>
 				</p>
+				</sec:accesscontrollist>
             	<div>
 					<table>
 					<tr>

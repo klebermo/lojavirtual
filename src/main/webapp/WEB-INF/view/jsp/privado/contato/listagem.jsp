@@ -43,8 +43,12 @@ $(document).ready(function(){
 		    row.append('<td>'+item.telefone+'</td>');
 		    
 		    var col = $('<td>');
+		    <sec:accesscontrollist hasPermission="altera_contato" domainObject="${someObject}">
 		    col.append('<button type="button" class="btn btn-sm btn-primary popup" data-action="${alteracao}/'+item.id+'">Editar</button>');
+		    </sec:accesscontrollist>
+		    <sec:accesscontrollist hasPermission="remove_contato" domainObject="${someObject}">
 		    col.append('<button type="button" class="btn btn-sm btn-primary popup" data-action="${remocao}/'+item.id+'">Remover</button>');
+		    </sec:accesscontrollist>
 		    row.append(col);
 		    
 		    $('tbody.content').append(row);

@@ -12,12 +12,13 @@
 <c:url value="/destaque/altera" var="alteracao"/>
 <c:url value="/destaque/remove" var="remocao"/>
 
-
+<sec:accesscontrollist hasPermission="cadastra_destaque" domainObject="${someObject}">
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar nova destaque
 	</button>
 </p>
+</sec:accesscontrollist>
 
 <table class="bordered">
 
@@ -54,8 +55,12 @@ $(document).ready(function(){
 		    row.append('<td>'+counter+'</td>');
 		    
 		    var col = $('<td>');
+		    <sec:accesscontrollist hasPermission="altera_destaque" domainObject="${someObject}">
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
+		    </sec:accesscontrollist>
+		    <sec:accesscontrollist hasPermission="remove_destaque" domainObject="${someObject}">
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
+		    </sec:accesscontrollist>
 		    row.append(col);
 		    
 		    $('tbody.content').append(row);

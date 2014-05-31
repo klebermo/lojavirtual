@@ -12,12 +12,13 @@
 <c:url value="/materia_prima/altera" var="alteracao"/>
 <c:url value="/materia_prima/remove" var="remocao"/>
 
-
+<sec:accesscontrollist hasPermission="cadastra_materia_prima" domainObject="${someObject}">
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar nova materia prima
 	</button>
 </p>
+</sec:accesscontrollist>
 
 <table class="bordered">
 
@@ -51,8 +52,12 @@ $(document).ready(function(){
 		    row.append('<td>'+item.custo+'</td>');
 		    
 		    var col = $('<td>');
+		    <sec:accesscontrollist hasPermission="altera_materia_prima" domainObject="${someObject}">
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
+		    </sec:accesscontrollist>
+		    <sec:accesscontrollist hasPermission="remove_materia_prima" domainObject="${someObject}">
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
+		    </sec:accesscontrollist>
 		    row.append(col);
 		    
 		    $('tbody.content').append(row);
