@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,19 +51,29 @@ public class Dao<E> {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<E> findByField(String field, String value) {
+	public List<E> findByStringField(String field, String value) {
 		String expressao = entity.toString();
 		String nome_classe = new String();
-		
 		StringTokenizer st = new StringTokenizer(expressao);
 		while (st.hasMoreTokens()) {
 			nome_classe = st.nextToken();
 		}
 		String query = "from "+nome_classe+" where "+field+" = :data";
-		
-		Query q = sessionFactory.getCurrentSession().createQuery(query);
-		q.setParameter("data", value);
-		List<E> instance = q.list();
+		List<E> instance = sessionFactory.getCurrentSession().createQuery(query).setString("data", value).list();
+		return instance;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<E> findByIntegerField(String field, Integer value) {
+		String expressao = entity.toString();
+		String nome_classe = new String();
+		StringTokenizer st = new StringTokenizer(expressao);
+		while (st.hasMoreTokens()) {
+			nome_classe = st.nextToken();
+		}
+		String query = "from "+nome_classe+" where "+field+" = :data";
+		List<E> instance = sessionFactory.getCurrentSession().createQuery(query).setInteger("data", value).list();
 		return instance;
 	}
 	

@@ -8,16 +8,16 @@
 </head>
 <body>
 
-<c:url value="/permissao/permissoes.json" var="permissoes"/>
+<c:url value="/permissao/permissoes.json" var="permissao"/>
   
-	    <c:url value="/permissao/cadastra.htm" var="cadastraGrupo"/>
+	    <c:url value="/permissao/cadastra" var="cadastraGrupo"/>
 	    <form class="form" role="form" action="${cadastraGrupo}" method="post">
       		<p> <input type="text" name="nome" class="form-control" placeholder="Nome" autofocus> </p>
       		
 			<table class="bordered">
 			<tr>
 				<td>
-					<select name="permissoes" id="permissoes" size="10" multiple="multiple">
+					<select id="lista_permissoes" size="10" multiple="multiple">
 					</select>
 				</td>
 				
@@ -27,7 +27,7 @@
 			</td>
 			
 				<td>
-					<select name="selecao" id="selecao" size="10" multiple="multiple">
+					<select name="permissoes" id="selecao" size="10" multiple="multiple">
 					</select>
 				</td>
 			</tr>
@@ -46,17 +46,17 @@
 
 <script>
 $(document).ready(function(){
-	var url = "${permissoes}";
+	var url = "${permissao}";
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.permissao, function(index, item) {
-			$('#permissoes').append('<option value="'+item.id+'">'+item.nome+'</option>');
+			$('#lista_permissoes').append('<option value="'+item.id+'">'+item.nome+'</option>');
 		});
 	});
 });
 
 $('#for_right').click(function(e) {
-    var selectedOpts = $('#permissoes option:selected');
+    var selectedOpts = $('#lista_permissoes option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
@@ -72,32 +72,9 @@ $('#for_left').click(function(e) {
         e.preventDefault();
     }
 
-    $('#permissoes').append($(selectedOpts).clone());
+    $('#lista_permissoes').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
-});
-
-$( ".form" ).submit(function( event ) {
-	  event.preventDefault();
-	  var $form = $( this ), url = $form.attr( "action" );
-	  
-	  var selecao_permissoes=[];
-		$('#selecao option').each(function(){
-			selecao_permissoes.push($(this).val());
-		});
-	  
-	  var nome = $("input[name=nome]").val();
-	  
-	  $.ajax({
-		  type: "POST",
-		  url: url,
-		  data: { nome: nome, permissoes: selecao_permissoes }
-		}).done(function( msg ) {
-		    $("#"+msg).show();
-		    $(".form").each (function(){
-				  this.reset();
-			});
-		});
 });
 </script>
 

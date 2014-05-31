@@ -28,7 +28,7 @@ public class AuthenticationService implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario account = accountDao.findByField("login", username).get(0);
+		Usuario account = accountDao.findByStringField("login", username).get(0);
 	
 	    if(account==null) {
 	    	System.out.println("No such user: " + username);

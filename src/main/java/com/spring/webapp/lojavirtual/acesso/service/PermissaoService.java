@@ -36,8 +36,11 @@ public class PermissaoService {
 		String nome_grupo = request.getParameter("nome");
 		String[] permissoes = request.getParameterValues("permissoes[]");
 		
-		if(nome_grupo == null || permissoes == null)
+		if(nome_grupo == null || permissoes == null) {
+			System.out.println("nome_grupo = "+nome_grupo);
+			System.out.println("permissoes = "+permissoes);
 			return false;
+		}
 		
 		GrupoPermissao grupo = new GrupoPermissao();
 		grupo.setNome(nome_grupo);

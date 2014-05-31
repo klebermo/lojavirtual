@@ -97,7 +97,7 @@ public class ProdutoControler {
 		if(id_categoria == null)
 			mav.addObject("lista", produto.listagem());
 		else
-			mav.addObject("lista", produto.listagem_por_categoria(id_categoria));
+			mav.addObject("lista", produto.listagem_por_categoria(Integer.valueOf(id_categoria)));
 		
 		mav.setViewName("listagem_produto");
 		return mav;

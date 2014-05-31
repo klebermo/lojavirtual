@@ -13,7 +13,7 @@ public class PrivadoService {
 	private UsuarioHome usuario;
 	
 	public Usuario loadUsuarioByUsername(String username) {
-		return usuario.findByField("login", username).get(0);
+		return usuario.findByStringField("login", username).get(0);
 	}
 	
 	public Usuario loadUsuarioById(int id) {

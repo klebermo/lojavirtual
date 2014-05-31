@@ -101,7 +101,7 @@ public class ProdutoService {
 	}
 	
 	@Transactional
-	public List<Produto> listagem_por_categoria(String id_categoria) {
-		return produto.findByField("categoria", id_categoria);
+	public List<Produto> listagem_por_categoria(Integer id_categoria) {
+		return produto.findByIntegerField("categoria", id_categoria);
 	}
 }

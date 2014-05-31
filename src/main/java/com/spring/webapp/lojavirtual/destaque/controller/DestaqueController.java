@@ -91,7 +91,7 @@ public class DestaqueController {
 			mav.setViewName("listagem_destaque");
 		}
 		else {
-			mav.addObject("lista", produto.listagem_por_categoria(id_categoria));
+			mav.addObject("lista", produto.listagem_por_categoria(Integer.valueOf(id_categoria)));
 			mav.setViewName("listagem_produto");
 		}
 		
