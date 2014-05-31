@@ -46,9 +46,11 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li> <c:url value="/privado/blank" var="blank"/><a class="pagina" href="${blank}">Dashboard</a></li>
+        <sec:authorize access="hasRole('Perfil')">
         <li> <c:url value="/privado/perfil" var="perfil"/><a class="pagina" href="${perfil}">Profile</a></li>
+        </sec:authorize>
         <li> <c:url value="/logout" var="logoutUrl"/> <a href="${logoutUrl}">Logout</a> </li>
-        <li><a href="#"><sec:authentication property="principal.username"/></a></li>
+        <li><a href="#"><sec:authentication property="principal"/></a></li>
       </ul>
     </div>
   </div>

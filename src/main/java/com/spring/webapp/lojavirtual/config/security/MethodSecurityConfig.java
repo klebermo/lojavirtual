@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.method.configuration.Globa
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
     protected MethodSecurityExpressionHandler createExpressionHandler() {
-        System.out.println("MethodSecurityConfig.createExpressionHandler");
         DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
         expressionHandler.setPermissionEvaluator(new CustomPermissionEvaluator());
         return expressionHandler;
