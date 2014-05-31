@@ -10,15 +10,12 @@
 
     <title>Dashboard</title>
 
-    <!-- Jquery core CSS -->
-    <link href="<c:out value="${pageContext.request.contextPath}/resources/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.min.css"/>" rel="stylesheet">
+<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="../resources/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-    <link href="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="<c:out value="${pageContext.request.contextPath}/resources/extras/css/dashboard.css"/>" rel="stylesheet">
-    <link href="<c:out value="${pageContext.request.contextPath}/resources/extras/css/table.css"/>" rel="stylesheet">
+<link href="../resources/extras/css/dashboard.css" rel="stylesheet">
+<link href="../resources/extras/css/table.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -93,18 +90,16 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-2.1.0.min.js"/>"></script>
-<script src="<c:out value="${pageContext.request.contextPath}/resources/jquery/js/jquery-ui-1.10.4.custom.min.js"/>"></script>
-<script src="<c:out value="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"/>"></script>
+<script src="../resources/jquery/js/jquery-2.1.0.min.js"></script>
+<script src="../resources/jquery/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/extras/js/docs.min.js"></script>
 
-<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/docs.min.js"/>"></script>
-<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/jquery.md5.min.js"/>"></script>
-
-<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/form_submit.js"/>"></script>
-<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/form_validation.js"/>"></script>
-<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/page_link.js"/>"></script>
-<script src="<c:out value="${pageContext.request.contextPath}/resources/extras/js/page_load.js"/>"></script>
-
+<script src="../resources/extras/js/jquery.md5.min.js"></script>
+<script src="../resources/extras/js/form_submit.js"></script>
+<script src="../resources/extras/js/form_validation.js"></script>
+<script src="../resources/extras/js/page_link.js"></script>
+<script src="../resources/extras/js/page_load.js"></script>
 
 </body>
 </html>
