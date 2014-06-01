@@ -55,8 +55,8 @@ var tam;
 var str;
 var regex;
 
-$(document).find('input.valida').each(function(e){
-	$(this).on('focus', '.valida', function(e){
+$(document).find('input.valida').each(function(e) {
+	$(this).focus(function(e) {
 	    regex = $(this).attr('pattern');
 	    
 	    counter = 0;
@@ -66,7 +66,7 @@ $(document).find('input.valida').each(function(e){
 	    $(this).val(str);
 	});
 
-	$(this).on('keypress', '.valida', function(e){
+	$(this).keypress(function(e) {
 	    e.preventDefault();
 	    
 	    var tecla = e.which;
