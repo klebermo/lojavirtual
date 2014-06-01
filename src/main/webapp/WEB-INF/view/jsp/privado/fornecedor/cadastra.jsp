@@ -31,7 +31,7 @@
 						        
 					      </div><!-- /btn-group -->
 					      
-					      <input type="text" name="identificador" class="form-control">
+					      <input type="text" name="identificador" class="form-control valida">
 				    </div><!-- /input-group -->
 			    </p>
 		      <p>
