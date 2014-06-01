@@ -54,50 +54,45 @@ var counter;
 var tam;
 var str;
 var regex;
-    
-$(document).on('focus', '.valida', function(e){
-    regex = $(this).attr('pattern');
-    
-    counter = 0;
-    tam = size_of(regex);
-    str = generate_string(regex, tam);
-    
-    $(this).val(str);
-});
 
-$(document).on('keypress', '.valida', function(e){
-    e.preventDefault();
-    
-    var tecla = e.which;
-    
-    if(tecla >= 48 && tecla <= 57)
-        var tecla2 = tecla - 48;
-    else
-        var tecla2 = String.fromCharCode(tecla);
-    
-    result = $("<div>");
-    result.append( "tecla = "+tecla+"<br>" );
-    
-    var t = type_of(regex, counter);
-    
-    if(counter < tam) {
-        if(t != 'number' && t != 'string') {
-            str = replaceAt(str, counter, t);
-            counter++;
-        }
-        
-        t = type_of(regex, counter);
-        
-        if(typeof tecla2 == t) {
-            result.append( "tecla2 = "+tecla2+"<br>" );
-            str = replaceAt(str, counter, tecla2);
-            counter++;
-        }
-    }
-    
-    result.append( "counter = "+counter+"<br>" );
-    $("#result").empty().append(result);
-    
-    $(this).val(str);
-});
+$(document).find('.valida').each(function(e){
+	$(this).on('focus', '.valida', function(e){
+	    regex = $(this).attr('pattern');
+	    
+	    counter = 0;
+	    tam = size_of(regex);
+	    str = generate_string(regex, tam);
+	    
+	    $(this).val(str);
+	});
 
+	$(this).on('keypress', '.valida', function(e){
+	    e.preventDefault();
+	    
+	    var tecla = e.which;
+	    var tecla2;
+	    
+	    if(tecla >= 48 && tecla <= 57)
+	        tecla2 = tecla - 48;
+	    else
+	        tecla2 = String.fromCharCode(tecla);
+	    
+	    var t = type_of(regex, counter);
+	    
+	    if(counter < tam) {
+	        if(t != 'number' && t != 'string') {
+	            str = replaceAt(str, counter, t);
+	            counter++;
+	        }
+	        
+	        t = type_of(regex, counter);
+	        
+	        if(typeof tecla2 == t) {
+	            str = replaceAt(str, counter, tecla2);
+	            counter++;
+	        }
+	    }
+	    
+	    $(this).val(str);
+	});
+});
