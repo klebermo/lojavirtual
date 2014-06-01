@@ -55,7 +55,7 @@ var tam;
 var str;
 var regex;
 
-$(document).find('.valida').each(function(e){
+$(document).find('input.valida').each(function(e){
 	$(this).on('focus', '.valida', function(e){
 	    regex = $(this).attr('pattern');
 	    
