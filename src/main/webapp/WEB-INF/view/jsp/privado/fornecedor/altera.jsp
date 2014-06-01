@@ -66,7 +66,7 @@
 					<table>
 					<tr>
 						<td>
-							<select id="all_enderecos" size="10" multiple="multiple">
+							<select class="all all_enderecos" size="10" multiple="multiple">
 							</select>
 						</td>
 						
@@ -76,7 +76,7 @@
 					</td>
 					
 						<td>
-							<select name="endereco" id="lista_enderecos" size="10" multiple="multiple">
+							<select name="endereco" class="lista lista_enderecos" size="10" multiple="multiple">
 								<c:forEach var="item" items="${fornecedor.endereco}">
 									<option value="${item.id}">${item.logradouro}${item.numero}</option>
 								</c:forEach>
@@ -100,7 +100,7 @@
 					<table>
 					<tr>
 						<td>
-							<select id="all_contatos" size="10" multiple="multiple">
+							<select class="all all_contatos" size="10" multiple="multiple">
 							</select>
 						</td>
 						
@@ -110,7 +110,7 @@
 					</td>
 					
 						<td>
-							<select name="contato" id="lista_contatos" size="10" multiple="multiple">
+							<select name="contato" class="lista lista_contatos" size="10" multiple="multiple">
 								<c:forEach var="item" items="${fornecedor.contato}">
 									<option value="${item.id}">${item.nome}</option>
 								</c:forEach>
@@ -158,10 +158,10 @@ function lista_endereco(){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.endereco, function(index, item){
-		    var row = $('<option value="'+item.id+'">');
+		    var row = $('<option class="item item_endereco" value="'+item.id+'">');
 		    row.append('<td>'+item.logradouro+'</td>');
 		    row.append('<td>'+item.numero+'</td>');
-		    $('#all_enderecos').append(row);
+		    $('.all_enderecos').append(row);
 		});
 	});
 };
@@ -171,9 +171,9 @@ function lista_contato(){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.endereco, function(index, item){
-		    var row = $('<option value="'+item.id+'">');
+		    var row = $('<option class="item item_endereco" value="'+item.id+'">');
 		    row.append('<td>'+item.nome+'</td>');
-		    $('#all_contatos').append(row);
+		    $('.all_contatos').append(row);
 		});
 	});
 };
@@ -189,45 +189,45 @@ $(".dropdown-menu li a").click(function(){
 });
 
 $('#for_right_1').click(function(e) {
-    var selectedOpts = $('#all_enderecos option:selected');
+    var selectedOpts = $('.all_enderecos option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#lista_enderecos').append($(selectedOpts).clone());
+    $('.lista_enderecos').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });
 
 $('#for_left_1').click(function(e) {
-    var selectedOpts = $('#lista_enderecos option:selected');
+    var selectedOpts = $('.lista_enderecos option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#all_enderecos').append($(selectedOpts).clone());
+    $('.all_enderecos').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });
 
 $('#for_right_2').click(function(e) {
-    var selectedOpts = $('#all_contatos option:selected');
+    var selectedOpts = $('.all_contatos option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#lista_contatos').append($(selectedOpts).clone());
+    $('.lista_contatos').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });
 
 $('#for_left_2').click(function(e) {
-    var selectedOpts = $('#lista_contatos option:selected');
+    var selectedOpts = $('.lista_contatos option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#all_contatos').append($(selectedOpts).clone());
+    $('.all_contatos').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });

@@ -18,13 +18,43 @@
 	      	<input type="text" name="nome" class="form-control" value="${produto.nome}" autofocus>
 	      </p>
 		  <p>
-		    <label for="unome">Categoria</label>
-		  	<select name="unome" class="form-control" id="categoria">
+		    <label for="categoria">Categoria</label>
+		  	<select name="categoria" class="form-control">
 		  	</select>
 		  </p>
 	      <p>
-	        <label for="senha">Descri&ccedil;&atilde;o</label>
-	        <textarea rows="25" cols="80" name="descricao"> ${produto.descricao} </textarea>
+	        <label for="senha" style="display: inline-block; vertical-align: top;">Descri&ccedil;&atilde;o</label>
+	        <textarea rows="10" cols="90" name="descricao"> ${produto.descricao} </textarea>
+	      </p>
+	      <p>
+	      <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title">Materia-Prima</h3>
+            </div>
+            <div id="endereco" class="panel-body">
+					<table>
+					<tr>
+						<td>
+							<select class="all all_materia_prima" size="10" multiple="multiple">
+							</select>
+						</td>
+						
+					<td>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_left"> << </button> </p>
+						<p> <button type="button" class="btn btn-lg btn-default" id="for_right"> >> </button> </p>
+					</td>
+					
+						<td>
+							<select name="materiaPrima" class="lista lista_materia_prima" size="10" multiple="multiple">
+								<c:forEach var="item" items="${produto.materiaPrima}">
+									<option value="${item.id}">${item.descricao.nome}</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					</table>
+            </div>
+	      </div>
 	      </p>
 		  <p>
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>
@@ -42,6 +72,7 @@
       </div>
 
 <c:url value="/categoria/listagem.json" var="lista"/>
+<c:url value="/materia_prima/listagem.json" var="lista_materia_prima"/>
 
 <script>
 $(document).ready(function(){
@@ -49,10 +80,50 @@ $(document).ready(function(){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.categoria, function(index, item){
-		    var option = $('<option value="'+item.id+'">'+item.nome+'</option>');
-		    $('#categoria').append(option);
+		    var option = $('<option class="item item_categoria" value="'+item.id+'">'+item.nome+'</option>');
+		    $('select[name=categoria]').append(option);
 		});
 	});
+	
+	url = "<c:out value="${lista_materia_prima}"/>";
+	$.get(url, function(data){
+		var json = jQuery.parseJSON( data );
+		$.each(json.materia_prima, function(index, item){
+		    var row = $('<option class="item item_materia_prima" value="'+item.id+'">');
+		    row.append('<td>'+item.nome+'</td>');
+		    $('.all_materia_prima').append(row);
+		});
+	});
+	
+	var categoria = "${produto.categoria.id}";
+	$("select[name=categoria]").find('option.item_categoria').each(function(e) {
+		if($(this).val() == categoria) {
+			console.log('selecionou um item');
+			$(this).attr('selected', 'selected');
+		}
+	});
+});
+
+$('#for_right').click(function(e) {
+    var selectedOpts = $('.all_materia_prima option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('.lista_materia_prima').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
+});
+
+$('#for_left').click(function(e) {
+    var selectedOpts = $('.lista_materia_prima option:selected');
+    if (selectedOpts.length == 0) {
+        e.preventDefault();
+    }
+
+    $('.all_materia_prima').append($(selectedOpts).clone());
+    $(selectedOpts).remove();
+    e.preventDefault();
 });
 </script>
 

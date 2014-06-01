@@ -18,7 +18,7 @@
 	  <form class="form" role="form" action="${cadastraDestaque}" method="post">
 	      <p>
 	        <label for="categoria">Categoria</label>
-	      	<select name="categoria" id="lista_categoria">
+	      	<select name="categoria" class="lista lista_categoria">
 	      		<option value="">P&aacute;gina frontal</option>
 	      	</select>
 	      </p>
@@ -30,7 +30,7 @@
 					<table>
 					<tr>
 						<td>
-							<select id="all_produtos" size="10" multiple="multiple">
+							<select class="all all_produtos" size="10" multiple="multiple">
 							</select>
 						</td>
 							
@@ -40,7 +40,7 @@
 						</td>
 						
 						<td>
-							<select name="produtos" id="lista_produtos" size="10" multiple="multiple">
+							<select name="produtos" class="lista lista_produtos" size="10" multiple="multiple">
 							</select>
 						</td>
 					</tr>
@@ -75,7 +75,7 @@ $(document).ready(function(){
 		var json = jQuery.parseJSON( data );
 		$.each(json.categoria, function(index, item){
 		    var option = $('<option class="categoria" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#lista_categoria').append(option);
+		    $('.lista_categoria').append(option);
 		});
 	});
 	
@@ -84,7 +84,7 @@ $(document).ready(function(){
 		var json = jQuery.parseJSON( data );
 		$.each(json.produto, function(index, item){
 		    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#all_produtos').append(option);
+		    $('.all_produtos').append(option);
 		});
 	});
 });
@@ -95,19 +95,19 @@ $(document).on('click', '.categoria', function(){
 	
 	if(id=="") {
 		url = "${lista_produtos_2}";
-		$("#all_produtos").empty();
+		$(".all_produtos").empty();
 		
 		$.get(url, function(data){
 			var json = jQuery.parseJSON( data );
 			$.each(json.produto, function(index, item){
 			    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
-			    $('#all_produtos').append(option);
+			    $('.all_produtos').append(option);
 			});
 		});
 	}
 	else {
 		url = "${lista_produtos_1}";
-		$("#all_produtos").empty();
+		$(".all_produtos").empty();
 		$("#nome").text($(this).text());
 		
 		$.ajax({
@@ -118,30 +118,30 @@ $(document).on('click', '.categoria', function(){
 			var json = jQuery.parseJSON( data );
 			$.each(json.produto, function(index, item){
 			    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
-			    $('#all_produtos').append(option);
+			    $('.all_produtos').append(option);
 			});
 		});
 	}
 });
 
 $('#for_right').click(function(e) {
-    var selectedOpts = $('#all_produtos option:selected');
+    var selectedOpts = $('.all_produtos option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#lista_produtos').append($(selectedOpts).clone());
+    $('.lista_produtos').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });
 
 $('#for_left').click(function(e) {
-    var selectedOpts = $('#lista_produtos option:selected');
+    var selectedOpts = $('.lista_produtos option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#all_produtos').append($(selectedOpts).clone());
+    $('.all_produtos').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });

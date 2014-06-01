@@ -54,53 +54,50 @@ var counter;
 var tam;
 var str;
 var regex;
+    
+$(document).on('focus', '.valida', function(e){
+    regex = $(this).attr('pattern');
+    
+    counter = 0;
+    tam = size_of(regex);
+    str = generate_string(regex, tam);
+    
+    $(this).val(str);
+});
 
-$('.valida').each(function(){
+$(document).on('keypress', '.valida', function(e){
+    e.preventDefault();
     
-    $(this).on('focus', function(e){
-        regex = $(this).attr('pattern');
-        
-        counter = 0;
-        tam = size_of(regex);
-        str = generate_string(regex, tam);
-        
-        $(this).val(str);
-    });
+    var tecla = e.which;
     
-    $(this).on('keypress', function(e){
-        e.preventDefault();
-        
-        var tecla = e.which;
-        
-        if(tecla >= 48 && tecla <= 57)
-            var tecla2 = tecla - 48;
-        else
-            var tecla2 = String.fromCharCode(tecla);
-        
-        result = $("<div>");
-        result.append( "tecla = "+tecla+"<br>" );
-        
-        var t = type_of(regex, counter);
-        
-        if(counter < tam) {
-            if(t != 'number' && t != 'string') {
-                str = replaceAt(str, counter, t);
-                counter++;
-            }
-            
-            t = type_of(regex, counter);
-            
-            if(typeof tecla2 == t) {
-                result.append( "tecla2 = "+tecla2+"<br>" );
-                str = replaceAt(str, counter, tecla2);
-                counter++;
-            }
+    if(tecla >= 48 && tecla <= 57)
+        var tecla2 = tecla - 48;
+    else
+        var tecla2 = String.fromCharCode(tecla);
+    
+    result = $("<div>");
+    result.append( "tecla = "+tecla+"<br>" );
+    
+    var t = type_of(regex, counter);
+    
+    if(counter < tam) {
+        if(t != 'number' && t != 'string') {
+            str = replaceAt(str, counter, t);
+            counter++;
         }
         
-        result.append( "counter = "+counter+"<br>" );
-        $("#result").empty().append(result);
+        t = type_of(regex, counter);
         
-        $(this).val(str);
-    });
+        if(typeof tecla2 == t) {
+            result.append( "tecla2 = "+tecla2+"<br>" );
+            str = replaceAt(str, counter, tecla2);
+            counter++;
+        }
+    }
     
+    result.append( "counter = "+counter+"<br>" );
+    $("#result").empty().append(result);
+    
+    $(this).val(str);
 });
+

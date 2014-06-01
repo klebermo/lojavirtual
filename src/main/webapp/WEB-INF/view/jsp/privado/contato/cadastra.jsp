@@ -19,7 +19,7 @@
 	      </p>
 	      <p>
 	        <label for="telefone">Telefone</label>
-	      	<input type="text" name="telefone" class="form-control" placeholder="(XX) XXXX-XXXX" pattern="([0-9]{2}) [0-9]{4}-[0-9]{4}">
+	      	<input type="text" name="telefone" class="form-control valida" pattern="([0-9]{2}) [0-9]{4}-[0-9]{4}">
 	      </p>
 		  <p>
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>

@@ -111,4 +111,9 @@ public class PermissaoService {
 		return permissao.findById(id);
 	}
 	
+	@Transactional
+	public Usuario findUsuarioByID(int id) {
+		return usuario.findById(id);
+	}
+	
 }

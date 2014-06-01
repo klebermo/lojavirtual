@@ -13,7 +13,7 @@
 <c:url value="/permissao/remove" var="remove"/>
 <c:url value="/permissao/listagem" var="listagem"/>
 
-<sec:accesscontrollist hasPermission="cadastra_permissao" domainObject="">
+<sec:accesscontrollist hasPermission="cadastra_permissao" domainObject="${someObject}">
 <button type="button" class="btn btn-lg btn-link action" data-action="${cadastra}" data-target="">
 	cadastrar novo grupo
 </button>
@@ -39,24 +39,50 @@
 
 <c:url value="/permissao/grupos.json" var="grupos"/>
 <c:url value="/permissao/permissoes_grupo.json" var="permissoes"/>
+<c:url value="/permissao/permissoes_usuario.json" var="permissoes_usuario"/>
 <script>
 function load() {
 	var url = "${grupos}";
 	$.get(url, function(data) {
 		var json = jQuery.parseJSON(data);
 		$.each(json.grupo, function(index, item){
-			$("#workspace").append('<div class="input-group input-group-sm"><span class="input-group-addon">');
-				<sec:accesscontrollist hasPermission="altera_permissao" domainObject="">
-					$("#workspace").append('+<input type="checkbox" class="checkbox" name="grupo" value="'+item.id+'">');
-				</sec:accesscontrollist>
-			$("#workspace").append('</span><input type="text" class="form-control" value="'+item.nome+'" readonly="readonly"><span class="input-group-btn"><button type="button" class="btn btn-default action" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span></div>');
+			var p = $('<p>');
 			
+			var option = $('<div class="input-group input-group-sm">');
+			<sec:accesscontrollist hasPermission="altera_permissao" domainObject="${someObject}">
+			option.append('<span class="input-group-addon"><input type="checkbox" class="checkbox" name="grupo" value="'+item.id+'"></span>');
+			</sec:accesscontrollist>
+			option.append('<input type="text" class="form-control" value="'+item.nome+'" readonly="readonly">');
+			option.append('<span class="input-group-btn"><button class="btn btn-default action" type="button" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span>');
+			
+			$(p).append(option);
+						
 			if(item.id > 17) {
-				<sec:accesscontrollist hasPermission="remove_permissao" domainObject="">
-				$("#workspace").append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove"></span></button>');
+				<sec:accesscontrollist hasPermission="remove_permissao" domainObject="${someObject}">
+				$(p).append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove">Remover</span></button>');
 				</sec:accesscontrollist>
 			}
+			
+			$("#workspace").append(p);
 		});
+		
+		var id = "${usuario.id}";
+		url = "${permissoes_usuario}";
+		$.ajax({
+			type: "GET",
+			url: url,
+			data: {id: id}
+		}).done(function(data){
+			var json = jQuery.parseJSON(data);
+			$.each(json.grupo, function(index, item) {
+				$("#workspace").find('.checkbox').each(function(){
+					if($(this).val() == item.id) {
+						$(this).attr('checked', 'checked');
+					}
+				});
+			});
+		});
+		
 	});
 };
 
@@ -77,7 +103,7 @@ $(document).ready(function() {
 
 $(document).on('click','.checkbox',function(){
 	var id_permissao = $(this).val();
-	var id_usuario = "${id_usuario}";
+	var id_usuario = "${usuario.id}";
 	var url = "${altera}";
     $.ajax({
     	type: "POST",

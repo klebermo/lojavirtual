@@ -17,7 +17,7 @@
       		<p>
 				<div class="row">
 			        <div class="col-md-4">
-						<select class="form-control" id="lista_permissoes" size="10" multiple="multiple">
+						<select class="form-control all all_permissoes" size="10" multiple="multiple">
 						</select>
 			        </div>
 			        <div class="col-md-4">
@@ -25,7 +25,7 @@
 						<p> <button type="button" class="btn btn-lg btn-default" id="for_right"> >> </button> </p>
 			        </div>
 			        <div class="col-md-4">
-						<select name="permissoes" class="form-control" id="selecao" size="10" multiple="multiple">
+						<select name="permissoes" class="form-control lista lista_permissoes" size="10" multiple="multiple">
 						</select>
 			        </div>
 				</div>
@@ -48,29 +48,29 @@ $(document).ready(function(){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.permissao, function(index, item) {
-			$('#lista_permissoes').append('<option value="'+item.id+'">'+item.nome+'</option>');
+			$('.all_permissoes').append('<option class="item item_permissao" value="'+item.id+'">'+item.nome+'</option>');
 		});
 	});
 });
 
 $('#for_right').click(function(e) {
-    var selectedOpts = $('#lista_permissoes option:selected');
+    var selectedOpts = $('.all_permissoes option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#selecao').append($(selectedOpts).clone());
+    $('.lista_permissoes').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });
 
 $('#for_left').click(function(e) {
-    var selectedOpts = $('#selecao option:selected');
+    var selectedOpts = $('.lista_permissoes option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#lista_permissoes').append($(selectedOpts).clone());
+    $('.all_permissoes').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });

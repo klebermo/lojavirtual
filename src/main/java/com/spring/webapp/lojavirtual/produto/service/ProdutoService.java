@@ -35,7 +35,7 @@ public class ProdutoService {
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
 		String category = request.getParameter("categoria");
-		String[] materia_prima = request.getParameterValues("materia_prima[]");
+		String[] materia_prima = request.getParameterValues("materia_prima");
 		
 		Produto novo = new Produto();
 		novo.setNome(nome);

@@ -15,8 +15,8 @@
 	      	<input type="text" name="nome" class="form-control" value="${descricao.nome}" autofocus>
 	      </p>
 	      <p>
-	        <label for="descricao">Descri&ccedil;&atilde;o</label>
-	      	<textarea rows="25" cols="80" name="descricao" value="${descricao.descricao}"> </textarea>
+	        <label for="descricao" style="display: inline-block; vertical-align: top;">Descri&ccedil;&atilde;o</label>
+	      	<textarea rows="10" cols="90" name="descricao" value="${descricao.descricao}"> </textarea>
 	      </p>
 	      <p>
 	        <label for="fornecedor">Fornecedor</label>
@@ -25,7 +25,7 @@
 	      </p>
 	      <p>
 	        <label for="quantidade">Quantidade</label>
-	      	<input type="number" name="quantidade" class="form-control" value="${quantidade.quantidade}">
+	      	<input type="number" name="quantidade" class="form-control valida" pattern="[0-9]{3},[0-9]{2}" value="${quantidade.quantidade}">
 	      </p>
 	      <p>
 	        <label for="unidade">Unidade</label>
@@ -33,7 +33,7 @@
 	      </p>
 	      <p>
 	        <label for="custo">Pre&ccedil;o por unidade</label>
-	      	<input type="number" name="custo" class="form-control" value="${quantidade.custo}">
+	      	<input type="number" name="custo" class="form-control valida" pattern="[0-9]{4},[0-9]{2}" value="${quantidade.custo}">
 	      </p>
 		  <p>
 		  	<button type="submit" class="btn btn-lg btn-default">Cadastrar</button>

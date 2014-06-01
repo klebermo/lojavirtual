@@ -14,11 +14,11 @@
 	      	<tr>
 		      	<td>
 			        <label for="categoria">Categoria</label>
-			        <select size="10" multiple="multiple" id="lista_categoria"></select>
+			        <select size="10" multiple="multiple" class="lista lista_categoria"></select>
 		        </td>
 		      	<td>
 			        <label for="produto">Produto</label>
-			        <select size="10" multiple="multiple" id="lista_produto"></select>
+			        <select size="10" multiple="multiple" class="lista lista_produto"></select>
 		        </td>
 		      	<td id="entrada" style="display: none;">
 		      		<p>
@@ -56,7 +56,7 @@ $(document).ready(function(){
 		var json = jQuery.parseJSON( data );
 		$.each(json.categoria, function(index, item){
 		    var option = $('<option class="categoria" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#lista_categoria').append(option);
+		    $('.lista_categoria').append(option);
 		});
 	});
 });
@@ -64,6 +64,7 @@ $(document).ready(function(){
 $(document).on('click', '.categoria', function(){
 	var url = "<c:out value="${lista_produto}"/>";
 	var id = $(this).val();
+	$('.lista_produto').empty();
 	$.ajax({
 		type: "GET",
 		url: url,
@@ -72,7 +73,7 @@ $(document).on('click', '.categoria', function(){
 		var json = jQuery.parseJSON( data );
 		$.each(json.produto, function(index, item){
 		    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#lista_produto').append(option);
+		    $('.lista_produto').append(option);
 		});
 	});
 });

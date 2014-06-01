@@ -20,7 +20,7 @@
 	      	<input type="hidden" name="id" value="${destaque.id}">
 	      </p>
 	      <p>
-	      	<input type="hidden" name="categoria" value="${destaque.categoria}">
+	      	<input type="hidden" name="categoria" value="${destaque.categoria.id}">
 	      </p>
           <div class="panel panel-warning">
           <c:choose>
@@ -39,7 +39,7 @@
 					<table>
 					<tr>
 						<td>
-							<select id="all_produtos" size="10" multiple="multiple">
+							<select class="all all_produtos" size="10" multiple="multiple">
 							</select>
 						</td>
 							
@@ -49,7 +49,7 @@
 						</td>
 						
 						<td>
-							<select name="produtos" id="lista_produtos" size="10" multiple="multiple">
+							<select name="produtos" class="lista lista_produtos" size="10" multiple="multiple">
 								<c:forEach var="item" items="${destaque.produtos}">
 									<option value="${item.id}">${item.nome}</option>
 								</c:forEach>
@@ -89,7 +89,7 @@ $(document).ready(function(){
 		var json = jQuery.parseJSON( data );
 		$.each(json.categoria, function(index, item){
 		    var option = $('<option class="categoria" value="'+item.id+'">'+item.nome+'</option>');
-		    $('#lista_categoria').append(option);
+		    $('.lista_categoria').append(option);
 		});
 	});
 	
@@ -101,7 +101,7 @@ $(document).ready(function(){
 			var json = jQuery.parseJSON( data );
 			$.each(json.produto, function(index, item){
 			    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
-			    $('#all_produtos').append(option);
+			    $('.all_produtos').append(option);
 			});
 		});
 	}
@@ -117,30 +117,30 @@ $(document).ready(function(){
 			var json = jQuery.parseJSON( data );
 			$.each(json.produto, function(index, item){
 			    var option = $('<option class="produto" value="'+item.id+'">'+item.nome+'</option>');
-			    $('#all_produtos').append(option);
+			    $('.all_produtos').append(option);
 			});
 		});
 	}
 });
 
 $('#for_right').click(function(e) {
-    var selectedOpts = $('#all_produtos option:selected');
+    var selectedOpts = $('.all_produtos option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#lista_produtos').append($(selectedOpts).clone());
+    $('.lista_produtos').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });
 
 $('#for_left').click(function(e) {
-    var selectedOpts = $('#lista_produtos option:selected');
+    var selectedOpts = $('.lista_produtos option:selected');
     if (selectedOpts.length == 0) {
         e.preventDefault();
     }
 
-    $('#all_produtos').append($(selectedOpts).clone());
+    $('.all_produtos').append($(selectedOpts).clone());
     $(selectedOpts).remove();
     e.preventDefault();
 });
