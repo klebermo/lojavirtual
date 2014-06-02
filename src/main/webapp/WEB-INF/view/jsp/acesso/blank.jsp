@@ -3,8 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<title>P&aacute;gina inicial</title>
 </head>
 <body>
+<h1>P&aacute;gina Inicial</h1>
 </body>
 </html>

@@ -55,44 +55,42 @@ var tam;
 var str;
 var regex;
 
-$(document).find('input.valida').each(function(e) {
-	$(this).focus(function(e) {
-	    regex = $(this).attr('pattern');
-	    
-	    counter = 0;
-	    tam = size_of(regex);
-	    str = generate_string(regex, tam);
-	    
-	    $(this).val(str);
-	});
+$(document).on('focus', '.valida', function(e) {
+    regex = $(this).attr('pattern');
+    
+    counter = 0;
+    tam = size_of(regex);
+    str = generate_string(regex, tam);
+    
+    $(this).val(str);
+});
 
-	$(this).keypress(function(e) {
-	    e.preventDefault();
-	    
-	    var tecla = e.which;
-	    var tecla2;
-	    
-	    if(tecla >= 48 && tecla <= 57)
-	        tecla2 = tecla - 48;
-	    else
-	        tecla2 = String.fromCharCode(tecla);
-	    
-	    var t = type_of(regex, counter);
-	    
-	    if(counter < tam) {
-	        if(t != 'number' && t != 'string') {
-	            str = replaceAt(str, counter, t);
-	            counter++;
-	        }
-	        
-	        t = type_of(regex, counter);
-	        
-	        if(typeof tecla2 == t) {
-	            str = replaceAt(str, counter, tecla2);
-	            counter++;
-	        }
-	    }
-	    
-	    $(this).val(str);
-	});
+$(document).on('keypress', '.valida', function(e) {
+    e.preventDefault();
+    
+    var tecla = e.which;
+    var tecla2;
+    
+    if(tecla >= 48 && tecla <= 57)
+        tecla2 = tecla - 48;
+    else
+        tecla2 = String.fromCharCode(tecla);
+    
+    var t = type_of(regex, counter);
+    
+    if(counter < tam) {
+        if(t != 'number' && t != 'string') {
+            str = replaceAt(str, counter, t);
+            counter++;
+        }
+        
+        t = type_of(regex, counter);
+        
+        if(typeof tecla2 == t) {
+            str = replaceAt(str, counter, tecla2);
+            counter++;
+        }
+    }
+    
+    $(this).val(str);
 });
