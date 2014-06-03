@@ -9,7 +9,7 @@ $(document).on('submit', '.form', function (event) {
 	        $(this).attr('selected', 'selected');
 	    });
 	}
-	
+		
 	var posting = $.post( url, $(this).serialize() );
 	posting.done(function( data ) {
 		$("#"+data).css("display", "block");

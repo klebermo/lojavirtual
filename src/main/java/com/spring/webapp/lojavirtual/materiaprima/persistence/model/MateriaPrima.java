@@ -19,7 +19,7 @@ public class MateriaPrima {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	
 	@OneToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@JoinColumn(name="descricao")
@@ -31,11 +31,11 @@ public class MateriaPrima {
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private QuantidadeMateriaPrima quantidade;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

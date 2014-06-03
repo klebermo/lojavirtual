@@ -14,7 +14,7 @@ public class QuantidadeMateriaPrima {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	
 	@Column(name = "quantidade")
 	private float quantidade;
@@ -25,11 +25,11 @@ public class QuantidadeMateriaPrima {
 	@Column(name = "custo")
 	private float custo;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

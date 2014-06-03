@@ -25,7 +25,7 @@ public class Fornecedor {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int Id;
+	private Integer Id;
 	
 	@Column(name = "razao_social")
 	private String razao_social;
@@ -49,11 +49,11 @@ public class Fornecedor {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Contato> contato;
 
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		Id = id;
 	}
 

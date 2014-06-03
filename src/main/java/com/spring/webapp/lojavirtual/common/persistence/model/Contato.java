@@ -14,7 +14,7 @@ public class Contato {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int Id;
+	private Integer Id;
 	
 	@Column(name = "nome")
 	private String nome;
@@ -25,11 +25,11 @@ public class Contato {
 	@Column(name = "email")
 	private String email;
 
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		Id = id;
 	}
 

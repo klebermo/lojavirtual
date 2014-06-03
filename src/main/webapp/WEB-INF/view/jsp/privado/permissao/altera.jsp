@@ -56,12 +56,12 @@ function load() {
 			option.append('<span class="input-group-btn"><button class="btn btn-default action" type="button" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span>');
 			
 			$(p).append(option);
-						
+			
+			<sec:accesscontrollist hasPermission="remove_permissao" domainObject="${someObject}">
 			if(item.id > 17) {
-				<sec:accesscontrollist hasPermission="remove_permissao" domainObject="${someObject}">
 				$(p).append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove">Remover</span></button>');
-				</sec:accesscontrollist>
 			}
+			</sec:accesscontrollist>
 			
 			$("#workspace").append(p);
 		});

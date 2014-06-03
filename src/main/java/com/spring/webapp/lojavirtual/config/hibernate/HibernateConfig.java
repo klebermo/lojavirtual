@@ -32,7 +32,7 @@ public class HibernateConfig {
    public DataSource restDataSource() {
       BasicDataSource dataSource = new BasicDataSource();
       dataSource.setDriverClassName("org.postgresql.Driver");
-      dataSource.setUrl("jdbc:postgresql://localhost:5432/webapp?charSet=LATIN1");
+      dataSource.setUrl("jdbc:postgresql://localhost:5432/loja?charSet=LATIN1");
       dataSource.setUsername("klebermo");
       dataSource.setPassword("123");
  
@@ -62,6 +62,7 @@ public class HibernateConfig {
 
 		{
             setProperty("hibernate.hbm2ddl.auto", "update");
+            setProperty("hibernate.hbm2ddl.import_files", "import.sql");
             setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
             setProperty("hibernate.globally_quoted_identifiers", "true");
          }

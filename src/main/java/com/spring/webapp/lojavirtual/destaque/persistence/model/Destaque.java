@@ -28,7 +28,7 @@ public class Destaque {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	
 	@OneToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@JoinColumn(name="categoria")
@@ -40,11 +40,11 @@ public class Destaque {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Produto> produtos;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
