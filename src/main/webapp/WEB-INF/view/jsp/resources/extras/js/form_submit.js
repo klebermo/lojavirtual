@@ -4,11 +4,9 @@ $(document).on('submit', '.form', function (event) {
 	var $form = $( this ),
 	url = $form.attr( "action" );
 	
-	if($("select.lista").length) {
-		jQuery('select.lista').find('option.item').each(function(){
-	        $(this).attr('selected', 'selected');
-	    });
-	}
+	$('select.lista').find('option.item').each(function(){
+        $(this).attr('selected', 'selected');
+    });
 		
 	var posting = $.post( url, $(this).serialize() );
 	posting.done(function( data ) {
