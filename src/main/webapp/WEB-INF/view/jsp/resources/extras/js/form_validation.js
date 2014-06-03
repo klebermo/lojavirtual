@@ -68,7 +68,8 @@ $(document).on('focus', '.valida', function(e) {
 $(document).on('keypress', '.valida', function(e) {
     e.preventDefault();
     
-    var tecla = e.which;
+    //var tecla = e.which;
+    var tecla = (e.which) ? e.which : e.keyCode;
     var tecla2;
     
     if(tecla >= 48 && tecla <= 57)
