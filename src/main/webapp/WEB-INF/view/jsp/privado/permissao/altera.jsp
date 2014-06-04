@@ -49,18 +49,20 @@ function load() {
 			var p = $('<p>');
 			
 			var option = $('<div class="input-group input-group-sm">');
+			
 			<sec:authorize access="hasPermission(#user, 'altera_permissao')">
-			option.append('<span class="input-group-addon"><input type="checkbox" class="checkbox" name="grupo" value="'+item.id+'"></span>');
+				option.append('<span class="input-group-addon"><input type="checkbox" class="checkbox" name="grupo" value="'+item.id+'"></span>');
 			</sec:authorize>
+			
 			option.append('<input type="text" class="form-control" value="'+item.nome+'" readonly="readonly">');
 			option.append('<span class="input-group-btn"><button class="btn btn-default action" type="button" data-action="${listagem}" data-target="'+item.id+'"><span class="glyphicon glyphicon-chevron-down"></span></button></span>');
 			
 			$(p).append(option);
 			
 			<sec:authorize access="hasPermission(#user, 'remove_permissao')">
-			if(item.id > 17) {
-				$(p).append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove">Remover</span></button>');
-			}
+				if(item.id > 17) {
+					$(p).append('<button type="button" class="btn btn-default action" data-action="${remove}" data-target="'+item.id+'"><span class="glyphicon glyphicon-remove">Remover</span></button>');
+				}
 			</sec:authorize>
 			
 			$("#workspace").append(p);

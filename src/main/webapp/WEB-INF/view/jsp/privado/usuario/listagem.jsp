@@ -55,12 +55,16 @@ $(document).ready(function(){
 		    row.append('<td>'+item.email+'</td>');
 		    
 		    var col = $('<td>');
+		    
 		    <sec:authorize access="hasPermission(#user, 'altera_usuario')">
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
+		    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
 		    </sec:authorize>
+		    
 		    <sec:authorize access="hasPermission(#user, 'remove_usuario')">
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
+		    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
 		    </sec:authorize>
+		    
+		    
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${permissao}/'+item.id+'">Permiss&otilde;es</button>');
 		    row.append(col);
 		    
