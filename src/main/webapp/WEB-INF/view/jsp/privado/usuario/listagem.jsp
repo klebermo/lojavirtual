@@ -14,11 +14,9 @@
 <c:url value="/permissao/altera" var="permissao"/>
 
 <p>
-<sec:authorize access="hasPermission(#user, 'cadastra_usuario')">
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar novo usu&aacute;rio
 	</button>
-</sec:authorize>
 </p>
 
 <table class="bordered">
@@ -54,17 +52,9 @@ $(document).ready(function(){
 		    row.append('<td>'+item.unome+'</td>');
 		    row.append('<td>'+item.email+'</td>');
 		    
-		    var col = $('<td>');
-		    
-		    <sec:authorize access="hasPermission(#user, 'altera_usuario')">
-		    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
-		    </sec:authorize>
-		    
-		    <sec:authorize access="hasPermission(#user, 'remove_usuario')">
-		    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    </sec:authorize>
-		    
-		    
+		    var col = $('<td>');		    
+	    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
+	    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
 		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${permissao}/'+item.id+'">Permiss&otilde;es</button>');
 		    row.append(col);
 		    
