@@ -23,9 +23,9 @@
 
     <thead>
     	<tr>
-	    	<td class="col" data-property="#">#</td>
-	    	<td class="col" data-property="nome">Nome</td>
-	    	<td class="col" data-property=""></td>
+	    	<th class="col" data-property="#">#</th>
+	    	<th class="col" data-property="nome">Nome</th>
+	    	<th class="col" data-property=""></th>
     	</tr>        
     </thead>
     

@@ -11,7 +11,7 @@
 <c:url value="/usuario/cadastra" var="cadastro"/>
 <c:url value="/usuario/altera" var="alteracao"/>
 <c:url value="/usuario/remove" var="remocao"/>
-<c:url value="/permissao/altera" var="permissao"/>
+<c:url value="/permissao/listagem" var="permissao"/>
 <c:url value="/usuario/listagem.json" var="lista"/>
 
 <p>
@@ -24,12 +24,12 @@
 
     <thead>
     	<tr>
-	    	<td class="col" data-property="#">#</td>
-	    	<td class="col" data-property="login">Login</td>
-	    	<td class="col" data-property="pnome">Nome</td>
-	    	<td class="col" data-property="unome">Sobrenome</td>
-	    	<td class="col" data-property="email">E-mail</td>
-	    	<td class="col" data-property=""></td>
+	    	<th class="col" data-property="#">#</th>
+	    	<th class="col" data-property="login">Login</th>
+	    	<th class="col" data-property="pnome">Nome</th>
+	    	<th class="col" data-property="unome">Sobrenome</th>
+	    	<th class="col" data-property="email">E-mail</th>
+	    	<th class="col" data-property=""></th>
     	</tr>        
     </thead>
     

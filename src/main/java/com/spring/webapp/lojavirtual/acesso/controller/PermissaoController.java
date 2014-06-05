@@ -48,11 +48,15 @@ public class PermissaoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="altera/{theString}")
+	@RequestMapping(value="altera/{theStringUser}/{theStringRole}")
 	@PreAuthorize("hasPermission(#user, 'altera_permissao')")
-	public ModelAndView alterna(@PathVariable String theString) {
+	public ModelAndView alterna(@PathVariable String theStringUser, @PathVariable String theStringRole) {
+		int id_usuario = Integer.valueOf(theStringUser).intValue();
+		int id_role = Integer.valueOf(theStringRole).intValue();
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("usuario", permissao.findUsuarioByID(Integer.valueOf(theString).intValue()));
+		mav.addObject("usuario", permissao.findUsuarioByID(id_usuario));
+		mav.addObject("permissao", permissao.findRoleById(id_role));
 		mav.setViewName("privado/permissao/altera");
 		return mav;
 	}
@@ -66,23 +70,25 @@ public class PermissaoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="remove/{theString}")
+	@RequestMapping(value="remove/{theStringUser}/{theStringRole}")
 	@PreAuthorize("hasPermission(#user, 'remove_permissao')")
-	public ModelAndView remove(@PathVariable String theString) {
-		int id = Integer.valueOf(theString).intValue();
+	public ModelAndView remove(@PathVariable String theStringUser, @PathVariable String theStringRole) {
+		int id_usuario = Integer.valueOf(theStringUser).intValue();
+		int id_role = Integer.valueOf(theStringRole).intValue();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("permissao", permissao.findRoleById(id));
+		mav.addObject("usuario", permissao.findUsuarioByID(id_usuario));
+		mav.addObject("permissao", permissao.findRoleById(id_role));
 		mav.setViewName("privado/permissao/remove");
 		return mav;
 	}
 	
-	@RequestMapping(value="listagem/{theString}")
-	public ModelAndView lista(@PathVariable String theString) {
-		int id = Integer.valueOf(theString).intValue();
+	@RequestMapping(value="listagem/{theStringUser}")
+	public ModelAndView lista(@PathVariable String theStringUser) {
+		int id_usuario = Integer.valueOf(theStringUser).intValue();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("permissoes", permissao.lista_permissoes_grupo(id));
+		mav.addObject("usuario", permissao.findUsuarioByID(id_usuario));
 		mav.setViewName("privado/permissao/listagem");
 		return mav;
 	}

@@ -4,22 +4,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Permiss&otilde;es</title>
+<title>Lista de Permiss&otilde;es de ${usuario.login}</title>
 </head>
 <body>
 
-<div class="panel panel-default">
-   <div class="panel-heading">
-     <h3 class="panel-title">Permiss&otilde;es</h3>
-   </div>
-   <div class="panel-body">
-   		<ul class="list-group">
-   		<c:forEach var="item" items="${permissoes}">
-		  <li class="list-group-item"><c:out value="${item.nome}"/></li>
-		</c:forEach>
-		</ul>
-   </div>
-</div>
+<c:url value="/permissao/cadastra" var="cadastra"/>
+<c:url value="/permissao/altera" var="altera"/>
+<c:url value="/permissao/remove" var="remove"/>
+
+<c:url value="/permissao/grupos.json" var="grupos"/>
+<c:url value="/permissao/permissoes_grupo.json" var="permissoes"/>
+<c:url value="/permissao/permissoes_usuario.json" var="permissoes_usuario"/>
+
+<p>
+	<button type="button" class="btn btn-lg btn-link action" data-action="${cadastra}" data-target="">
+		cadastrar novo grupo
+	</button>
+</p>
+
+
 
 </body>
 </html>

@@ -31,6 +31,25 @@ function open(url) {
 	});
 }
 
+function open(url, target) {
+	$.ajax({
+		type: "GET",
+		url: url
+	}).done(function( data ) {
+		var $temp  = $('<div/>', {html:data});
+		var titulo = $temp.find('title').text();
+		var conteudo = $temp.remove('head').html();
+		
+		var $title = target.find('#titulo');
+		var $content = target.find('#conteudo');
+		$title.empty();
+		$content.empty();
+		$title.text(titulo);
+		$content.html(conteudo);
+		target.show();
+	});
+}
+
 function open_dialog(url, dialog_div) {
 	$.ajax({
 		type: "GET",
@@ -65,3 +84,11 @@ $(document).on('click', '.pagina', function(event){
     var link = $(this).attr('href');
     open(link);
 });
+
+$(document).on('click', '.action', function (event) {
+	event.preventDefault();
+	var action = $(this).data('action');
+	var target = $(this).data('target');
+	open(action, target);
+});
+

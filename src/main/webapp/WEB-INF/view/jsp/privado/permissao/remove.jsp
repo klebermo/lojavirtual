@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Remover permiss&atilde;o</title>
+<title>Remover permiss&atilde;o do usu&aacute;rio: ${usuario.login}</title>
 </head>
 <body>
 
