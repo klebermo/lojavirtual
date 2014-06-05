@@ -31,7 +31,7 @@ function open(url) {
 	});
 }
 
-function open(url, target) {
+function open_interna(url, target) {
 	$.ajax({
 		type: "GET",
 		url: url
@@ -71,6 +71,12 @@ $(document).on('click', '.link', function (event) {
 	open(action);
 });
 
+$(document).on('click', '.pagina', function(event){
+	event.preventDefault();
+    var link = $(this).attr('href');
+    open(link);
+});
+
 $(document).on('click', '.popup', function (event) {
 	event.preventDefault();
 	var action = $(this).data('action');
@@ -79,16 +85,11 @@ $(document).on('click', '.popup', function (event) {
 	open_dialog(action, div);
 });
 
-$(document).on('click', '.pagina', function(event){
-	event.preventDefault();
-    var link = $(this).attr('href');
-    open(link);
-});
-
 $(document).on('click', '.action', function (event) {
 	event.preventDefault();
 	var action = $(this).data('action');
 	var target = $(this).data('target');
-	open(action, target);
+	var div = $("#"+target);
+	open_interna(action, div);
 });
 

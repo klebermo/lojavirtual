@@ -4,19 +4,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Remover permiss&atilde;o do usu&aacute;rio: ${usuario.login}</title>
+<title>Remover permiss&atilde;o ${permissao.nome}</title>
 </head>
 <body>
 
-<c:url value="/usuario/listagem" var="listagem"/>
+<c:url value="/permissao/listagem" var="listagem"/>
 
 <c:url value="/permissao/remove" var="removePermissao"/>
 <form class="form" role="form" action="${removePermissao}" method="post">
 <div class="alert alert-warning" id="pergunta">
-  <strong>Aten&ccedil;&atilde;o!</strong> Tem certeza que quer remover a permiss&atilde;o <c:out value="${permissao.nome}"/>?
+
+	Tem certeza que quer excluir o grupo de permiss&otilde;es <strong>${permissao.nome}</strong>?
+  
   <input type="hidden" name="id" value="<c:out value="${permissao.id}"/>">
+  
   <button type="submit" class="btn btn-lg btn-link"><span class="glyphicon glyphicon-ok"></span></button>
-  <button type="button" class="btn btn-lg btn-link link" data-action="${listagem}"><span class="glyphicon glyphicon-remove"></span></button>
+  <button type="button" class="btn btn-lg btn-link link" data-action="${listagem}/${usuario.id}"><span class="glyphicon glyphicon-remove"></span></button>
 </div>
 </form>
 

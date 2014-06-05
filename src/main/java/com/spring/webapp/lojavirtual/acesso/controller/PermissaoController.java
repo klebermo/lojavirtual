@@ -84,7 +84,7 @@ public class PermissaoController {
 	}
 	
 	@RequestMapping(value="listagem/{theStringUser}")
-	public ModelAndView lista(@PathVariable String theStringUser) {
+	public ModelAndView listagem(@PathVariable String theStringUser) {
 		int id_usuario = Integer.valueOf(theStringUser).intValue();
 		
 		ModelAndView mav = new ModelAndView();
@@ -114,14 +114,6 @@ public class PermissaoController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lista", permissao.lista_permissoes_grupo(Integer.valueOf(id_grupo).intValue()));
 		mav.setViewName("listagem_permissoes");
-		return mav;
-	}
-	
-	@RequestMapping(value="permissoes_usuario.json", method=RequestMethod.GET)
-	public ModelAndView permissoes_usuario(@RequestParam("id") String id_usuario) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("lista", permissao.lista_permissoes_usuario(Integer.valueOf(id_usuario).intValue()));
-		mav.setViewName("listagem_grupos");
 		return mav;
 	}
 	
