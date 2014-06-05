@@ -20,33 +20,38 @@
 	</button>
 </p>
 
-<table class="tabela bordered">
+<table class="bordered">
 
-    <thead class="header">
-    <tr>
-        <th>#</th>        
-        <th>Login</th>
-        <th>Nome</th>
-        <th>Sobrenome</th>
-        <th>E-Mail</th>
-        <th>#</th>
-    </tr>
+    <thead>
+    	<tr>
+	    	<td class="col" data-property="#">#</td>
+	    	<td class="col" data-property="login">Login</td>
+	    	<td class="col" data-property="pnome">Nome</td>
+	    	<td class="col" data-property="unome">Sobrenome</td>
+	    	<td class="col" data-property="email">E-mail</td>
+	    	<td class="col" data-property=""></td>
+    	</tr>        
     </thead>
     
     <tbody class="content">
     </tbody>
     
-    <tfoot class="actions">
-    	<div class="command" data-nome="Altera" data-action="${altera}"></div>
-    	<div class="command" data-nome="Remove" data-action="${remove}"></div>
-    	<div class="command" data-nome="Permissoes" data-action="${permissao}"></div>
+    <tfoot>
+    	<tr>
+	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	<td class="comando" data-nome="Permiss&otilde;es" data-action="${permissao}"></td>
+	    	<td></td>
+	    	<td></td>
+	    	<td></td>
+    	</tr>
     </tfoot>
 
 </table>
 
 <script>
 $(document).ready(function(){
-	load_content("${lista}", $('.tabela'));
+	load_content("${lista}", $('table.bordered'));
 });
 </script>
 

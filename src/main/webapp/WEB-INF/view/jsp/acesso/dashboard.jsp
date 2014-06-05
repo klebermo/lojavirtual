@@ -10,12 +10,12 @@
 
     <title>Dashboard</title>
 
-<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="../resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="../resources/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath}/resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath}/resources/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
 
-<link href="../resources/extras/css/dashboard.css" rel="stylesheet">
-<link href="../resources/extras/css/table.css" rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath}/resources/extras/css/dashboard.css" rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath}/resources/extras/css/table.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -90,16 +90,16 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="../resources/jquery/js/jquery-2.1.0.min.js"></script>
-<script src="../resources/jquery/js/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/extras/js/docs.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/jquery/js/jquery-2.1.0.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/jquery/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/extras/js/docs.min.js"></script>
 
-<script src="../resources/extras/js/jquery.md5.min.js"></script>
-<script src="../resources/extras/js/form_submit.js"></script>
-<script src="../resources/extras/js/form_valida.js"></script>
-<script src="../resources/extras/js/page_link.js"></script>
-<script src="../resources/extras/js/page_load.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/extras/js/jquery.md5.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/extras/js/form_submit.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/extras/js/form_valida.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/extras/js/page_link.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/extras/js/page_load.js"></script>
 
 </body>
 </html>

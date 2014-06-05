@@ -11,58 +11,42 @@
 <c:url value="/materia_prima/cadastra" var="cadastro"/>
 <c:url value="/materia_prima/altera" var="alteracao"/>
 <c:url value="/materia_prima/remove" var="remocao"/>
+<c:url value="/materia_prima/listagem.json" var="lista"/>
 
-<sec:accesscontrollist hasPermission="cadastra_materia_prima" domainObject="${someObject}">
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar nova materia prima
 	</button>
 </p>
-</sec:accesscontrollist>
 
 <table class="bordered">
 
     <thead>
-    <tr>
-        <th>#</th>        
-        <th>Nome</th>
-        <th>Fornecedor</th>
-        <th>Pre&ccedil;o</th>
-        <th></th>
-    </tr>
+    	<tr>
+	    	<td class="col" data-property="#">#</td>
+	    	<td class="col" data-property="nome">Nome</td>
+	    	<td class="col" data-property="fornecedor">Fornecedor</td>
+	    	<td class="col" data-property="preco">Pre&ccedil;o</td>
+    	</tr>        
     </thead>
     
     <tbody class="content">
     </tbody>
+    
+    <tfoot>
+    	<tr>
+	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	<td></td>
+	    	<td></td>
+    	</tr>
+    </tfoot>
 
 </table>
 
-<c:url value="/materia_prima/listagem.json" var="lista"/>
-
 <script>
 $(document).ready(function(){
-	var url = "<c:out value="${lista}"/>";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
-		$.each(json.materia_prima, function(index, item){
-		    var row = $('<tr>');
-		    row.append('<td>'+item.id+'</td>');
-		    row.append('<td>'+item.nome+'</td>');
-		    row.append('<td>'+item.fornecedor+'</td>');
-		    row.append('<td>'+item.custo+'</td>');
-		    
-		    var col = $('<td>');
-		    <sec:accesscontrollist hasPermission="altera_materia_prima" domainObject="${someObject}">
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
-		    </sec:accesscontrollist>
-		    <sec:accesscontrollist hasPermission="remove_materia_prima" domainObject="${someObject}">
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    </sec:accesscontrollist>
-		    row.append(col);
-		    
-		    $('tbody.content').append(row);
-		});
-	});
+	load_content("${lista}", $('table.bordered'));
 });
 </script>
 

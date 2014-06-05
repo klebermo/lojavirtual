@@ -10,58 +10,42 @@
 
 <c:url value="/endereco/altera" var="alteracao"/>
 <c:url value="/endereco/remove" var="remocao"/>
+<c:url value="/endereco/listagem.json" var="lista"/>
 
 <table class="bordered">
 
     <thead>
-    <tr>
-        <th>#</th>        
-        <th>Logradouro</th>
-        <th>Numero</th>
-        <th>Complemento</th>
-        <th>Bairro</th>
-        <th>Cidade</th>
-        <th>Estado</th>
-        <th>CEP</th>
-        <th></th>
-    </tr>
+    	<tr>
+	    	<td class="col" data-property="#">#</td>
+	    	<td class="col" data-property="logradouro">Logradouro</td>
+	    	<td class="col" data-property="numero">Numero</td>
+	    	<td class="col" data-property="complemento">Complemento</td>
+	    	<td class="col" data-property="bairro">Bairro</td>
+	    	<td class="col" data-property="cidade">Cidade</td>
+	    	<td class="col" data-property="estado">Estado</td>
+	    	<td class="col" data-property="cep">CEP</td>
+	    	<td></td>
+    	</tr>        
     </thead>
     
     <tbody class="content">
     </tbody>
+    
+    <tfoot>
+    	<tr>
+	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	<td></td>
+	    	<td></td>
+	    	<td></td>
+    	</tr>
+    </tfoot>
 
 </table>
 
-<c:url value="/endereco/listagem.json" var="enderecos"/>
-
 <script>
 $(document).ready(function(){
-	var url = "<c:out value="${enderecos}"/>";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
-		$.each(json.endereco, function(index, item){
-		    var row = $('<tr>');
-		    row.append('<td>'+item.id+'</td>');
-		    row.append('<td>'+item.logradouro+'</td>');
-		    row.append('<td>'+item.numero+'</td>');
-		    row.append('<td>'+item.complemento+'</td>');
-		    row.append('<td>'+item.bairro+'</td>');
-		    row.append('<td>'+item.cidade+'</td>');
-		    row.append('<td>'+item.estado+'</td>');
-		    row.append('<td>'+item.cep+'</td>');
-		    
-		    var col = $('<td>');
-		    <sec:accesscontrollist hasPermission="altera_endereco" domainObject="${someObject}">
-		    col.append('<button type="button" class="btn btn-sm btn-primary popup" data-action="${alteracao}/'+item.id+'">Editar</button>');
-		    </sec:accesscontrollist>
-		    <sec:accesscontrollist hasPermission="remove_endereco" domainObject="${someObject}">
-		    col.append('<button type="button" class="btn btn-sm btn-primary popup" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    </sec:accesscontrollist>
-		    row.append(col);
-		    
-		    $('tbody.content').append(row);
-		});
-	});
+	load_content("${lista}", $('table.bordered'));
 });
 </script>
 

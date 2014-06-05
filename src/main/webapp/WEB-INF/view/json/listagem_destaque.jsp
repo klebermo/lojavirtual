@@ -1,6 +1,6 @@
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 <json:object>
-	<json:array name="destaque" var="item" items="${lista}">
+	<json:array name="item" var="item" items="${lista}">
 		<json:object>
 				<json:property name="id" value="${item.id}"/>
 				<json:property name="categoria" value="${item.categoria}"/>

@@ -10,50 +10,38 @@
 
 <c:url value="/contato/altera" var="alteracao"/>
 <c:url value="/contato/remove" var="remocao"/>
+<c:url value="/contato/listagem.json" var="lista"/>
 
 <table class="bordered">
 
     <thead>
-    <tr>
-        <th>#</th>        
-        <th>Nome</th>
-        <th>E-Mail</th>
-        <th>Telefone</th>
-        <th></th>
-    </tr>
+    	<tr>
+	    	<td class="col" data-property="#">#</td>
+	    	<td class="col" data-property="nome">Nome</td>
+	    	<td class="col" data-property="email">E-mail</td>
+	    	<td class="col" data-property="telefone">Telefone</td>
+	    	<td></td>
+    	</tr>        
     </thead>
     
     <tbody class="content">
     </tbody>
+    
+    <tfoot>
+    	<tr>
+	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	<td></td>
+	    	<td></td>
+	    	<td></td>
+    	</tr>
+    </tfoot>
 
 </table>
 
-<c:url value="/contato/listagem.json" var="contatos"/>
-
 <script>
 $(document).ready(function(){
-	var url = "<c:out value="${contatos}"/>";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
-		$.each(json.contato, function(index, item){
-		    var row = $('<tr>');
-		    row.append('<td>'+item.id+'</td>');
-		    row.append('<td>'+item.nome+'</td>');
-		    row.append('<td>'+item.email+'</td>');
-		    row.append('<td>'+item.telefone+'</td>');
-		    
-		    var col = $('<td>');
-		    <sec:accesscontrollist hasPermission="altera_contato" domainObject="${someObject}">
-		    col.append('<button type="button" class="btn btn-sm btn-primary popup" data-action="${alteracao}/'+item.id+'">Editar</button>');
-		    </sec:accesscontrollist>
-		    <sec:accesscontrollist hasPermission="remove_contato" domainObject="${someObject}">
-		    col.append('<button type="button" class="btn btn-sm btn-primary popup" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    </sec:accesscontrollist>
-		    row.append(col);
-		    
-		    $('tbody.content').append(row);
-		});
-	});
+	load_content("${lista}", $('table.bordered'));
 });
 </script>
 

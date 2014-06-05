@@ -11,53 +11,40 @@
 <c:url value="/produto/cadastra" var="cadastro"/>
 <c:url value="/produto/altera" var="alteracao"/>
 <c:url value="/produto/remove" var="remocao"/>
+<c:url value="/produto/listagem.json" var="lista_produto"/>
 
-<sec:accesscontrollist hasPermission="cadastra_produto" domainObject="${someObject}">
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar novo produto
 	</button>
 </p>
-</sec:accesscontrollist>
 
 <table class="bordered">
 
     <thead>
-    <tr>
-        <th>#</th>        
-        <th>Nome</th>
-        <th>#</th>
-    </tr>
+    	<tr>
+	    	<td class="col" data-property="#">#</td>
+	    	<td class="col" data-property="nome">Nome</td>
+	    	<td class="col" data-property=""></td>
+    	</tr>        
     </thead>
     
     <tbody class="content">
     </tbody>
+    
+    <tfoot>
+    	<tr>
+	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	<td></td>
+    	</tr>
+    </tfoot>
 
 </table>
 
-<c:url value="/produto/listagem.json" var="lista_produto"/>
-
 <script>
 $(document).ready(function(){
-	var url = "<c:out value="${lista_produto}"/>";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
-		$.each(json.produto, function(index, item){
-		    var row = $('<tr id=user'+item.id+'>');
-		    row.append('<td>'+item.id+'</td>');
-		    row.append('<td>'+item.nome+'</td>');
-		    $('tbody.content').append(row);
-		    
-		    var col = $('<td>');
-		    <sec:accesscontrollist hasPermission="altera_produto" domainObject="${someObject}">
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
-		    </sec:accesscontrollist>
-		    <sec:accesscontrollist hasPermission="remove_produto" domainObject="${someObject}">
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    </sec:accesscontrollist>
-		    row.append(col);
-		});
-	});
+	load_content("${lista}", $('table.bordered'));
 });
 </script>
 

@@ -1,9 +1,10 @@
 function load_content(lista, target){
 	var atributos = [];
-	target.find("thead.header").each(function(){
-		var temp = $(this).text();
-		console.log(temp);
-		atributos.push(temp);
+	
+	$(".col").each(function(){
+		var property = $(this).data('property');
+		atributos.push(property);
+		console.log('property = '+property);
 	});
 	
 	var url = lista;
@@ -11,6 +12,7 @@ function load_content(lista, target){
 		var json = jQuery.parseJSON( data );
 		$.each(json.item, function(index, item){
 			var row = $('<tr id=user'+item.id+'>');
+			var counter = 0;
 			
 			for(var i=0; i<atributos.length; i++) {
 				if(atributos[i] == '#') {
@@ -18,10 +20,10 @@ function load_content(lista, target){
 				}
 				else if(atributos[i] == '') {
 				    var col = $('<td>');
-				    target.find("tfoot.actions").each(function(){
-				    	var nome = $(this).data("nome");
-				    	var action = $(this).data("action");
-				    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="'+action+'/'+item.id+'">'+nome+'</button>');
+				    $(".comando").each(function(){
+					    	var nome = $(this).data("nome");
+					    	var action = $(this).data("action");
+					    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="'+action+'/'+item.id+'">'+nome+'</button>');
 				    });
 				    row.append(col);
 				}
@@ -32,6 +34,7 @@ function load_content(lista, target){
 			}
 			
 			target.find("tbody.content").append(row);
+			counter++;
 		});
 	});
 }
