@@ -27,6 +27,7 @@
 	    	<td class="col" data-property="nome">Nome</td>
 	    	<td class="col" data-property="fornecedor">Fornecedor</td>
 	    	<td class="col" data-property="preco">Pre&ccedil;o</td>
+	    	<td class="col" data-property=""></td>
     	</tr>        
     </thead>
     
@@ -37,6 +38,7 @@
     	<tr>
 	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
 	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	<td></td>
 	    	<td></td>
 	    	<td></td>
     	</tr>

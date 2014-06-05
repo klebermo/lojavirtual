@@ -26,7 +26,7 @@
 	    	<td class="col" data-property="#">#</td>
 	    	<td class="col" data-property="categoria">Categoria</td>
 	    	<td class="col" data-property="produtos">Quant produtos</td>
-	    	<td></td>
+	    	<td class="col" data-property=""></td>
     	</tr>        
     </thead>
     

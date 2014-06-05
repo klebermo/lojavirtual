@@ -24,7 +24,7 @@
 	    	<td class="col" data-property="cidade">Cidade</td>
 	    	<td class="col" data-property="estado">Estado</td>
 	    	<td class="col" data-property="cep">CEP</td>
-	    	<td></td>
+	    	<td class="col" data-property=""></td>
     	</tr>        
     </thead>
     
@@ -35,6 +35,10 @@
     	<tr>
 	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
 	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	<td></td>
+	    	<td></td>
+	    	<td></td>
+	    	<td></td>
 	    	<td></td>
 	    	<td></td>
 	    	<td></td>

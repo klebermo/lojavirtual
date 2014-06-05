@@ -20,7 +20,7 @@
 	    	<td class="col" data-property="nome">Nome</td>
 	    	<td class="col" data-property="email">E-mail</td>
 	    	<td class="col" data-property="telefone">Telefone</td>
-	    	<td></td>
+	    	<td class="col" data-property=""></td>
     	</tr>        
     </thead>
     

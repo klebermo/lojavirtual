@@ -11,7 +11,7 @@ function load_content(lista, target){
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
 		$.each(json.item, function(index, item){
-			var row = $('<tr id=user'+item.id+'>');
+			var row = $('<tr id='+item.id+'>');
 			var counter = 0;
 			
 			for(var i=0; i<atributos.length; i++) {
@@ -34,6 +34,7 @@ function load_content(lista, target){
 			}
 			
 			target.find("tbody.content").append(row);
+			target.find("tfoot").hide();
 			counter++;
 		});
 	});

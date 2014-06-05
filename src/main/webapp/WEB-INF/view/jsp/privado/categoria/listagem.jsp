@@ -25,7 +25,7 @@
     	<tr>
 	    	<td class="col" data-property="#">#</td>
 	    	<td class="col" data-property="nome">Nome</td>
-	    	<td></td>
+	    	<td class="col" data-property=""></td>
     	</tr>        
     </thead>
     

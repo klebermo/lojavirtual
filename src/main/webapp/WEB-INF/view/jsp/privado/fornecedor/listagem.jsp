@@ -27,7 +27,7 @@
 	    	<td class="col" data-property="nome">Nome</td>
 	    	<td class="col" data-property="identificador">Cpf / Cnpj</td>
 	    	<td class="col" data-property="website">Website</td>
-	    	<td></td>
+	    	<td class="col" data-property=""></td>
     	</tr>        
     </thead>
     
