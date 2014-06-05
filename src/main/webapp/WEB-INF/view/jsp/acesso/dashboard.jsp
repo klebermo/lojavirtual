@@ -97,7 +97,7 @@
 
 <script src="../resources/extras/js/jquery.md5.min.js"></script>
 <script src="../resources/extras/js/form_submit.js"></script>
-<script src="../resources/extras/js/form_validation.js"></script>
+<script src="../resources/extras/js/form_valida.js"></script>
 <script src="../resources/extras/js/page_link.js"></script>
 <script src="../resources/extras/js/page_load.js"></script>
 

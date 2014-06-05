@@ -12,6 +12,7 @@
 <c:url value="/usuario/altera" var="alteracao"/>
 <c:url value="/usuario/remove" var="remocao"/>
 <c:url value="/permissao/altera" var="permissao"/>
+<c:url value="/usuario/listagem.json" var="lista"/>
 
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
@@ -19,9 +20,9 @@
 	</button>
 </p>
 
-<table class="bordered">
+<table class="tabela bordered">
 
-    <thead>
+    <thead class="header">
     <tr>
         <th>#</th>        
         <th>Login</th>
@@ -34,33 +35,18 @@
     
     <tbody class="content">
     </tbody>
+    
+    <tfoot class="actions">
+    	<div class="command" data-nome="Altera" data-action="${altera}"></div>
+    	<div class="command" data-nome="Remove" data-action="${remove}"></div>
+    	<div class="command" data-nome="Permissoes" data-action="${permissao}"></div>
+    </tfoot>
 
 </table>
 
-<c:url value="/usuario/listagem.json" var="lista"/>
-
 <script>
 $(document).ready(function(){
-	var url = "<c:out value="${lista}"/>";
-	$.get(url, function(data){
-		var json = jQuery.parseJSON( data );
-		$.each(json.usuario, function(index, item){
-		    var row = $('<tr id=user'+item.id+'>');
-		    row.append('<td>'+item.id+'</td>');
-		    row.append('<td>'+item.login+'</td>');
-		    row.append('<td>'+item.pnome+'</td>');
-		    row.append('<td>'+item.unome+'</td>');
-		    row.append('<td>'+item.email+'</td>');
-		    
-		    var col = $('<td>');		    
-	    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${alteracao}/'+item.id+'">Editar</button>');
-	    	col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${remocao}/'+item.id+'">Remover</button>');
-		    col.append('<button type="button" class="btn btn-sm btn-primary link" data-action="${permissao}/'+item.id+'">Permiss&otilde;es</button>');
-		    row.append(col);
-		    
-		    $('tbody.content').append(row);
-		});
-	});
+	load_content("${lista}", $('.tabela'));
 });
 </script>
 
