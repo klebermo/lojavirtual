@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -43,6 +44,7 @@ public class Usuario {
 	@ManyToMany
 	@JoinTable(name="role_members", joinColumns={@JoinColumn(name="fk_usuario")}, inverseJoinColumns={@JoinColumn(name="fk_role")})
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<GrupoPermissao> Autorizacao = new ArrayList<GrupoPermissao>();
 
 	public Usuario() {

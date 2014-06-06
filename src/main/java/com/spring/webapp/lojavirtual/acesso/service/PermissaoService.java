@@ -70,7 +70,7 @@ public class PermissaoService {
 			int max = user.getAutorizacao().size();
 			for(int i=0; i<max; i++) {
 				if(user.getAutorizacao().get(i).equals(grupo_permissao.findById(Integer.valueOf(id_permissao).intValue()))) {
-					user.getAutorizacao().set(i, null);
+					user.getAutorizacao().remove(i);
 				}
 			}
 			return usuario.merge(user);
@@ -82,7 +82,8 @@ public class PermissaoService {
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		GrupoPermissao novo = grupo_permissao.findById(Integer.valueOf(id).intValue());
-		novo.setPermissao(null);
+		for(int i=0; i<novo.getPermissao().size(); i++)
+			novo.getPermissao().remove(i);
 		return grupo_permissao.remove(novo);
 	}
 	
