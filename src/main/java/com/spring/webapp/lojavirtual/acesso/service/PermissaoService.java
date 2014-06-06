@@ -70,8 +70,7 @@ public class PermissaoService {
 			int max = user.getAutorizacao().size();
 			for(int i=0; i<max; i++) {
 				if(user.getAutorizacao().get(i).equals(grupo_permissao.findById(Integer.valueOf(id_permissao).intValue()))) {
-					user.getAutorizacao().remove(i);
-					break;
+					user.getAutorizacao().set(i, null);
 				}
 			}
 			return usuario.merge(user);
