@@ -13,19 +13,21 @@
 <c:url value="/categoria/remove" var="remocao"/>
 <c:url value="/categoria/listagem.json" var="lista"/>
 
+<sec:authorize access="hasPermission(#user, 'cadastra_categoria')">
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar nova categoria
 	</button>
 </p>
+</sec:authorize>
 
 <table class="bordered">
 
     <thead>
     	<tr>
-	    	<td class="col" data-property="#">#</td>
-	    	<td class="col" data-property="nome">Nome</td>
-	    	<td class="col" data-property=""></td>
+	    	<th class="col" data-property="#">#</th>
+	    	<th class="col" data-property="nome">Nome</th>
+	    	<th class="col" data-property=""></th>
     	</tr>        
     </thead>
     
@@ -34,9 +36,12 @@
     
     <tfoot>
     	<tr>
-	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
-	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
-	    	<td></td>
+    		<sec:authorize access="hasPermission(#user, 'altera_categoria')">
+	    		<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	</sec:authorize>
+	    	<sec:authorize access="hasPermission(#user, 'remove_categoria')">
+	    		<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	</sec:authorize>
     	</tr>
     </tfoot>
 

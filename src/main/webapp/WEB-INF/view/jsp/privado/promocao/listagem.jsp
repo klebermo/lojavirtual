@@ -13,11 +13,13 @@
 <c:url value="/promocao/remove" var="remocao"/>
 <c:url value="/promocao/listagem.json" var="lista"/>
 
+<sec:authorize access="hasPermission(#user, 'cadastra_promocao')">
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar nova promo&ccedil;&atilde;o
 	</button>
 </p>
+</sec:authorize>
 
 <table class="bordered">
 
@@ -25,6 +27,7 @@
     	<tr>
 	    	<th class="col" data-property="#">#</th>
 	    	<th class="col" data-property="produto">Produto</th>
+	    	<th class="col" data-property="desconto">Desconto</th>
 	    	<th class="col" data-property=""></th>
     	</tr>        
     </thead>
@@ -34,9 +37,12 @@
     
     <tfoot>
     	<tr>
-	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
-	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
-	    	<td></td>
+    		<sec:authorize access="hasPermission(#user, 'altera_promocao')">
+	    		<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	</sec:authorize>
+	    	<sec:authorize access="hasPermission(#user, 'remove_promocao')">
+	    		<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	</sec:authorize>
     	</tr>
     </tfoot>
 

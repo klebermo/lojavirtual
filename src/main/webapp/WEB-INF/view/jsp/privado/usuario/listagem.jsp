@@ -14,11 +14,13 @@
 <c:url value="/permissao/listagem" var="permissao"/>
 <c:url value="/usuario/listagem.json" var="lista"/>
 
+<sec:authorize access="hasPermission(#user, 'cadastra_usuario')">
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar novo usu&aacute;rio
 	</button>
 </p>
+</sec:authorize>
 
 <table class="bordered">
 
@@ -38,12 +40,13 @@
     
     <tfoot>
     	<tr>
-	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
-	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+    		<sec:authorize access="hasPermission(#user, 'altera_usuario')">
+	    		<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	</sec:authorize>
+	    	<sec:authorize access="hasPermission(#user, 'remove_usuario')">
+	    		<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	</sec:authorize>
 	    	<td class="comando" data-nome="Permiss&otilde;es" data-action="${permissao}"></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
     	</tr>
     </tfoot>
 

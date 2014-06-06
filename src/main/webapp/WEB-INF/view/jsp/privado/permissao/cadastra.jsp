@@ -47,7 +47,7 @@ $(document).ready(function(){
 	var url = "${permissao}";
 	$.get(url, function(data){
 		var json = jQuery.parseJSON( data );
-		$.each(json.permissao, function(index, item) {
+		$.each(json.item, function(index, item) {
 			$('.all_permissoes').append('<option class="item item_permissao" value="'+item.id+'">'+item.nome+'</option>');
 		});
 	});

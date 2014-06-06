@@ -32,22 +32,18 @@ function open(url) {
 }
 
 function open_interna(url, target) {
-	$.ajax({
-		type: "GET",
-		url: url
-	}).done(function( data ) {
-		var $temp  = $('<div/>', {html:data});
-		var titulo = $temp.find('title').text();
-		var conteudo = $temp.remove('head').html();
-		
-		var $title = target.find('#titulo');
-		var $content = target.find('#conteudo');
-		$title.empty();
-		$content.empty();
-		$title.text(titulo);
-		$content.html(conteudo);
-		target.show();
-	});
+	target.toggle();
+	if($(target).is(":visible") ) {
+		$.ajax({
+			type: "GET",
+			url: url
+		}).done(function( data ) {
+			var $temp  = $('<div/>', {html:data});
+			var conteudo = $temp.remove('head').html();
+			target.empty();
+			target.html(conteudo);
+		});
+	}
 }
 
 function open_dialog(url, dialog_div) {

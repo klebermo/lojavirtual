@@ -11,45 +11,52 @@
 <c:url value="/permissao/cadastra" var="cadastra"/>
 <c:url value="/permissao/altera" var="altera"/>
 <c:url value="/permissao/remove" var="remove"/>
-<c:url value="/permissao/listagem" var="listagem"/>
+<c:url value="/permissao/listagem_grupo" var="permissoes"/>
 
-<c:url value="/permissao/grupos.json" var="grupos"/>
-<c:url value="/permissao/permissoes_grupo.json" var="permissoes"/>
+<c:set var="id_usuario" value="${usuario.id}" />
 
+<sec:authorize access="hasPermission(#user, 'cadastra_permissao')">
 <p>
-	<button type="button" class="btn btn-lg btn-link action" data-action="${cadastra}" data-target="">
+	<button type="button" class="btn btn-lg btn-link popup" data-action="${cadastra}" data-target="popup_window_permissao">
 		cadastrar novo grupo
 	</button>
 </p>
+</sec:authorize>
 
-<div class="row">
-  <div class="col-md-3">
-  	<div class="row">
-	  	<div class="col-lg-6">
-	  		<div class="input-group">
-	  			<span class="input-group-addon">
-	  				<input class="checkbox" type="checkbox">
-	  			</span>
-	  			<input type="text" class="form-control" value="">
-	  			<span class="input-group-btn">
-	  				<button class="btn btn-default action" data-action="${permissoes}/${usuario.id}" data-target="workspace" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
-	  			</span>
-	  		</div>
-	  		<c:if test="${item.id > 17}">
-	  		<button class="btn btn-default action" data-action="${remove}/${usuario.id}/${item.id}" data-target="workspace" type="button"><span class="glyphicon glyphicon-trash"></span></button>
-	  		</c:if>
-	  		<button class="btn btn-default action" data-action="${altera}/${uuario.id}/${item.id}" data-target="workspace" type="button"><span class="glyphicon glyphicon-refresh"></span></button>
-	  	</div>
-  	</div>
-  </div>
-  <div class="col-md-6" style="display: none;">
-  	<div id="workspace" class="panel panel-primary">
-  		<div id="titulo" class="panel-heading">
-  		</div>
-  		<div id="conteudo" class="panel-body">
-  		</div>
-  	</div>
-  </div>
+<c:forEach var="item" items="${grupos}">
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">
+					<c:forEach var="item2" items="${usuario.autorizacao}">
+						    <c:if test="${item2.id == item.id}">
+						       <span class="glyphicon glyphicon-ok-circle"></span>
+						    </c:if>
+					</c:forEach>
+				</span>
+				<input type="text" class="form-control" value="${item.nome}">
+				<span class="input-group-btn">
+					<button class="btn btn-default action" data-action="${permissoes}/${item.id}" data-target="view-${item.id}" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+				</span>
+			</div>
+		</div>
+		<sec:authorize access="hasPermission(#user, 'altera_permissao')">
+		<div class="col-lg-3">
+			<button class="btn btn-default link" data-action="${altera}/${id_usuario}/${item.id}" type="button"><span class="glyphicon glyphicon-refresh"></span></button>
+		</div>
+		</sec:authorize>
+		<sec:authorize access="hasPermission(#user, 'remove_permissao')">
+		<div class="col-lg-3">
+			<c:if test="${item.id > 17}"><button class="btn btn-default link" data-action="${remove}/${item.id}" type="button"><span class="glyphicon glyphicon-trash"></span></button></c:if>
+		</div>
+		</sec:authorize>
+	</div>
+	<div class="row" id="view-${item.id}" style="display: none;">
+	</div>
+</c:forEach>
+
+<div id="popup_window_permissao">
+	<div class="dialog" title="Basic dialog"> <p> <span id="text"></span> </p> </div>
 </div>
 
 </body>

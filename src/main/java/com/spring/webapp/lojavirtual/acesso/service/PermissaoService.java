@@ -58,18 +58,24 @@ public class PermissaoService {
 	public boolean altera(HttpServletRequest request, HttpServletResponse response) {
 		String id_usuario = request.getParameter("usuario");
 		String id_permissao = request.getParameter("grupo");
+		String possui = request.getParameter("possui");
 		
-		Usuario user = usuario.findById(Integer.valueOf(id_usuario).intValue());
-		int id = Integer.valueOf(id_permissao).intValue();
-		for(int i=0; i<user.getAutorizacao().size(); i++) {
-			if(user.getAutorizacao().get(i).getId() == id) {
-				user.getAutorizacao().remove(i);
-				return usuario.merge(user);
-			}
+		if(possui.equals("yes")) {
+			Usuario user = usuario.findById(Integer.valueOf(id_usuario).intValue());
+			user.getAutorizacao().add(grupo_permissao.findById(Integer.valueOf(id_permissao).intValue()));
+			return usuario.merge(user);
 		}
-		
-		user.getAutorizacao().add(grupo_permissao.findById(id));
-		return usuario.merge(user);
+		else {
+			Usuario user = usuario.findById(Integer.valueOf(id_usuario).intValue());
+			int max = user.getAutorizacao().size();
+			for(int i=0; i<max; i++) {
+				if(user.getAutorizacao().get(i).equals(grupo_permissao.findById(Integer.valueOf(id_permissao).intValue()))) {
+					user.getAutorizacao().remove(i);
+					break;
+				}
+			}
+			return usuario.merge(user);
+		}
 	}
 	
 	@PreAuthorize("hasPermission(#user, 'remove_permissao')")

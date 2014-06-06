@@ -13,20 +13,22 @@
 <c:url value="/destaque/remove" var="remocao"/>
 <c:url value="/destaque/listagem.json" var="lista"/>
 
+<sec:authorize access="hasPermission(#user, 'cadastra_destaque')">
 <p>
 	<button type="button" class="btn btn-sm btn-link link" data-action="${cadastro}">
 		cadastrar nova destaque
 	</button>
 </p>
+</sec:authorize>
 
 <table class="bordered">
 
     <thead>
     	<tr>
-	    	<td class="col" data-property="#">#</td>
-	    	<td class="col" data-property="categoria">Categoria</td>
-	    	<td class="col" data-property="produtos">Quant produtos</td>
-	    	<td class="col" data-property=""></td>
+	    	<th class="col" data-property="#">#</th>
+	    	<th class="col" data-property="categoria">Categoria</th>
+	    	<th class="col" data-property="produtos">Quant produtos</th>
+	    	<th class="col" data-property=""></th>
     	</tr>        
     </thead>
     
@@ -35,10 +37,12 @@
     
     <tfoot>
     	<tr>
-	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
-	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
-	    	<td></td>
-	    	<td></td>
+	    	<sec:authorize access="hasPermission(#user, 'altera_destaque')">
+	    		<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	</sec:authorize>
+	    	<sec:authorize access="hasPermission(#user, 'remove_destaque')">
+	    		<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	</sec:authorize>
     	</tr>
     </tfoot>
 

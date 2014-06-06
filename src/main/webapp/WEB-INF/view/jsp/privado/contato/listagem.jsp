@@ -16,11 +16,11 @@
 
     <thead>
     	<tr>
-	    	<td class="col" data-property="#">#</td>
-	    	<td class="col" data-property="nome">Nome</td>
-	    	<td class="col" data-property="email">E-mail</td>
-	    	<td class="col" data-property="telefone">Telefone</td>
-	    	<td class="col" data-property=""></td>
+	    	<th class="col" data-property="#">#</th>
+	    	<th class="col" data-property="nome">Nome</th>
+	    	<th class="col" data-property="email">E-mail</th>
+	    	<th class="col" data-property="telefone">Telefone</th>
+	    	<th class="col" data-property=""></th>
     	</tr>        
     </thead>
     
@@ -29,11 +29,12 @@
     
     <tfoot>
     	<tr>
-	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
-	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
+	    	<sec:authorize access="hasPermission(#user, 'altera_contato')">
+	    		<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	</sec:authorize>
+	    	<sec:authorize access="hasPermission(#user, 'remove_contato')">
+	    		<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	</sec:authorize>
     	</tr>
     </tfoot>
 

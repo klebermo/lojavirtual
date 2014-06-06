@@ -70,14 +70,12 @@ public class PermissaoController {
 			return "not";
 	}
 	
-	@RequestMapping(value="remove/{theStringUser}/{theStringRole}")
+	@RequestMapping(value="remove/{theStringRole}")
 	@PreAuthorize("hasPermission(#user, 'remove_permissao')")
-	public ModelAndView remove(@PathVariable String theStringUser, @PathVariable String theStringRole) {
-		int id_usuario = Integer.valueOf(theStringUser).intValue();
+	public ModelAndView remove(@PathVariable String theStringRole) {
 		int id_role = Integer.valueOf(theStringRole).intValue();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("usuario", permissao.findUsuarioByID(id_usuario));
 		mav.addObject("permissao", permissao.findRoleById(id_role));
 		mav.setViewName("privado/permissao/remove");
 		return mav;
@@ -89,7 +87,18 @@ public class PermissaoController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("usuario", permissao.findUsuarioByID(id_usuario));
+		mav.addObject("grupos", permissao.lista_grupos());
 		mav.setViewName("privado/permissao/listagem");
+		return mav;
+	}
+	
+	@RequestMapping(value="listagem_grupo/{theStringRole}")
+	public ModelAndView listagem_grupo(@PathVariable String theStringRole) {
+		int id_role = Integer.valueOf(theStringRole).intValue();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("grupo", permissao.findRoleById(id_role));
+		mav.setViewName("privado/permissao/listagem_grupo");
 		return mav;
 	}
 	

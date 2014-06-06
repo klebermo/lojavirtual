@@ -16,15 +16,15 @@
 
     <thead>
     	<tr>
-	    	<td class="col" data-property="#">#</td>
-	    	<td class="col" data-property="logradouro">Logradouro</td>
-	    	<td class="col" data-property="numero">Numero</td>
-	    	<td class="col" data-property="complemento">Complemento</td>
-	    	<td class="col" data-property="bairro">Bairro</td>
-	    	<td class="col" data-property="cidade">Cidade</td>
-	    	<td class="col" data-property="estado">Estado</td>
-	    	<td class="col" data-property="cep">CEP</td>
-	    	<td class="col" data-property=""></td>
+	    	<th class="col" data-property="#">#</th>
+	    	<th class="col" data-property="logradouro">Logradouro</th>
+	    	<th class="col" data-property="numero">Numero</th>
+	    	<th class="col" data-property="complemento">Complemento</th>
+	    	<th class="col" data-property="bairro">Bairro</th>
+	    	<th class="col" data-property="cidade">Cidade</th>
+	    	<th class="col" data-property="estado">Estado</th>
+	    	<th class="col" data-property="cep">CEP</th>
+	    	<th class="col" data-property=""></th>
     	</tr>        
     </thead>
     
@@ -33,15 +33,12 @@
     
     <tfoot>
     	<tr>
-	    	<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
-	    	<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
+    		<sec:authorize access="hasPermission(#user, 'altera_endereco')">
+	    		<td class="comando" data-nome="Altera" data-action="${alteracao}"></td>
+	    	</sec:authorize>
+	    	<sec:authorize access="hasPermission(#user, 'remove_endereco')">
+	    		<td class="comando" data-nome="Remove" data-action="${remocao}"></td>
+	    	</sec:authorize>
     	</tr>
     </tfoot>
 

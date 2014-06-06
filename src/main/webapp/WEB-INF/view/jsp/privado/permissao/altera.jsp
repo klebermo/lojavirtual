@@ -4,29 +4,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Alterar Permiss&otilde;es do usu&aacute;rio: ${usuario.login}</title>
+<title>Alterar Permiss&otilde;es do usu&aacute;rio: <c:out value="${usuario.login}"/></title>
 </head>
 <body>
 
 <c:url value="/usuario/listagem" var="listagem"/>
 
-<c:url value="/permissao/remove" var="alteraPermissao"/>
+<c:set var="id_usuario" value="${usuario.id}" />
+<c:set var="id_permissao" value="${permissao.id}" />
+
+<c:url value="/permissao/altera" var="alteraPermissao"/>
 <form class="form" role="form" action="${alteraPermissao}" method="post">
 <div class="alert alert-warning" id="pergunta">
 
-	<c:choose>
 		<c:forEach var="item" items="${usuario.autorizacao}">
-	    <c:when test="${item.id == ${permissao.id}">
-	       Remover a permiss&atilde;o <strong>${permissao.nome}</strong> do usu&aacute;rio <strong>${item.login}</strong>
-	    </c:when>
+		    <c:if test="${item.id == id_permissao}">
+		    	<c:set var="possui_permissao" value='1' />
+		    </c:if>
 	    </c:forEach>
-	    <c:otherwise>
-	        Conceder a permiss&atilde;o <strong>${permissao.nome}</strong> ao usu&aacute;rio <strong>${item.login}</strong>
-	    </c:otherwise>
-	</c:choose>
+	    <c:choose>
+			<c:when test="${possui_permissao == '1'}">
+				<input type="hidden" name="possui" value="yes">
+				Remover a permiss&atilde;o <strong><c:out value="${permissao.nome}"/></strong> do usu&aacute;rio <strong><c:out value="${usuario.login}"/></strong>
+			</c:when>
+			<c:otherwise>
+				<input type="hidden" name="possui" value="not">
+				Conceder a permiss&atilde;o <strong><c:out value="${permissao.nome}"/></strong> ao usu&aacute;rio <strong><c:out value="${usuario.login}"/></strong>
+			</c:otherwise>
+		</c:choose>
   
-  <input type="hidden" name="grupo" value="${permissao.id}">
-  <input type="hidden" name="usuario" value="${usuario.id}">
+  <input type="hidden" name="grupo" value="${id_permissao}">
+  <input type="hidden" name="usuario" value="${id_usuario}">
   
   <button type="submit" class="btn btn-lg btn-link"><span class="glyphicon glyphicon-ok"></span></button>
   <button type="button" class="btn btn-lg btn-link link" data-action="${listagem}"><span class="glyphicon glyphicon-remove"></span></button>
