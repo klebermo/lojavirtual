@@ -36,19 +36,19 @@ public class PermissaoService {
 		String nome_grupo = request.getParameter("nome");
 		String[] permissoes = request.getParameterValues("permissoes");
 		
-		if(nome_grupo == null || permissoes == null) {
-			System.out.println("nome_grupo = "+nome_grupo);
-			System.out.println("permissoes = "+permissoes);
+		if(nome_grupo == null) {
 			return false;
 		}
 		
 		GrupoPermissao grupo = new GrupoPermissao();
 		grupo.setNome(nome_grupo);
 		
-		List<Permissao> lista = new ArrayList<Permissao>();
-		for(int i=0; i<permissoes.length; i++)
-			lista.add(permissao.findById(Integer.valueOf(permissoes[i]).intValue()));
-		grupo.setPermissao(lista);
+		if(permissoes != null) {
+			List<Permissao> lista = new ArrayList<Permissao>();
+			for(int i=0; i<permissoes.length; i++)
+				lista.add(permissao.findById(Integer.valueOf(permissoes[i]).intValue()));
+			grupo.setPermissao(lista);
+		}
 		
 		return grupo_permissao.persist(grupo);
 	}
@@ -60,7 +60,7 @@ public class PermissaoService {
 		String id_permissao = request.getParameter("grupo");
 		String possui = request.getParameter("possui");
 		
-		if(possui.equals("yes")) {
+		if(possui.equals("not")) {
 			Usuario user = usuario.findById(Integer.valueOf(id_usuario).intValue());
 			user.getAutorizacao().add(grupo_permissao.findById(Integer.valueOf(id_permissao).intValue()));
 			return usuario.merge(user);
@@ -68,11 +68,20 @@ public class PermissaoService {
 		else {
 			Usuario user = usuario.findById(Integer.valueOf(id_usuario).intValue());
 			int max = user.getAutorizacao().size();
+			int index[] = new int[max];
+			for(int i=0; i<max; i++)
+				index[i] = -1;
 			for(int i=0; i<max; i++) {
-				if(user.getAutorizacao().get(i).equals(grupo_permissao.findById(Integer.valueOf(id_permissao).intValue()))) {
-					user.getAutorizacao().remove(i);
+				String p_user = user.getAutorizacao().get(i).getNome();
+				String p_comp = grupo_permissao.findById(Integer.valueOf(id_permissao).intValue()).getNome();
+				System.out.println(i+"->"+p_user+"=="+p_comp);
+				if(p_user.equals(p_comp)) {
+					index[i] = i;
 				}
 			}
+			for(int i=0; i<max; i++)
+				if(index[i] >= 0)
+					user.getAutorizacao().remove(i);
 			return usuario.merge(user);
 		}
 	}
