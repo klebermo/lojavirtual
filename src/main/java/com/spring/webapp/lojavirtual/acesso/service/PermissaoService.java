@@ -93,6 +93,7 @@ public class PermissaoService {
 		GrupoPermissao novo = grupo_permissao.findById(Integer.valueOf(id).intValue());
 		for(int i=0; i<novo.getPermissao().size(); i++)
 			novo.getPermissao().remove(i);
+		grupo_permissao.merge(novo);
 		return grupo_permissao.remove(novo);
 	}
 	
