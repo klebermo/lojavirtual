@@ -91,8 +91,7 @@ public class PermissaoService {
 	public boolean remove(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		GrupoPermissao novo = grupo_permissao.findById(Integer.valueOf(id).intValue());
-		for(int i=0; i<novo.getPermissao().size(); i++)
-			novo.getPermissao().remove(i);
+		novo.setPermissao(null);
 		grupo_permissao.merge(novo);
 		return grupo_permissao.remove(novo);
 	}
