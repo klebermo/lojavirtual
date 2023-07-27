@@ -10,7 +10,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.webapp.lojavirtual.acesso.persistence.GrupoPermissaoHome;
 import com.spring.webapp.lojavirtual.acesso.persistence.UsuarioHome;
 import com.spring.webapp.lojavirtual.acesso.persistence.model.Usuario;
 
@@ -19,9 +18,6 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioHome usuario;
-	
-	@Autowired
-	private GrupoPermissaoHome grupo_permissao;
 	
 	@PreAuthorize("hasPermission(#user, 'cadastra_usuario')")
 	@Transactional
